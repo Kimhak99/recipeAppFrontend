@@ -28,7 +28,7 @@
           <v-toolbar dark>
             <v-spacer></v-spacer>
 
-            <v-btn flat>
+            <v-btn>
               Sign Up
             </v-btn>
 
@@ -39,12 +39,12 @@
         </div>
       </v-row>
       <v-row>
-         <v-content>
-            <hello-world/>
-          </v-content>
+         <v-main>
+            <Home/>
+          </v-main>
       </v-row>
     
-        <v-footer class="pa-3" color="#B71C1C" dark>
+        <v-footer class="pa-3" color="#B71C1C" dark fixed>
           <v-spacer></v-spacer>
           <div>The Foodie's Tongue &nbsp; &copy; {{new Date().getFullYear()}}</div>
           <v-spacer></v-spacer>
@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Home from './components/Home.vue';
 
 export default {
-  components: { HelloWorld },
+  components: { Home },
   name: 'App',
 
   data: () => ({
