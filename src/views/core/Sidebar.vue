@@ -2,6 +2,13 @@
       <v-navigation-drawer
         permanent
         expand-on-hover
+         id="core-navigation-drawer"
+        v-model="drawer"
+        :dark="barColor !== 'rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)'"
+        :src="barImage"
+        mobile-breakpoint="1280"
+        app
+        v-show="showSidebar"
       >
         <v-list>
           <v-list-item class="px-2">
@@ -50,6 +57,11 @@
 
 <script>
   export default {
-    name: "Sidebar"
+    name: "Sidebar",
+    data () {
+      return {
+        showSidebar: true
+      }
+    }
   }
 </script>

@@ -3,7 +3,7 @@
   <v-card flat>
     <v-container fluid>
       <v-row class="child-flex">
-        <div>
+        <div ml-50>
           <v-toolbar color="#B71C1C" dark>
             <v-btn
               icon
