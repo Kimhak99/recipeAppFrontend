@@ -1,8 +1,20 @@
 <template>
-  <div class="login">
+  <v-app>
     <h1>This is a login page</h1>
-  </div>
+  </v-app>
 </template>
+
+<script>
+ import UserDashboardLayout from '../layouts/UserDashboardLayout'
+
+  export default {
+  // components: { UserDashboardLayout },
+    name: 'Login',
+    created(){
+      this.$emit(`update:layout`, UserDashboardLayout);
+    }
+  }
+</script>
 
 <style>
   h1{
