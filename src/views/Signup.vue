@@ -38,6 +38,7 @@
                           name="Firstname"
                           prepend-icon="person"
                           type="text"
+                          color="#B71C1C"
                         />
                         </v-col>
                         <v-col>
@@ -45,33 +46,38 @@
                           label="Lastname"
                           name="Lastname"
                           type="text"
+                          color="#B71C1C"
                         />
                         </v-col>
-                      </v-row>                
-                    <v-text-field
-                      label="Email"
-                      name="Email"
-                      prepend-icon="email"
-                      type="text"
-                    />
+                      </v-row>  
                       <v-text-field
-                      label="Username"
-                      name="Username"
-                      prepend-icon="person"
-                      type="text"
-                    />
-                    <v-text-field
-                      label="Password"
-                      name="Password"
-                      prepend-icon="lock"
-                      type="text"
-                    />
-                    <v-text-field
-                      label="Confirm Password"
-                      name="ConfirmPassword"
-                      prepend-icon="lock"
-                      type="text"
-                    />
+                        label="Username"
+                        name="Username"
+                        prepend-icon="person"
+                        type="text"
+                        color="#B71C1C"
+                      />              
+                      <v-text-field
+                        label="Email"
+                        name="Email"
+                        prepend-icon="email"
+                        type="text"
+                        color="#B71C1C"
+                      />
+                      <v-text-field
+                        label="Password"
+                        name="Password"
+                        prepend-icon="lock"
+                        type="text"
+                        color="#B71C1C"
+                      />
+                      <v-text-field
+                        label="Confirm Password"
+                        name="ConfirmPassword"
+                        prepend-icon="lock"
+                        type="text"
+                        color="#B71C1C"
+                      />
                     </v-form>
                   </v-card-text>
                   <div class="text-center mt-n5">

@@ -1,9 +1,5 @@
 <template>  
-  <v-app
-    app
-    color="primary"
-    dark
-  >
+  <v-app>
     <v-container fluid>
       <v-row>
         <v-main>

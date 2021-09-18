@@ -12,7 +12,7 @@
       </v-row> -->
       <v-footer class="pa-3" color="#B71C1C" dark fixed>
         <v-spacer></v-spacer>
-        <div>The Foodie's Tongue &nbsp; &copy; {{new Date().getFullYear()}}</div>
+        <div>{{$t("app_name")}} &nbsp; &copy; {{new Date().getFullYear()}}</div>
         <v-spacer></v-spacer>
       </v-footer>
     <!-- </v-container>

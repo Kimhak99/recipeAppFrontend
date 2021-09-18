@@ -27,7 +27,32 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: () => import(/* webpackChunkName: "login" */'../views/Signin.vue')
-  }
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import(/* webpackChunkName: "login" */'../views/User.vue')
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: () => import(/* webpackChunkName: "login" */'../views/Category.vue')
+  },
+  {
+    path: '/recipe',
+    name: 'Recipe',
+    component: () => import(/* webpackChunkName: "login" */'../views/Recipe.vue')
+  },
+  {
+    path: '/userprofile',
+    name: 'UserProfile',
+    component: () => import(/* webpackChunkName: "login" */'../views/UserProfile.vue')
+  },
+  {
+    name: 'NotFound',
+    path: '*',
+    component: () => import('@/views/404'),
+  },
 ]
 
 const router = new Router({

@@ -2,23 +2,23 @@
       <v-navigation-drawer
         permanent
         expand-on-hover
-         id="core-navigation-drawer"
-        v-model="drawer"
-        :dark="barColor !== 'rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)'"
-        :src="barImage"
+        id="core-navigation-drawer"
+      
+        dark
         mobile-breakpoint="1280"
         app
         v-show="showSidebar"
+        width="200"
       >
         <v-list>
           <v-list-item class="px-2">
             <v-list-item-avatar>
-              <v-img :src="require('../../assets/tongue.png')"></v-img>
+              <v-img :src="require('../../assets/crown.png')"></v-img>
             </v-list-item-avatar>
           </v-list-item>
 
           <v-list-item link>
-            <v-list-item-content>
+            <v-list-item-content @click="$router.push({ name: 'UserProfile'}).catch(() => {})">
               <v-list-item-title class="text-h6">
                 Sandra Adams
               </v-list-item-title>
@@ -33,24 +33,30 @@
           nav
           dense
         >
-          <v-list-item link>
+          <v-list-item @click="$router.push({ name: 'Recipe'}).catch(() => {})">
             <v-list-item-icon>
-              <v-icon>mdi-folder</v-icon>
+              <v-icon>mdi-book-check-outline</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>My Files</v-list-item-title>
+            <v-list-item-title>{{$t("Recipe")}}</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item @click="$router.push({ name: 'Category'}).catch(() => {})">
+            <v-list-item-icon>
+              <v-icon>mdi-table-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{$t("Category")}}</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="$router.push({ name: 'User'}).catch(() => {})">
             <v-list-item-icon>
               <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Shared with me</v-list-item-title>
-          </v-list-item>
-          <v-list-item link>
+            <v-list-item-title>{{$t("User")}}</v-list-item-title>
+          </v-list-item> 
+          <v-list-item @click="$router.push({ name: 'Signin'}).catch(() => {})">
             <v-list-item-icon>
-              <v-icon>mdi-star</v-icon>
+              <v-icon>mdi-logout-variant</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Starred</v-list-item-title>
-          </v-list-item>
+            <v-list-item-title>{{$t("signout")}}</v-list-item-title>
+          </v-list-item> 
         </v-list>
       </v-navigation-drawer>
 </template>
