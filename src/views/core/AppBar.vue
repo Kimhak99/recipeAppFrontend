@@ -21,11 +21,11 @@
             <v-spacer></v-spacer>
 
             <v-btn @click="$router.push({ name: 'Signup' }).catch(() => {})">
-              Signup
+              Sign Up
             </v-btn>
 
-            <v-btn @click="$router.push({ name: 'Login' }).catch(() => {})">
-              Login
+            <v-btn @click="$router.push({ name: 'Signin' }).catch(() => {})">
+              Sign In
             </v-btn>
           </v-toolbar>
         </div>
