@@ -39,13 +39,13 @@
             </v-list-item-icon>
             <v-list-item-title>{{$t("Recipe")}}</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="$router.push({ name: 'Category'}).catch(() => {})">
+          <v-list-item v-if="$store.getters.userInfo.is_admin" @click="$router.push({ name: 'Category'}).catch(() => {})">
             <v-list-item-icon>
               <v-icon>mdi-table-multiple</v-icon>
             </v-list-item-icon>
             <v-list-item-title>{{$t("Category")}}</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="$router.push({ name: 'User'}).catch(() => {})">
+          <v-list-item v-if="$store.getters.userInfo.is_admin" @click="$router.push({ name: 'User'}).catch(() => {})">
             <v-list-item-icon>
               <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-icon>
@@ -68,6 +68,6 @@
       return {
         showSidebar: true
       }
-    }
+    },//your structure is not dynamic so no point in using dynamic function
   }
 </script>

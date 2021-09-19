@@ -81,7 +81,7 @@
                     </v-form>
                   </v-card-text>
                   <div class="text-center mt-n5">
-                    <v-btn rounded dark style="background-color: #B71C1C;">SIGN UP</v-btn>
+                    <v-btn @click="handleClick" rounded dark style="background-color: #B71C1C;">SIGN UP</v-btn>
                   </div>
                 </v-col>
               </v-row>           
@@ -101,8 +101,14 @@
     name: 'Signup',
     created(){
       this.$emit(`update:layout`, UserDashboardLayout);
+    },
+  methods:{
+    handleClick(){
+      this.$store.dispatch("getUserInfo")//what is ur login info
+      .then(res => console.log(res))
+      .catch(console.log)
     }
-
+  }
   }
 </script>
 <style>

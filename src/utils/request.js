@@ -1,19 +1,18 @@
 import basicConfig from "./basicConfig";
 import axios from "axios";
-import meta from './enum'
+import {meta} from './enum'
+import store from "../store";
 
 const service = axios.create({
     baseURL: basicConfig.api_url,
     timeout: 15000
 })
 
-const token = "";
-
 service.interceptors.request.use(config => {
-    config.headers['Authorization'] = token;
+    config.headers['authorization'] = store.getters.token;
     config.headers['Content-Type'] = 'application/json';
 
-    if(config.method === 'post') {
+    if(config.method === 'post') { //=== used by react by defult, unless u want to strictly check type too, just a head up
         config.data = JSON.stringify(config.data);
     }
 

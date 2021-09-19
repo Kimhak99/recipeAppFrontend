@@ -41,6 +41,7 @@
     name: 'Home',
     created(){
       this.$emit(`update:layout`, UserDashboardLayout);
+      console.log(this.$router);
     }
 
    
