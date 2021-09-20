@@ -3,7 +3,6 @@
         permanent
         expand-on-hover
         id="core-navigation-drawer"
-      
         dark
         mobile-breakpoint="1280"
         app
@@ -11,7 +10,7 @@
         width="200"
       >
         <v-list>
-          <v-list-item class="px-2">
+          <v-list-item class="px-2 mt-16">
             <v-list-item-avatar>
               <v-img :src="require('../../assets/crown.png')"></v-img>
             </v-list-item-avatar>

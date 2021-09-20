@@ -1,9 +1,9 @@
 
 <template>
-  <v-card flat>
+  <v-card flat class="test">
     <v-container fluid>
       <v-row class="child-flex">
-        <div ml-50>
+        <div>
           <v-toolbar color="#B71C1C" dark>
             <!-- <v-btn
               icon
@@ -11,7 +11,7 @@
             >
               <v-app-bar-nav-icon @click="$router.push({ name: 'Home'}).catch(() => {})"></v-app-bar-nav-icon>
             </v-btn> -->
-            <v-toolbar-side-icon class="ml-12" @click="$router.push({ name: 'Home'}).catch(() => {})">
+            <v-toolbar-side-icon @click="$router.push({ name: 'Home'}).catch(() => {})">
             <v-img class="mr-3" src="@/assets/tongue-circle.png" height="50px" width="50px"> 
             </v-img>
           </v-toolbar-side-icon>
@@ -39,3 +39,11 @@
     </v-container>
   </v-card>
 </template>
+
+
+<style>
+  .test {
+z-index: 999999 !important;
+}
+  
+</style>

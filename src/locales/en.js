@@ -11,6 +11,7 @@ export default {
     err404: "Error",
     err404title: "404",
     err404msg: "Page Not Found!",
-    home: "Home"
+    home: "Home",
+    userInfo: "User Information"
 
 }
