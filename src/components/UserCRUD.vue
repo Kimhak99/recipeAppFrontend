@@ -20,11 +20,11 @@
                 sm="4"
                 class="d-flex justify-center align-center"
               >
-                <ImageUpload
+                <!-- <ImageUpload
                   :image.sync="uploadedImg"
                   :avatar="user.profile_image"
                   :defaultImg="blankProfile"
-                />
+                /> -->
               </v-col>
             </v-row>
             <v-row>
@@ -74,6 +74,7 @@
                   label="Confirm Password"
                   type="password"
                   :rules="rule"
+                  v-model="user.password"
                 />
               </v-col>
             </v-row>
@@ -100,11 +101,12 @@
 import basicConfig from "@/utils/basicConfig";
 export default {
   components: {
-    ImageUpload: () => import("@/components/ImageUpload"),
+    // ImageUpload: () => import("@/components/ImageUpload"),
   },
   name: "UserCRUD",
   data() {
     return {
+      uploadedImg: undefined,
       blankProfile: basicConfig.blank_profile_img,
       valid: false,
       rule: [(v) => !!v || "This field is required."],
@@ -121,6 +123,9 @@ export default {
         this.$emit("handleData", this.user);
         this.$emit("update:dialog", false);
       }
+    },
+     resetValidation() {
+      this.$refs.form.resetValidation();
     },
     cancelDialog() {
       this.$emit("update:dialog", false);

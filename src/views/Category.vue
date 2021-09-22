@@ -10,7 +10,7 @@
             color="#b71c1c"
           >
           mdi-account-group
-          </v-icon><span class="ml-2 mt-1 display-1" style=" font-weight: bold">User</span></v-card-title>
+          </v-icon><span class="ml-2 mt-1 display-1" style=" font-weight: bold">{{$t("category")}}</span></v-card-title>
           <!-- <v-sheet> -->
             <v-toolbar-items class="d-flex align-center">
               <v-row>
@@ -71,9 +71,6 @@
             :loading="tableLoading"
             mobile-breakpoint="600"
           >
-          <template v-slot:[`item.fullname`]="{ item }">
-            {{item.lastname + " " + item.fullname}}
-          </template>
           <template v-slot:[`item.actions`]="{ item }">
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
@@ -112,10 +109,10 @@
           :deleteObj="obj"
           @handleDelete="handleDeleteConfirm"
         />
-          <UserCRUD
+          <CategoryCRUD
           :category="obj"
           :dialog.sync="dialog"
-          @handleData="handleUser"
+          @handleData="handleCategory"
         />
       </v-col>
     </v-row>
@@ -125,11 +122,13 @@
 
 <script>
 import UserDashboardLayout from "../layouts/UserDashboardLayout";
+
 import {
   listCategory,
   deleteCategory,
-  addCategory
-} from "@/api/user";
+  addCategory,
+  // updateCategory,
+} from "@/api/category";
 
 const newSearch = () => {
   return {
@@ -156,7 +155,7 @@ export default {
   components: {
     // PageNavigation: () => import("@/components/PageNavigation"),
       DeleteDialog: () => import("@/components/DeleteDialog"),
-      UserCRUD: () => import("@/components/UserCRUD"),
+      CategoryCRUD: () => import("@/components/CategoryCRUD"),
   },
   created() {
     this.$emit(`update:layout`, UserDashboardLayout);
@@ -242,8 +241,8 @@ export default {
       this.dialog = true;
       this.obj = obj;
     },
-    handleUser(item) {
-      addUser(item)
+    handleCategory(item) {
+      addCategory(item)
         .then((res) => {
           if (res.meta == 2001) {
             this.getData();
@@ -262,7 +261,7 @@ export default {
     handleDeleteConfirm(obj) {
       this.deleteDialog = false;
 
-      deleteUser(obj.id)
+      deleteCategory(obj.id)
         .then((res) => {
           if (res.meta == 2001) {
             this.$toast.success(res.message);

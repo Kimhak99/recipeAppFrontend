@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="800px">
+  <v-dialog v-model="dialog" persistent max-width="500px">
     <v-card class="pa-0" elevation="2">
       <v-card-text class="pb-0">
         <v-form v-model="valid" ref="form" lazy-validation>
@@ -20,15 +20,15 @@
                 sm="4"
                 class="d-flex justify-center align-center"
               >
-                <ImageUpload
+                <!-- <ImageUpload
                   :image.sync="uploadedImg"
-                  :avatar="user.profile_image"
+                  :avatar="category.profile_image"
                   :defaultImg="blankProfile"
-                />
+                /> -->
               </v-col>
             </v-row>
 
-            <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+            <v-col class="py-0" cols="12">
               <v-text-field
                 :label="$t('catName')"
                 type="text"
@@ -36,7 +36,7 @@
                 v-model="category.name"
               />
             </v-col>
-            <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+            <v-col class="py-0" cols="12">
               <v-textarea
                 :label="$t('remark')"
                 outlined
@@ -62,7 +62,7 @@
 import basicConfig from "@/utils/basicConfig";
 export default {
   components: {
-    ImageUpload: () => import("@/components/ImageUpload"),
+    // ImageUpload: () => import("@/components/ImageUpload"),
   },
   name: "CategoryCRUD",
   data() {
@@ -80,7 +80,7 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.$emit("handleData", this.user);
+        this.$emit("handleData", this.category);
         this.$emit("update:dialog", false);
       }
     },
@@ -89,6 +89,9 @@ export default {
       this.$refs.form.resetValidation();
     },
   },
+   resetValidation() {
+      this.$refs.form.resetValidation();
+    },
   watch: {
     dialog() {
       if (this.dialog) {

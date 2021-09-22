@@ -7,16 +7,11 @@ import '@mdi/font/css/materialdesignicons.css'
 import i18n from './i18n';
 import store from "./store";
 import "./permission";
+import Toast, { POSITION } from "vue-toastification";
+import "vue-toastification/dist/index.css";
+import "@/permission";
 
 Vue.config.productionTip = false
-
-new Vue({
-  router,
-  store,
-  vuetify,
-  i18n,
-  render: h => h(App)
-}).$mount('#app')
 
 Vue.mixin({
   methods: {
@@ -27,3 +22,84 @@ Vue.mixin({
     },
   }
   });
+
+Vue.use(Toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true,
+  position: POSITION.TOP_CENTER,
+  timeout: 3000
+});
+
+new Vue({
+  router,
+  store,
+  vuetify,
+  i18n,
+  render: h => h(App)
+}).$mount('#app');
+
+// Styles
+import '../../styles/main.sass'
+
+// Locale
+import { en } from '../../locale'
+
+
+//let me give you a tour of typescript and how to notice whether it ts or js
+
+//this preset is a type of VuetifyPreset, JS doesnt accpet type
+//many js libraries nowadaysm, either keep or switch to TS, so u need to make sure what work, if u dont need any of the field inside the object, just remove them, leave only
+//the one u needed
+export const preset = {
+  breakpoint: {
+    scrollBarWidth: 16,
+    thresholds: {
+      xs: 600,
+      sm: 960,
+      md: 1280,
+      lg: 1920,
+    },
+  },
+  icons: {
+    iconfont: 'mdi',
+    values: {},
+  },
+  lang: {
+    current: 'en',
+    locales: { en },
+    // t: undefined as any,
+  },
+  rtl: false,
+  theme: {
+    dark: false,
+    default: 'light',
+    disable: false,
+    options: {
+      cspNonce: undefined,
+      customProperties: undefined,
+      minifyTheme: undefined,
+      themeCache: undefined,
+    },
+    themes: {
+      light: {
+        primary: '#1976D2',
+        secondary: '#424242',
+        accent: '#82B1FF',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00',
+      },
+      dark: {
+        primary: '#2196F3',
+        secondary: '#424242',
+        accent: '#FF4081',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00',
+      },
+    },
+  },
+}

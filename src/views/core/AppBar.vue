@@ -19,7 +19,7 @@
           </v-toolbar>
         </div>
 
-        <div style="flex-basis: 20%">
+        <div style="flex-basis: 20%"> 
           <v-toolbar dark>
             <v-spacer></v-spacer>
 
@@ -43,7 +43,8 @@
 
 <style>
   .test {
-z-index: 999999 !important;
+/* z-index: 999999 !important; */
+z-index: 1;
 }
   
 </style>

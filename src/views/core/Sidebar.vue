@@ -70,3 +70,8 @@
     },//your structure is not dynamic so no point in using dynamic function
   }
 </script>
+<style>
+ #core-navigation-drawer{
+   z-index: 0;
+ }
+</style>
