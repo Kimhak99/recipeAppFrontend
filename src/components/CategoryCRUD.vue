@@ -8,7 +8,7 @@
               <v-col cols="12" class="pa-0">
                 <span class="display-2">
                   <v-icon left class="pb-1"> mdi-apple-finder </v-icon>
-                  {{ $t("userInfo") }}
+                  {{ $t("category") }}
                 </span>
               </v-col>
             </v-row>
@@ -27,60 +27,22 @@
                 />
               </v-col>
             </v-row>
-            <v-row>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="First Name"
-                  type="text"
-                  :rules="rule"
-                  v-model="user.firstname"
-                />
-              </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Last Name"
-                  type="text"
-                  :rules="rule"
-                  v-model="user.lastname"
-                />
-              </v-col>
 
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Username"
-                  type="text"
-                  :rules="rule"
-                  v-model="user.username"
-                />
-              </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Email"
-                  type="email"
-                  :rules="rule"
-                  v-model="user.email"
-                />
-              </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Password"
-                  type="password"
-                  :rules="rule"
-                  v-model="user.password"
-                />
-              </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Confirm Password"
-                  type="password"
-                  :rules="rule"
-                />
-              </v-col>
-            </v-row>
-            <v-row cols="12" justify="end" class="pr-2">
-              <v-checkbox checked: false v-model="user.is_admin" label="Are you
-              an admin?" />
-            </v-row>
+            <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+              <v-text-field
+                :label="$t('catName')"
+                type="text"
+                :rules="rule"
+                v-model="category.name"
+              />
+            </v-col>
+            <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+              <v-textarea
+                :label="$t('remark')"
+                outlined
+                v-model="category.remark"
+              />
+            </v-col>
           </v-container>
         </v-form>
       </v-card-text>
@@ -102,7 +64,7 @@ export default {
   components: {
     ImageUpload: () => import("@/components/ImageUpload"),
   },
-  name: "UserCRUD",
+  name: "CategoryCRUD",
   data() {
     return {
       blankProfile: basicConfig.blank_profile_img,
@@ -111,7 +73,7 @@ export default {
     };
   },
   props: {
-    user: Object,
+    category: Object,
     dialog: Boolean,
   },
 
@@ -137,5 +99,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

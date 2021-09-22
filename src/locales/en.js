@@ -12,6 +12,8 @@ export default {
     err404title: "404",
     err404msg: "Page Not Found!",
     home: "Home",
-    userInfo: "User Information"
+    userInfo: "User Information",
+    remark: "Remark",
+    catName: "Category Name",
 
 }
