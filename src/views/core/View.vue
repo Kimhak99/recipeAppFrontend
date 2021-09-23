@@ -1,12 +1,12 @@
 <template>
   <v-main>
-    <router-view/>
+    <router-view style="padding: 0 20px" />
   </v-main>
 </template>
 
 <script>
 export default {
-  name: "View",
+  name: "IView",
 
   components: {
     // Footer: () => import("./Footer"),

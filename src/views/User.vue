@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="mt-16">
+  <v-container fluid>
     <!-- <PageNavigation :items="navigation" /> -->
     <v-row no-gutters>
-      <v-col cols="8" offset="2">
+      <v-col cols="12" offset="0">
         <v-card class="px-4">
           <v-card-title>
             <v-icon large color="#b71c1c"> mdi-account-group </v-icon
@@ -74,7 +74,7 @@
             <template v-slot:[`item.is_admin`]="{ item }">
               <!-- <span v-if="item.is_admin==1?">Admin</span> -->
 
-              {{item.is_admin ? "Admin" : "User"}} 
+              {{ item.is_admin ? "Admin" : "User" }}
             </template>
             <template v-slot:[`item.actions`]="{ item }">
               <v-tooltip top>
@@ -121,7 +121,6 @@
 </template>
 
 <script>
-import UserDashboardLayout from "../layouts/UserDashboardLayout";
 import { listUser, deleteUser, addUser, updateUser } from "@/api/user";
 
 const newSearch = () => {
@@ -164,9 +163,6 @@ export default {
     // PageNavigation: () => import("@/components/PageNavigation"),
     DeleteDialog: () => import("@/components/DeleteDialog"),
     UserCRUD: () => import("@/components/UserCRUD"),
-  },
-  created() {
-    this.$emit(`update:layout`, UserDashboardLayout);
   },
   data: () => ({
     // navigation:[{ text: "User"}]
@@ -276,7 +272,7 @@ export default {
           .then((res) => {
             if (res.meta == 2001) {
               this.getData();
-              this.$toast.success(res.message);//you are trying to access this component, when it does not exist or properly intergrade
+              this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
             } else {
               this.$toast.error("Erorr - " + res.meta);
               console.log("Add User Error", res);
@@ -326,7 +322,6 @@ export default {
   },
   mounted() {
     this.getData();
-
   },
 };
 </script>

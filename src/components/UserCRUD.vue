@@ -19,12 +19,14 @@
                 md="2"
                 sm="4"
                 class="d-flex justify-center align-center"
+                style="height: 300px"
               >
-                <!-- <ImageUpload
+                <ImageUpload
                   :image.sync="uploadedImg"
                   :avatar="user.profile_image"
-                  :defaultImg="blankProfile"
-                /> -->
+                />
+
+                <!-- <img :src="blankProfile" alt="" /> -->
               </v-col>
             </v-row>
             <v-row>
@@ -98,10 +100,10 @@
 </template>
 // TODO:: enable image upload
 <script>
-import basicConfig from "@/utils/basicConfig";
+import basicConfig from "../utils/basicConfig";
 export default {
   components: {
-    // ImageUpload: () => import("@/components/ImageUpload"),
+    ImageUpload: () => import("@/components/ImageUpload"),
   },
   name: "UserCRUD",
   data() {
@@ -124,7 +126,7 @@ export default {
         this.$emit("update:dialog", false);
       }
     },
-     resetValidation() {
+    resetValidation() {
       this.$refs.form.resetValidation();
     },
     cancelDialog() {

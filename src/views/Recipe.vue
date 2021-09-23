@@ -1,21 +1,19 @@
 <template>
-  <h1>This is recipe page</h1>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12"> <h1>Recipe Page</h1> </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
- import UserDashboardLayout from '../layouts/UserDashboardLayout'
-
-  export default {
-  // components: { UserDashboardLayout },
-    name: 'Recipt',
-    created(){
-      this.$emit(`update:layout`, UserDashboardLayout);
-    }
-
-  }
+export default {
+  name: "Recipt",
+};
 </script>
 <style>
-  h1{
-    color: #B71C1C
-  }
+h1 {
+  color: #b71c1c;
+  height: 120vh;
+}
 </style>

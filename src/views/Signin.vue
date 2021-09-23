@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <home />
-    <v-content>
+    <v-main>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
@@ -12,9 +11,7 @@
                 <v-col cols="12" md="8">
                   <v-card-text class="mt-12">
                     <h1 class="text-center display-2 text-accent-3">
-                      <span style="color: #b71c1c"
-                        >Sign in to The Recipe</span
-                      >
+                      <span style="color: #b71c1c">Sign in to The Recipe</span>
                     </h1>
                     <div class="text-center mt-4">
                       <v-btn class="mx-2" fab color="black" outlined>
@@ -37,6 +34,7 @@
                         prepend-icon="person"
                         type="text"
                         color="#B71C1C"
+                        v-model="username"
                       />
 
                       <v-text-field
@@ -46,12 +44,18 @@
                         prepend-icon="lock"
                         type="password"
                         color="#B71C1C"
+                        v-model="password"
                       />
                     </v-form>
                     <h3 class="text-center mt-3">Forget your password</h3>
                   </v-card-text>
                   <div class="text-center mt-3">
-                    <v-btn @click="handleClick" rounded dark style="background-color: #b71c1c">
+                    <v-btn
+                      @click="handleClick"
+                      rounded
+                      dark
+                      style="background-color: #b71c1c"
+                    >
                       SIGN IN
                     </v-btn>
                   </div>
@@ -81,7 +85,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -96,17 +100,22 @@ export default {
   },
   data: () => ({
     step: 1,
+    username: "",
+    password: "",
   }),
   props: {
     source: String,
   },
   methods: {
     handleClick() {
+      //there are still a couple more problems like logout for example, need to clear all
+      //user info , check the sidebar item based on is_admin,
+
       this.$store
-        .dispatch("Login", { username: "samantha", password: "admin123" }) //what is ur login info //its cmt out before i comment out, the token is generate using that account okay
+        .dispatch("Login", { username: this.username, password: this.password })
         .then((res) => {
           console.log(res);
-          this.$router.push("/")
+          this.$router.push("/");
         })
         .catch(console.log);
     },
