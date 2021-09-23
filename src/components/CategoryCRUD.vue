@@ -33,7 +33,7 @@
                 :label="$t('catName')"
                 type="text"
                 :rules="rule"
-                v-model="category.name"
+                v-model="category.category_name"
               />
             </v-col>
             <v-col class="py-0" cols="12">

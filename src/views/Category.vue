@@ -118,7 +118,6 @@
     </v-row>
   </v-container>
 </template>
-// TODO:: add and update user
 
 <script>
 import UserDashboardLayout from "../layouts/UserDashboardLayout";
@@ -127,7 +126,7 @@ import {
   listCategory,
   deleteCategory,
   addCategory,
-  // updateCategory,
+  updateCategory,
 } from "@/api/category";
 
 const newSearch = () => {
@@ -176,11 +175,17 @@ export default {
         value: "itemNo",
         width: "100px",
       },
-       {
+      {
         text: "Category Image",
         align: "start",
         sortable: false, 
         value: "image",
+      },
+      {
+        text: "Category Name",
+        align: "start",
+        sortable: false, 
+        value: "category_name",
       },
       {
         text: "Remark",
@@ -242,17 +247,34 @@ export default {
       this.obj = obj;
     },
     handleCategory(item) {
-      addCategory(item)
-        .then((res) => {
-          if (res.meta == 2001) {
-            this.getData();
-            this.$toast.success(res.message);
-          } else {
-            this.$toast.error("Erorr - " + res.meta);
-            console.log("Add Error", res);
-          }
-        })
-        .catch(console.log);
+       if (this.obj.id == "") {
+        addCategory(item)
+          .then((res) => {
+            if (res.meta == 2001) {
+              this.getData();
+              this.$toast.success(res.message);
+            } else {
+              this.$toast.error("Erorr - " + res.meta);
+              console.log("Add Error", res);
+            }
+          })
+          .catch(console.log);
+        }
+        else {
+           updateCategory(item)
+          .then((res) => {
+            if (res.meta == 2001) {
+              this.getData();
+              this.$toast.success(res.message);
+            } else {
+              console.log("edit", res);
+              this.$toast.error("Error - " + res.meta);
+            }
+          })
+          .catch((err) => {
+            console.log("Edit User Error", err);
+          });
+        }
     },
     handleDelete(obj) {
       this.deleteDialog = true;

@@ -15,7 +15,7 @@
             <v-img class="mr-3" src="@/assets/tongue-circle.png" height="50px" width="50px"> 
             </v-img>
           </v-toolbar-side-icon>
-            <v-toolbar-title>{{$t("welcome")}}</v-toolbar-title>
+            <v-toolbar-title>{{$t("app_name")}}</v-toolbar-title>
           </v-toolbar>
         </div>
 

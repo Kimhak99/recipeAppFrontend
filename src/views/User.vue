@@ -119,7 +119,6 @@
     </v-row>
   </v-container>
 </template>
-// TODO:: add and update user
 
 <script>
 import UserDashboardLayout from "../layouts/UserDashboardLayout";
@@ -287,8 +286,6 @@ export default {
             console.log("Add User Error", err);
           });
       } else {
-        console.log(item);
-
         updateUser(item)
           .then((res) => {
             if (res.meta == 2001) {

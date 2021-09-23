@@ -40,10 +40,10 @@ new Vue({
 }).$mount('#app');
 
 // Styles
-import '../../styles/main.sass'
+// import '../../styles/main.sass'
 
 // Locale
-import { en } from '../../locale'
+// import { en } from '../../locale'
 
 
 //let me give you a tour of typescript and how to notice whether it ts or js
@@ -65,11 +65,11 @@ export const preset = {
     iconfont: 'mdi',
     values: {},
   },
-  lang: {
-    current: 'en',
-    locales: { en },
-    // t: undefined as any,
-  },
+  // lang: {
+  //   current: 'en',
+  //   locales: { en },
+  //   t: undefined as any,
+  // },
   rtl: false,
   theme: {
     dark: false,
