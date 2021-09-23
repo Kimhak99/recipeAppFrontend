@@ -1,50 +1,54 @@
 
+
 <template>
-  <v-card flat class="test">
-    <v-container fluid>
-      <v-row class="child-flex">
-        <div>
-          <v-toolbar color="#B71C1C" dark>
-            <!-- <v-btn
-              icon
-              class="ml-8"
-            >
-              <v-app-bar-nav-icon @click="$router.push({ name: 'Home'}).catch(() => {})"></v-app-bar-nav-icon>
-            </v-btn> -->
-            <v-toolbar-side-icon @click="$router.push({ name: 'Home'}).catch(() => {})">
-            <v-img class="mr-3" src="@/assets/tongue-circle.png" height="50px" width="50px"> 
-            </v-img>
-          </v-toolbar-side-icon>
-            <v-toolbar-title>{{$t("app_name")}}</v-toolbar-title>
-          </v-toolbar>
-        </div>
+  <!-- <v-card class="overflow-hidden"> -->
+    <v-app-bar
+      absolute
+      color="black"
+      dark
+    >
+    <!-- <v-img
+        class="ml-16"
+        src="@/assets/tongue-circle.png"
+        max-height="50"
+        max-width="50"
+         @click="$router.push({ name: 'Home'}).catch(() => {})"
+        contain
+      ></v-img> -->
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-        <div style="flex-basis: 20%"> 
-          <v-toolbar dark>
-            <v-spacer></v-spacer>
+      <v-toolbar-title class="titleStyle">{{$t("app_name")}}</v-toolbar-title>
 
-            <v-btn @click="$router.push({ name: 'Signin' }).catch(() => {})">
-              {{$t('signin')}}
-            </v-btn>
+      <v-spacer></v-spacer>
+
+              
+             <v-btn @click="$router.push({ name: 'Signin' }).catch(() => {})" class="mr-5 test">
+               {{$t('signin')}}
+             </v-btn>
 
             <v-btn @click="$router.push({ name: 'Signup' }).catch(() => {})">
-               {{$t('signup')}}
-            </v-btn>
-            <!-- <v-btn class="mx-2" fab color="white" outlined> -->
-              <i class="fas fa-sign-out-alt mx-4" style='font-size:24px' @click="$router.push({ name: 'Signin' }).catch(() => {})"></i>
-            <!-- </v-btn> -->
-          </v-toolbar>
-        </div>
-      </v-row>
-    </v-container>
-  </v-card>
+                {{$t('signup')}}
+             </v-btn>    
+    </v-app-bar>
+    <!-- <v-sheet
+      id="scrolling-techniques-7"
+      class="overflow-y-auto"
+      max-height="600"
+    >
+      <v-container style="height: 1500px;">
+      </v-container>
+    </v-sheet> -->
+  <!-- </v-card> -->
 </template>
-
-
 <style>
   .test {
 /* z-index: 999999 !important; */
-z-index: 1;
+border-radius: 5px;
+background-color: green;
+color: pink;
+}
+.titleStyle{
+  margin-left: 7%;
 }
   
 </style>

@@ -13,7 +13,7 @@
                   <v-card-text class="mt-12">
                     <h1 class="text-center display-2 text-accent-3">
                       <span style="color: #b71c1c"
-                        >Sign in to The Foodie's Tongue</span
+                        >Sign in to The Recipe</span
                       >
                     </h1>
                     <div class="text-center mt-4">

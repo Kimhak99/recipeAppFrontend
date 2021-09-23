@@ -81,7 +81,7 @@
               <div style="position: abolute; bottom: 20px; margin-left: auto; margin-right: auto; left:0; right:0;
               text-align: center;">
                 <v-btn text>
-                  <v-icon>fas fa-sign-out-alt</v-icon>
+                  <v-icon @click="$router.push({ name: 'Signup' }).catch(() => {})">fas fa-sign-out-alt</v-icon>
                 </v-btn>
               </div>
           </v-navigation-drawer>

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="navStyle">
     <!-- <PageNavigation :items="navigation" /> -->
     <v-row no-gutters>
       <v-col cols="8" offset="2" >
@@ -307,5 +307,8 @@ export default {
 <style>
 h1 {
   color: #b71c1c;
+}
+.navStyle{
+  margin-top: 80px;
 }
 </style>
