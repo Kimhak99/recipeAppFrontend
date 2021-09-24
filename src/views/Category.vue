@@ -1,77 +1,74 @@
 <template>
-  <v-container fluid class="navStyle">
+  <v-container fluid>
     <!-- <PageNavigation :items="navigation" /> -->
     <v-row no-gutters>
-      <v-col cols="8" offset="2" >
+      <v-col cols="12">
         <v-card class="px-4">
-          <v-card-title>  
-            <v-icon
-            large
-            color="#b71c1c"
+          <v-card-title>
+            <v-icon large color="#b71c1c"> mdi-account-group </v-icon
+            ><span class="ml-2 mt-1 display-1" style="font-weight: bold">{{
+              $t("category")
+            }}</span></v-card-title
           >
-          mdi-account-group
-          </v-icon><span class="ml-2 mt-1 display-1" style=" font-weight: bold">{{$t("category")}}</span></v-card-title>
           <!-- <v-sheet> -->
-            <v-toolbar-items class="d-flex align-center">
-              <v-row>
-                <v-col cols="12" lg="6" md="6" sm="6">
-                  <v-text-field
-                    label="Search"
-                    v-model="search.keyword"
-                    prepend-inner-icon="mdi-magify"
-                    hint="Empty input will clear filter"
-                    persistent-hint
-                    clearable
-                    @click:clear="handleSearch('')"
-                    @keyup.enter="handleSearch(undefined)"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  lg="1"
-                  md="1"
-                  sm="1"
-                  align-self="center"
-                  :class="
-                  $vuetify.breakpoint.mdAndDown
-                  ? 'd-flex justify-end pr-0'
-                  : ''
-                  "
-                >
+          <v-toolbar-items class="d-flex align-center">
+            <v-row>
+              <v-col cols="12" lg="6" md="6" sm="6">
+                <v-text-field
+                  label="Search"
+                  v-model="search.keyword"
+                  prepend-inner-icon="mdi-magify"
+                  hint="Empty input will clear filter"
+                  persistent-hint
+                  clearable
+                  @click:clear="handleSearch('')"
+                  @keyup.enter="handleSearch(undefined)"
+                />
+              </v-col>
+              <v-col
+                cols="12"
+                lg="1"
+                md="1"
+                sm="1"
+                align-self="center"
+                :class="
+                  $vuetify.breakpoint.mdAndDown ? 'd-flex justify-end pr-0' : ''
+                "
+              >
                 <v-btn
-                    fab
-                    small
-                    color="primary"
-                    @click="handleSearch(undefined)"
-                  >
-                     <v-icon>mdi-magnify</v-icon>
-                  </v-btn>
-                </v-col>
-                <v-spacer />
-                <v-col
-                  cols="12"
-                  lg="2"
-                  md="2"
-                  sm="2"
-                  class="d-flex justify-end"
-                  align-self="center"
+                  fab
+                  small
+                  color="primary"
+                  @click="handleSearch(undefined)"
                 >
+                  <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+              </v-col>
+              <v-spacer />
+              <v-col
+                cols="12"
+                lg="2"
+                md="2"
+                sm="2"
+                class="d-flex justify-end"
+                align-self="center"
+              >
                 <v-btn color="green" elevation="2" @click="handleDialog">
-                    <v-icon left>mdi-account-plus</v-icon>
-                    {{ $t("add")}}
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-toolbar-items>
+                  <v-icon left>mdi-account-plus</v-icon>
+                  {{ $t("add") }}
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-toolbar-items>
           <!-- </v-sheet> -->
-           <v-data-table
+          <v-data-table
             :headers="headers"
             :items="datas"
             class="elevation-0 mt-4"
             :loading="tableLoading"
             mobile-breakpoint="600"
           >
-          <template v-slot:[`item.actions`]="{ item }">
+            <template v-slot:[`item.actions`]="{ item }">
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
@@ -101,15 +98,15 @@
                 <span>delete</span>
               </v-tooltip>
             </template>
-           </v-data-table>
+          </v-data-table>
         </v-card>
 
-          <DeleteDialog
+        <DeleteDialog
           :dialogDelete.sync="deleteDialog"
           :deleteObj="obj"
           @handleDelete="handleDeleteConfirm"
         />
-          <CategoryCRUD
+        <CategoryCRUD
           :category="obj"
           :dialog.sync="dialog"
           @handleData="handleCategory"
@@ -143,18 +140,17 @@ const newObj = () => {
     category_name: "",
     image: "",
     remark: "",
-    is_active: Boolean
-
-  }
-}
+    is_active: Boolean,
+  };
+};
 
 export default {
   // components: { UserDashboardLayout },
   name: "Category",
   components: {
     // PageNavigation: () => import("@/components/PageNavigation"),
-      DeleteDialog: () => import("@/components/DeleteDialog"),
-      CategoryCRUD: () => import("@/components/CategoryCRUD"),
+    DeleteDialog: () => import("@/components/DeleteDialog"),
+    CategoryCRUD: () => import("@/components/CategoryCRUD"),
   },
   created() {
     this.$emit(`update:layout`, UserDashboardLayout);
@@ -167,7 +163,7 @@ export default {
     tableLoading: true,
     deleteDialog: false,
     obj: newObj(),
-        headers: [
+    headers: [
       {
         text: "ID",
         align: "center",
@@ -178,13 +174,13 @@ export default {
       {
         text: "Category Image",
         align: "start",
-        sortable: false, 
+        sortable: false,
         value: "image",
       },
       {
         text: "Category Name",
         align: "start",
-        sortable: false, 
+        sortable: false,
         value: "category_name",
       },
       {
@@ -201,27 +197,26 @@ export default {
         value: "actions",
       },
     ],
-  
   }),
   methods: {
     getData() {
       this.datas = [];
       this.tableLoading = true;
 
-      listCategory(this.search) 
+      listCategory(this.search)
         .then((res) => {
           console.log(res);
-          if(res.meta == 2001) {
+          if (res.meta == 2001) {
             this.tableLoading = false;
-            
-            if(res.data.length == 0) {
+
+            if (res.data.length == 0) {
               this.$toast("No Data Found");
               return true;
             }
 
             res.data.forEach((p, i) => (p.itemNo = i + 1));
             this.datas = res.data;
-            console.log(this.datas)
+            console.log(this.datas);
           }
         })
         .catch((err) => {
@@ -230,13 +225,13 @@ export default {
         });
     },
     handleSearch(item) {
-      if(item == "") {
+      if (item == "") {
         this.search = newSearch();
       }
       this.getData();
-        setTimeout(() => {
-          this.search = newSearch();
-        }, 500);
+      setTimeout(() => {
+        this.search = newSearch();
+      }, 500);
     },
     handleDialog() {
       this.dialog = true;
@@ -247,7 +242,7 @@ export default {
       this.obj = obj;
     },
     handleCategory(item) {
-       if (this.obj.id == "") {
+      if (this.obj.id == "") {
         addCategory(item)
           .then((res) => {
             if (res.meta == 2001) {
@@ -259,9 +254,8 @@ export default {
             }
           })
           .catch(console.log);
-        }
-        else {
-           updateCategory(item)
+      } else {
+        updateCategory(item)
           .then((res) => {
             if (res.meta == 2001) {
               this.getData();
@@ -274,7 +268,7 @@ export default {
           .catch((err) => {
             console.log("Edit User Error", err);
           });
-        }
+      }
     },
     handleDelete(obj) {
       this.deleteDialog = true;
@@ -300,15 +294,11 @@ export default {
   },
   mounted() {
     this.getData();
-
-  }
+  },
 };
 </script>
 <style>
 h1 {
   color: #b71c1c;
-}
-.navStyle{
-  margin-top: 80px;
 }
 </style>

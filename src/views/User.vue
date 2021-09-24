@@ -2,7 +2,7 @@
   <v-container fluid>
     <!-- <PageNavigation :items="navigation" /> -->
     <v-row no-gutters>
-      <v-col cols="12" offset="0">
+      <v-col cols="12">
         <v-card class="px-4">
           <v-card-title>
             <v-icon large color="#b71c1c"> mdi-account-group </v-icon

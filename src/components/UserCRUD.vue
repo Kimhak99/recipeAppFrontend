@@ -14,12 +14,12 @@
             </v-row>
             <v-row>
               <v-col
+                class="py-0"
                 cols="12"
                 lg="2"
                 md="2"
                 sm="4"
-                class="d-flex justify-center align-center"
-                style="height: 300px"
+                style="height: 100%; width: 100%"
               >
                 <ImageUpload
                   :image.sync="uploadedImg"
