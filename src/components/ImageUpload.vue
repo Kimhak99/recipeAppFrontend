@@ -1,7 +1,6 @@
 <template>
   <div class="mt-4">
     <v-btn
-      @click="imgClick"
       elevation="0"
       height="100px"
       width="100px"
@@ -9,9 +8,13 @@
         'background-image: url(' +
         profilePic +
         '); background-position: 50% 0; background-size: cover; background-color: rgba(0, 0, 0, 0)'
-      "
+        "
+        class="btnStyle"
     >
+    <v-icon @click="imgClick" color="white">fas fa-camera</v-icon>
+    <v-icon v-if="image" @click="imgRemove" color="white">fas fa-times-circle</v-icon>
     </v-btn>
+
 
     <v-file-input
       v-model="tempImage"
@@ -45,6 +48,10 @@ export default {
     imgClick() {
       this.$refs.avatarUpload.$refs.input.click();
     },
+    imgRemove() {
+     this.avatar = "";
+     this.image= undefined;
+    }
   },
   computed: {
     profilePic: function () {
@@ -70,12 +77,18 @@ export default {
 </script>
 
 <style>
-.myClass {
-  width: 100%;
-  height: 100%;
+.btnStyle{
+  border-radius: 50%;
+  align-items: center;
+  /* background: grey; */
 }
-.myXs {
-  width: 30rem;
-  height: 25rem;
+.v-icon:hover:before{
+  background: black;
+  opacity: 0.5;
+  padding: 6px;
+  border-radius: 50%;
+}
+v-icon{
+ 
 }
 </style>
