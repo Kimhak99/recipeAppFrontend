@@ -8,13 +8,15 @@
         'background-image: url(' +
         profilePic +
         '); background-position: 50% 0; background-size: cover; background-color: rgba(0, 0, 0, 0)'
-        "
-        class="btnStyle"
+      "
+      class="btnStyle"
     >
-    <v-icon @click="imgClick" color="white">fas fa-camera</v-icon>
-    <v-icon v-if="image" @click="imgRemove" color="white">fas fa-times-circle</v-icon>
+      <v-icon @click="imgClick" color="white">fas fa-camera</v-icon>
+      <span v-if="image">&nbsp;&nbsp;</span>
+      <v-icon v-if="image" @click="imgRemove" color="white"
+        >fas fa-times-circle</v-icon
+      >
     </v-btn>
-
 
     <v-file-input
       v-model="tempImage"
@@ -49,9 +51,9 @@ export default {
       this.$refs.avatarUpload.$refs.input.click();
     },
     imgRemove() {
-     this.avatar = "";
-     this.image= undefined;
-    }
+      this.avatar = "";
+      this.image = undefined;
+    },
   },
   computed: {
     profilePic: function () {
@@ -77,18 +79,18 @@ export default {
 </script>
 
 <style>
-.btnStyle{
+.btnStyle {
   border-radius: 50%;
   align-items: center;
+  border: 1px solid silver;
   /* background: grey; */
 }
-.v-icon:hover:before{
+.v-icon:hover:before {
   background: black;
   opacity: 0.5;
   padding: 6px;
   border-radius: 50%;
 }
-v-icon{
- 
+v-icon {
 }
 </style>
