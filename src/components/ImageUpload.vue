@@ -91,6 +91,6 @@ export default {
   padding: 6px;
   border-radius: 50%;
 }
-v-icon {
-}
+/* v-icon {
+} */
 </style>

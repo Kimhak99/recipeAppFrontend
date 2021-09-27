@@ -122,6 +122,7 @@
 
 <script>
 import { listUser, deleteUser, addUser, updateUser } from "@/api/user";
+import { uploadFile } from "@/api/generalAPI";
 
 const newSearch = () => {
   return {
@@ -266,13 +267,24 @@ export default {
       this.dialog = true;
       this.obj = obj;
     },
-    handleUser(item) {
+    async handleUser(item, imagefile) {
+      if (imagefile != undefined && imagefile != "") {
+        const fileImageForm = new FormData();
+        fileImageForm.append("file", imagefile);
+
+        await uploadFile(fileImageForm)
+          .then((res) => {
+            item.profile_image = res.file.md5;
+          })
+          .catch(console.log);
+      }
       if (this.obj.id == "") {
         addUser(item)
           .then((res) => {
             if (res.meta == 2001) {
               this.getData();
               this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
+              console.log("added item: ", res);
             } else {
               this.$toast.error("Erorr - " + res.meta);
               console.log("Add User Error", res);

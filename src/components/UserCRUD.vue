@@ -100,7 +100,7 @@
 </template>
 // TODO:: enable image upload
 <script>
-import basicConfig from "../utils/basicConfig";
+// import basicConfig from "../utils/basicConfig";
 export default {
   components: {
     ImageUpload: () => import("@/components/ImageUpload"),
@@ -109,7 +109,7 @@ export default {
   data() {
     return {
       uploadedImg: undefined,
-      blankProfile: basicConfig.blank_profile_img,
+      // blankProfile: basicConfig.blank_profile_img,
       valid: false,
       rule: [(v) => !!v || "This field is required."],
     };
@@ -122,16 +122,20 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.$emit("handleData", this.user);
+        this.$emit("handleData", this.user, this.uploadedImg);
+        this.uploadedImg = undefined;
         this.$emit("update:dialog", false);
+      } else {
+        this.$toast.warning(this.$t("fillRequire"));
       }
     },
     resetValidation() {
       this.$refs.form.resetValidation();
     },
     cancelDialog() {
-      this.$emit("update:dialog", false);
       this.$refs.form.resetValidation();
+      this.uploadedImg = undefined;
+      this.$emit("update:dialog", false);
     },
   },
   watch: {

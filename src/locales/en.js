@@ -15,5 +15,6 @@ export default {
     userInfo: "User Information",
     remark: "Remark",
     catName: "Category Name",
+    fillRequire: "Please fill in all the required fields.",
 
 }
