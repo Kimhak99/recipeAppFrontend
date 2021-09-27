@@ -76,19 +76,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .btnStyle {
   border-radius: 50%;
   align-items: center;
   border: 1px solid silver;
   /* background: grey; */
 }
+
 .v-icon:hover:before {
   background: black;
   opacity: 0.5;
   padding: 6px;
   border-radius: 50%;
 }
-/* v-icon {
-} */
 </style>
