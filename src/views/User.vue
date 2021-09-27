@@ -70,8 +70,7 @@
           >
             <template v-slot:[`item.profile_image`]="{ item }">
               <v-img
-                lazy-src="https://www.iappreciatelife.com/img/user.png"
-                :src="checkAvatar(item)"
+                :src="checkAvatar(item.profile_image)"
                 width="65px"
                 height="70px"
                 style="margin: 10px; border-radius: 50px"
@@ -239,7 +238,7 @@ export default {
 
       listUser(this.search)
         .then((res) => {
-          console.log("Res", res);
+          // console.log("Res", res);
           if (res.meta == 2001) {
             this.tableLoading = false;
 
@@ -279,25 +278,26 @@ export default {
       this.obj = obj;
     },
     async handleUser(item, imagefile) {
-      console.log("img: ", imagefile);
       this.dialog = false;
+
       if (imagefile != undefined && imagefile != "") {
         const fileImageForm = new FormData();
         fileImageForm.append("file", imagefile);
 
         await uploadFile(fileImageForm)
           .then((res) => {
-            item.profile_image = res.file.md5;
+            item.profile_image = res.file.filename;
           })
           .catch(console.log);
       }
+
       if (this.obj.id == "") {
         addUser(item)
           .then((res) => {
             if (res.meta == 2001) {
               this.getData();
               this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
-              console.log("added item: ", res);
+              console.log("added item: ", item);
             } else {
               this.$toast.error("Erorr - " + res.meta);
               console.log("Add User Error", res);
@@ -307,6 +307,8 @@ export default {
             console.log("Add User Error", err);
           });
       } else {
+        console.log(item);
+
         updateUser(item)
           .then((res) => {
             if (res.meta == 2001) {
@@ -344,16 +346,16 @@ export default {
           console.log(err);
         });
     },
-    checkAvatar(item) {
-      return typeof item.profile_image === "string" ||
-        item.profile_image == undefined
-        ? item.profile_image == "" || item.profile_image == undefined
-          ? basicConfig.blank_profile_img
-          : this.imgUrl + item.profile_image
-        : item.profile_image != 0
-        ? this.imgUrl + item.profile_image[0]
-        : basicConfig.blank_profile_img;
-    },
+    // checkAvatar(item) {
+    //   return typeof item.profile_image === "string" ||
+    //     item.profile_image == undefined
+    //     ? item.profile_image == "" || item.profile_image == undefined
+    //       ? basicConfig.blank_profile_img
+    //       : this.imgUrl + item.profile_image
+    //     : item.profile_image != 0
+    //     ? this.imgUrl + item.profile_image[0]
+    //     : basicConfig.blank_profile_img;
+    // },
   },
   mounted() {
     this.getData();

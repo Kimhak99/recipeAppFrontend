@@ -10,6 +10,7 @@ import "./permission";
 import Toast, { POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "@/permission";
+import basicConfig from './utils/basicConfig'
 
 Vue.config.productionTip = false
 
@@ -20,8 +21,13 @@ Vue.mixin({
         this.$refs.form.resetValidation();
       });
     },
+    checkAvatar(item) {
+      if (!item) return basicConfig.blank_profile_img;
+
+      return `${basicConfig.file_url}${item}`
+    }
   }
-  });
+});
 
 Vue.use(Toast, {
   transition: "Vue-Toastification__bounce",

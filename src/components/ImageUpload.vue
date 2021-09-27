@@ -4,11 +4,7 @@
       elevation="0"
       height="100px"
       width="100px"
-      :style="
-        'background-image: url(' +
-        profilePic +
-        '); background-position: 50% 0; background-size: cover; background-color: rgba(0, 0, 0, 0)'
-      "
+      :style="`background-image: url(${profilePic}); background-position: 50% 0; background-size: cover; background-color: rgba(0, 0, 0, 0)}`"
       class="btnStyle"
     >
       <v-icon @click="imgClick" color="white">fas fa-camera</v-icon>
@@ -51,8 +47,10 @@ export default {
       this.$refs.avatarUpload.$refs.input.click();
     },
     imgRemove() {
-      this.avatar = "";
-      this.image = undefined;
+      // this.avatar = ""; //this is a variable from the parent components, cant directly assign
+      //new value to it;
+      this.$emit("update:image", undefined); //wat abt just this? can it remove?
+      //since you are using .sync, u neeed to update value by $emit event back to parent
     },
   },
   computed: {

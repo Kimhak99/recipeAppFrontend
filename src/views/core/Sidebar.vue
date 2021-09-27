@@ -44,9 +44,7 @@
           "
         >
           <v-btn text>
-            <v-icon @click="$router.push({ name: 'Signup' }).catch(() => {})"
-              >fas fa-sign-out-alt</v-icon
-            >
+            <v-icon @click="logout">fas fa-sign-out-alt</v-icon>
           </v-btn>
         </div>
       </v-navigation-drawer>
@@ -70,6 +68,13 @@ export default {
       //remember that this is fixed item, so if u happened to change in index route
       //need to change here too
     };
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("LogOut").then(() => {
+        this.$router.push({ path: "/signin" });
+      });
+    },
   },
   computed: {
     drawer: {
