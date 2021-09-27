@@ -124,7 +124,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.$emit("handleData", this.user, this.uploadedImg);
         this.uploadedImg = undefined;
-        this.$emit("update:dialog", false);
+        // this.$emit("update:dialog", false);
       } else {
         this.$toast.warning(this.$t("fillRequire"));
       }

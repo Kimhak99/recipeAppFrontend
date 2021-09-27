@@ -68,6 +68,15 @@
             :loading="tableLoading"
             mobile-breakpoint="600"
           >
+            <template v-slot:[`item.profile_image`]="{ item }">
+              <v-img
+                lazy-src="https://www.iappreciatelife.com/img/user.png"
+                :src="checkAvatar(item)"
+                width="65px"
+                height="70px"
+                style="margin: 10px; border-radius: 50px"
+              />
+            </template>
             <template v-slot:[`item.fullname`]="{ item }">
               {{ item.lastname + " " + item.firstname }}
             </template>
@@ -123,6 +132,7 @@
 <script>
 import { listUser, deleteUser, addUser, updateUser } from "@/api/user";
 import { uploadFile } from "@/api/generalAPI";
+import basicConfig from "@/utils/basicConfig";
 
 const newSearch = () => {
   return {
@@ -167,6 +177,7 @@ export default {
   },
   data: () => ({
     // navigation:[{ text: "User"}]
+    imgUrl: basicConfig.file_url,
     search: newSearch(),
     dialog: false,
     datas: [],
@@ -268,6 +279,8 @@ export default {
       this.obj = obj;
     },
     async handleUser(item, imagefile) {
+      console.log("img: ", imagefile);
+      this.dialog = false;
       if (imagefile != undefined && imagefile != "") {
         const fileImageForm = new FormData();
         fileImageForm.append("file", imagefile);
@@ -330,6 +343,16 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    checkAvatar(item) {
+      return typeof item.profile_image === "string" ||
+        item.profile_image == undefined
+        ? item.profile_image == "" || item.profile_image == undefined
+          ? basicConfig.blank_profile_img
+          : this.imgUrl + item.profile_image
+        : item.profile_image != 0
+        ? this.imgUrl + item.profile_image[0]
+        : basicConfig.blank_profile_img;
     },
   },
   mounted() {
