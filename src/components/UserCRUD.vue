@@ -67,7 +67,7 @@
                 <v-text-field
                   label="Password"
                   type="password"
-                  :rules="rule"
+                  :rules="passwordConfirmationRule"
                   v-model="user.password"
                 />
               </v-col>
@@ -75,8 +75,8 @@
                 <v-text-field
                   label="Confirm Password"
                   type="password"
-                  :rules="rule"
-                  v-model="user.password"
+                  :rules="passwordConfirmationRule"
+                  v-model="confirmPassword"
                 />
               </v-col>
             </v-row>
@@ -112,6 +112,9 @@ export default {
       // blankProfile: basicConfig.blank_profile_img,
       valid: false,
       rule: [(v) => !!v || "This field is required."],
+      passwordConfirmationRule() {
+      return () => (this.password === this.confirmPassword) || 'Password must match'
+    }
     };
   },
   props: {

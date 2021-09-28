@@ -165,7 +165,7 @@ export default {
   //   this.$emit(`update:layout`, UserDashboardLayout);
   // },
   data: () => ({
-    // navigation:[{ text: "User"}]
+    imgUrl: basicConfig.file_url,
     search: newSearch(),
     dialog: false,
     datas: [],
@@ -250,7 +250,7 @@ export default {
       this.dialog = true;
       this.obj = obj;
     },
-    handleCategory(item, imagefile) {
+    async handleCategory(item, imagefile) {
       this.dialog = false;
 
        if (imagefile != undefined && imagefile != "") {
@@ -259,7 +259,7 @@ export default {
 
         await uploadFile(fileImageForm)
           .then((res) => {
-            item.profile_image = res.file.filename;
+            item.image = res.file.filename;
           })
           .catch(console.log);
       }

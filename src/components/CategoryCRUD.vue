@@ -22,7 +22,7 @@
               >
                 <ImageUpload
                   :image.sync="uploadedImg"
-                  :avatar="category.profile_image"
+                  :avatar="category.image"
                 />
               </v-col>
             </v-row>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import basicConfig from "@/utils/basicConfig";
+// import basicConfig from "@/utils/basicConfig";
 export default {
   components: {
     ImageUpload: () => import("@/components/ImageUpload"),
