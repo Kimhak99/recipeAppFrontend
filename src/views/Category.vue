@@ -68,6 +68,14 @@
             :loading="tableLoading"
             mobile-breakpoint="600"
           >
+            <template v-slot:[`item.image`]="{ item }">
+              <v-img
+                :src="checkAvatar(item.image)"
+                width="65px"
+                height="70px"
+                style="margin: 10px; border-radius: 50px"
+              />
+            </template>
             <template v-slot:[`item.actions`]="{ item }">
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
@@ -117,8 +125,9 @@
 </template>
 
 <script>
-import UserDashboardLayout from "../layouts/UserDashboardLayout";
-
+// import UserDashboardLayout from "../layouts/UserDashboardLayout";
+import { uploadFile } from "@/api/generalAPI";
+import basicConfig from "@/utils/basicConfig";
 import {
   listCategory,
   deleteCategory,
@@ -152,9 +161,9 @@ export default {
     DeleteDialog: () => import("@/components/DeleteDialog"),
     CategoryCRUD: () => import("@/components/CategoryCRUD"),
   },
-  created() {
-    this.$emit(`update:layout`, UserDashboardLayout);
-  },
+  // created() {
+  //   this.$emit(`update:layout`, UserDashboardLayout);
+  // },
   data: () => ({
     // navigation:[{ text: "User"}]
     search: newSearch(),
@@ -241,7 +250,20 @@ export default {
       this.dialog = true;
       this.obj = obj;
     },
-    handleCategory(item) {
+    handleCategory(item, imagefile) {
+      this.dialog = false;
+
+       if (imagefile != undefined && imagefile != "") {
+        const fileImageForm = new FormData();
+        fileImageForm.append("file", imagefile);
+
+        await uploadFile(fileImageForm)
+          .then((res) => {
+            item.profile_image = res.file.filename;
+          })
+          .catch(console.log);
+      }
+
       if (this.obj.id == "") {
         addCategory(item)
           .then((res) => {

@@ -20,11 +20,10 @@
                 sm="4"
                 class="d-flex justify-center align-center"
               >
-                <!-- <ImageUpload
+                <ImageUpload
                   :image.sync="uploadedImg"
                   :avatar="category.profile_image"
-                  :defaultImg="blankProfile"
-                /> -->
+                />
               </v-col>
             </v-row>
 
@@ -57,17 +56,18 @@
     </v-card>
   </v-dialog>
 </template>
-// TODO:: enable image upload
+
 <script>
 import basicConfig from "@/utils/basicConfig";
 export default {
   components: {
-    // ImageUpload: () => import("@/components/ImageUpload"),
+    ImageUpload: () => import("@/components/ImageUpload"),
   },
   name: "CategoryCRUD",
   data() {
     return {
-      blankProfile: basicConfig.blank_profile_img,
+      uploadedImg: undefined,
+      // blankProfile: basicConfig.blank_profile_img,
       valid: false,
       rule: [(v) => !!v || "This field is required."],
     };
@@ -80,8 +80,9 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.$emit("handleData", this.category);
-        this.$emit("update:dialog", false);
+        this.$emit("handleData", this.category, this.uploadedImg);
+        this.uploadedImg = undefined;
+        // this.$emit("update:dialog", false);
       }
     },
     cancelDialog() {

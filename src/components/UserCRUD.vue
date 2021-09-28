@@ -98,7 +98,7 @@
     </v-card>
   </v-dialog>
 </template>
-// TODO:: enable image upload
+
 <script>
 // import basicConfig from "../utils/basicConfig";
 export default {
