@@ -34,7 +34,7 @@
                 <v-text-field
                   label="First Name"
                   type="text"
-                  :rules="rule"
+                  :rules="Rule"
                   v-model="user.firstname"
                 />
               </v-col>
@@ -42,7 +42,7 @@
                 <v-text-field
                   label="Last Name"
                   type="text"
-                  :rules="rule"
+                  :rules="Rule"
                   v-model="user.lastname"
                 />
               </v-col>
@@ -51,7 +51,7 @@
                 <v-text-field
                   label="Username"
                   type="text"
-                  :rules="rule"
+                  :rules="Rule"
                   v-model="user.username"
                 />
               </v-col>
@@ -59,7 +59,7 @@
                 <v-text-field
                   label="Email"
                   type="email"
-                  :rules="rule"
+                  :rules="Rule"
                   v-model="user.email"
                 />
               </v-col>
@@ -67,15 +67,15 @@
                 <v-text-field
                   label="Password"
                   type="password"
-                  :rules="passwordConfirmationRule"
-                  v-model="user.password"
+                  :rules="Rule"
+                  v-model="pwd"
                 />
               </v-col>
               <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
                   label="Confirm Password"
                   type="password"
-                  :rules="passwordConfirmationRule"
+                  :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
                   v-model="confirmPassword"
                 />
               </v-col>
@@ -108,13 +108,18 @@ export default {
   name: "UserCRUD",
   data() {
     return {
+      confirmPassword: "",
+      pwd: "",
       uploadedImg: undefined,
       // blankProfile: basicConfig.blank_profile_img,
       valid: false,
-      rule: [(v) => !!v || "This field is required."],
-      passwordConfirmationRule() {
-      return () => (this.password === this.confirmPassword) || 'Password must match'
-    }
+      Rule: [(v) => !!v || "this field is required"],
+      confirmPasswordRules: [
+        (value) => !!value || "type confirm password",
+        (value) =>
+          value === this.password ||
+          "The password confirmation does not match.",
+      ],
     };
   },
   props: {
@@ -146,6 +151,12 @@ export default {
       if (this.dialog) {
         this.resetForm();
       }
+    },
+  },
+  computed: {
+    passwordConfirmationRule() {
+      return () =>
+        this.password === this.confirmPassword || "Password must match";
     },
   },
 };
