@@ -34,8 +34,8 @@
                 <v-text-field
                   label="First Name"
                   type="text"
-                  :rules="Rule"
-                      prepend-icon="person"
+                  :rules="Rules"
+                  prepend-icon="person"
                   v-model="user.firstname"
                 />
               </v-col>
@@ -43,8 +43,8 @@
                 <v-text-field
                   label="Last Name"
                   type="text"
-                  :rules="Rule"
-                      prepend-icon="person"
+                  :rules="Rules"
+                  prepend-icon="person"
                   v-model="user.lastname"
                 />
               </v-col>
@@ -53,27 +53,36 @@
                 <v-text-field
                   label="Username"
                   type="text"
-                  :rules="Rule"
-                      prepend-icon="person"
+                  :rules="Rules"
+                  prepend-icon="person"
                   v-model="user.username"
                 />
               </v-col>
-              <v-col class="py-0" cols="12" lg="6" md="6" sm="6">
+              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
                   label="Email"
                   type="email"
-                      prepend-icon="email"
-                  :rules="Rule"
+                  prepend-icon="email"
+                  :rules="Rules"
                   v-model="user.email"
                 />
               </v-col>
-              <v-col class="py-0" cols="12" lg="6" md="6" sm="6">
+              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
                   label="Password"
                   type="password"
-                      prepend-icon="lock"
-                  :rules="Rule"
-                  v-model="pwd"
+                  prepend-icon="lock"
+                  :rules="Rules"
+                  v-model="user.password"
+                />
+              </v-col>
+                <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+                <v-text-field
+                  label="Confirm Password"
+                  type="password"
+                  prepend-icon="lock"
+                  :rules="[Rules, matchingPasswords]"
+                  v-model="confirmPassword"
                 />
               </v-col>
             </v-row>
@@ -107,11 +116,10 @@ export default {
   data() {
     return {
       confirmPassword: "",
-      pwd: "",
       uploadedImg: undefined,
       // blankProfile: basicConfig.blank_profile_img,
       valid: false,
-      Rule: [(v) => !!v || "this field is required"],
+      Rules:[(v) => !!v || "this field is required"],
     };
   },
   props: {
@@ -137,6 +145,14 @@ export default {
       this.uploadedImg = undefined;
       this.$emit("update:dialog", false);
     },
+    matchingPasswords: function() {
+      if(this.user.password === this.confirmPassword) {
+        return true;
+      }
+      else {
+        return "Passwords do not match.";
+      }
+    }
   },
   watch: {
     dialog() {
