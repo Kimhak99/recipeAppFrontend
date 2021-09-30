@@ -35,6 +35,7 @@
                   label="First Name"
                   type="text"
                   :rules="Rule"
+                      prepend-icon="person"
                   v-model="user.firstname"
                 />
               </v-col>
@@ -43,6 +44,7 @@
                   label="Last Name"
                   type="text"
                   :rules="Rule"
+                      prepend-icon="person"
                   v-model="user.lastname"
                 />
               </v-col>
@@ -52,6 +54,7 @@
                   label="Username"
                   type="text"
                   :rules="Rule"
+                      prepend-icon="person"
                   v-model="user.username"
                 />
               </v-col>
@@ -59,6 +62,7 @@
                 <v-text-field
                   label="Email"
                   type="email"
+                      prepend-icon="email"
                   :rules="Rule"
                   v-model="user.email"
                 />
@@ -67,16 +71,9 @@
                 <v-text-field
                   label="Password"
                   type="password"
+                      prepend-icon="lock"
                   :rules="Rule"
                   v-model="pwd"
-                />
-              </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Confirm Password"
-                  type="password"
-                  :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
-                  v-model="confirmPassword"
                 />
               </v-col>
             </v-row>
@@ -146,12 +143,6 @@ export default {
       if (this.dialog) {
         this.resetForm();
       }
-    },
-  },
-  computed: {
-    passwordConfirmationRule() {
-      return () =>
-        user.password === this.confirmPassword || "Password must match";
     },
   },
 };
