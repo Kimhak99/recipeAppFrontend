@@ -35,6 +35,7 @@
                   label="First Name"
                   type="text"
                   :rules="rule"
+                  prepend-icon="person"
                   v-model="user.firstname"
                 />
               </v-col>
@@ -42,6 +43,7 @@
                 <v-text-field
                   label="Last Name"
                   type="text"
+                  prepend-icon="person"
                   :rules="rule"
                   v-model="user.lastname"
                 />
@@ -51,34 +53,30 @@
                 <v-text-field
                   label="Username"
                   type="text"
+                  prepend-icon="person"
                   :rules="rule"
                   v-model="user.username"
                 />
               </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+              <v-col class="py-0" cols="12" lg="6" md="6" sm="6">
                 <v-text-field
                   label="Email"
                   type="email"
                   :rules="rule"
+                  prepend-icon="email"
                   v-model="user.email"
                 />
               </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+              <v-col class="py-0" cols="12" lg="6" md="6" sm="6">
                 <v-text-field
                   label="Password"
                   type="password"
-                  :rules="passwordConfirmationRule"
+                  :rules="rule"
                   v-model="user.password"
+                  prepend-icon="mdi-lock-outline"
                 />
               </v-col>
-              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
-                <v-text-field
-                  label="Confirm Password"
-                  type="password"
-                  :rules="passwordConfirmationRule"
-                  v-model="confirmPassword"
-                />
-              </v-col>
+             
             </v-row>
             <v-row cols="12" justify="end" class="pr-2">
               <v-checkbox checked: false v-model="user.is_admin" label="Are you
@@ -101,6 +99,7 @@
 
 <script>
 // import basicConfig from "../utils/basicConfig";
+
 export default {
   components: {
     ImageUpload: () => import("@/components/ImageUpload"),
@@ -112,9 +111,6 @@ export default {
       // blankProfile: basicConfig.blank_profile_img,
       valid: false,
       rule: [(v) => !!v || "This field is required."],
-      passwordConfirmationRule() {
-      return () => (this.password === this.confirmPassword) || 'Password must match'
-    }
     };
   },
   props: {
@@ -151,5 +147,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

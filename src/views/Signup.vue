@@ -59,6 +59,7 @@
                             label="Lastname"
                             name="Lastname"
                             type="text"
+                            prepend-icon="person"
                             color="#B71C1C"
                           />
                         </v-col>
