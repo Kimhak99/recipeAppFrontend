@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-toolbar flat>
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="12" class="pa-12">
+      <v-row align="center" justify="center" >
+        <v-col cols="12">
           <v-text-field
+          full-width
             append-icon="search"
             filled
-            rounded
             dense
             solo
             flat
@@ -45,7 +45,7 @@
             </v-app-bar>
             <!-- <h5 class="ml-5 mt-n5">$4.99</h5> -->
             <div
-              class="d-flex flex-column justify-space-between align-center red" style="height:230px;"
+              class="d-flex flex-column justify-space-between align-center" style="height:230px;"
             >
               <v-img :src="img" max-height="100%" max-width="100%"></v-img>
             </div>
