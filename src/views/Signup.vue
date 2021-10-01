@@ -43,7 +43,7 @@
                     <h4 class="text-center mt-4">
                       Ensure your email for registration
                     </h4>
-                    <v-form>
+                    <v-form v-model="valid" ref="form" lazy-validation>
                       <v-row>
                         <v-col
                           class="py-0"
@@ -78,7 +78,7 @@
                             name="Lastname"
                             type="text"
                             prepend-icon="person"
-                              v-model="obj.lastname"
+                            v-model="obj.lastname"
                             color="#B71C1C"
                           />
                         </v-col>
@@ -87,7 +87,7 @@
                         label="Username"
                         name="Username"
                         prepend-icon="person"
-                          v-model="obj.username"
+                        v-model="obj.username"
                         type="text"
                         color="#B71C1C"
                       />
@@ -95,14 +95,14 @@
                         label="Email"
                         name="Email"
                         prepend-icon="email"
-                          v-model="obj.email"
+                        v-model="obj.email"
                         type="text"
                         color="#B71C1C"
                       />
                       <v-text-field
                         label="Password"
                         name="Password"
-                          v-model="obj.password"
+                        v-model="obj.password"
                         prepend-icon="lock"
                         type="text"
                         color="#B71C1C"
@@ -136,9 +136,11 @@
   </v-app>
 </template>
 
+//TODO::upload image and clear form
 <script>
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
 import { addUser } from "@/api/user";
+import { uploadFile } from "@/api/generalAPI";
 
 const newObj = () => {
   return {
@@ -163,6 +165,7 @@ export default {
   //   this.$emit(`update:layout`, UserDashboardLayout);
   // },
   data: () => ({
+    valid: false,
     confirmPassword: "",
     uploadedImg: undefined,
     obj: newObj(),
@@ -175,20 +178,23 @@ export default {
     //     .catch(console.log);
     // },
     async validate() {
-      if (this.obj.profile_image != undefined && this.obj.profile_image != "") {
-        const fileImageForm = new FormData();
-        fileImageForm.append("file", this.obj.profile_image);
+      if (this.$refs.form.validate()) {
+        if (
+          this.obj.profile_image != undefined &&
+          this.obj.profile_image != ""
+        ) {
+          const fileImageForm = new FormData();
+          fileImageForm.append("file", this.obj.profile_image);
 
-        await uploadFile(fileImageForm)
-          .then((res) => {
-            this.obj.profile_image = res.file.filename;
-          })
-          .catch(console.log);
-      }
-       addUser(this.obj)
+          await uploadFile(fileImageForm)
+            .then((res) => {
+              this.obj.profile_image = res.file.filename;
+            })
+            .catch(console.log);
+        }
+        addUser(this.obj)
           .then((res) => {
             if (res.meta == 2001) {
-              this.getData();
               this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
               console.log("added item: ", this.obj);
             } else {
@@ -199,6 +205,8 @@ export default {
           .catch((err) => {
             console.log("Add User Error", err);
           });
+      }
+      this.resetForm();
     },
   },
 };
