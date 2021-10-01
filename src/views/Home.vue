@@ -1,5 +1,21 @@
 <template>
   <v-container>
+    <v-toolbar flat>
+      <v-row align="center" justify="center">
+        <v-col cols="12" sm="12" class="pa-12">
+          <v-text-field
+            append-icon="search"
+            filled
+            rounded
+            dense
+            solo
+            flat
+            background-color="grey lighten-3"
+          >
+          </v-text-field>
+        </v-col>
+      </v-row>
+    </v-toolbar>
     <v-row class="mt-n6" align="center" justify="center">
       <v-col
         cols="12"
@@ -7,7 +23,7 @@
         sm="6"
         v-for="img in images"
         :key="img"
-        class="d-flex flex-column justify-space-between align-center"
+        class="d-flex flex-column justify-space-between align-center py-6"
       >
         <v-hover v-slot="{ hover }" open-delay="200">
           <v-card
@@ -19,19 +35,19 @@
           >
             <v-app-bar flat color="rgba(0,0,0,0)">
               <v-spacer></v-spacer>
-              <h2 class="ml-1 grey--text-lighten-3"  v-for="title in titles"
-        :key="title">{{title}}</h2>
+              <h2 class="ml-1 grey--text-lighten-3">Cabage Salad</h2>
               <!-- chorizo-mozarella-gnocchi-bake-cropped -->
               <v-spacer></v-spacer>
               <!-- <v-chip class="ma-2" color="grey lighten-3" text-color="red" dense>
                 250g
               </v-chip> -->
+              <v-btn fab x-small color="pink"><v-icon>fas fa-plus</v-icon></v-btn>
             </v-app-bar>
             <!-- <h5 class="ml-5 mt-n5">$4.99</h5> -->
             <div
-              class="d-flex flex-column justify-space-between align-center red"
+              class="d-flex flex-column justify-space-between align-center red" style="height:230px;"
             >
-              <v-img :src="img" max-height="250px" max-width="100%"></v-img>
+              <v-img :src="img" max-height="100%" max-width="100%"></v-img>
             </div>
             <v-app-bar flat color="rgba(0,0,0,0)">
               <v-chip class="ma-2" color="black" text-color="white" dense>
