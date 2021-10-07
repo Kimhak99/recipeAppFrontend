@@ -35,6 +35,7 @@
                         type="text"
                         color="#B71C1C"
                         v-model="username"
+                        :disabled="isLoading"
                       />
 
                       <v-text-field
@@ -45,12 +46,14 @@
                         type="password"
                         color="#B71C1C"
                         v-model="password"
+                        :disabled="isLoading"
                       />
                     </v-form>
                     <h3 class="text-center mt-3">Forget your password</h3>
                   </v-card-text>
                   <div class="text-center mt-3">
                     <v-btn
+                      :loading="isLoading"
                       @click="handleClick"
                       rounded
                       dark
@@ -74,6 +77,7 @@
                       rounded
                       outlined
                       dark
+                      :loading="isLoading"
                       @click="$router.push({ name: 'Signup' }).catch(() => {})"
                       style="background-color: white; color: #b71c1c"
                       >SIGN UP</v-btn
@@ -90,34 +94,35 @@
 </template>
 
 <script>
-import UserDashboardLayout from "../layouts/UserDashboardLayout";
+import { meta } from "../utils/enum";
 
 export default {
-  // components: { UserDashboardLayout },
   name: "Signin",
-  created() {
-    this.$emit(`update:layout`, UserDashboardLayout);
-  },
   data: () => ({
     step: 1,
     username: "",
     password: "",
+    isLoading: false,
   }),
-  props: {
-    source: String,
-  },
   methods: {
     handleClick() {
-      //there are still a couple more problems like logout for example, need to clear all
-      //user info , check the sidebar item based on is_admin,
+      console.log(this.username, this.password);
 
+      this.isLoading = true;
       this.$store
         .dispatch("Login", { username: this.username, password: this.password })
         .then((res) => {
-          console.log(res);
-          this.$router.push("/");
+          if (res.meta == meta.OK) return this.$router.push("/");
+
+          this.$toast.error(res.message);
         })
-        .catch(console.log);
+        .catch((err) => {
+          this.$toast.error("Error");
+          console.log(err);
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     },
   },
 };

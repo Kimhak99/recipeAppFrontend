@@ -147,6 +147,7 @@ const newObj = () => {
     firstname: "",
     lastname: "",
     password: "",
+    confirmPassword: "",
     email: "",
     profile_image: "",
     is_admin: Boolean,
@@ -276,6 +277,7 @@ export default {
     handleEdit(obj) {
       this.dialog = true;
       this.obj = obj;
+      this.obj.confirmPassword = obj.password;
     },
     async handleUser(item, imagefile) {
       this.dialog = false;

@@ -15,6 +15,16 @@ export async function uploadFiles(data) {
     return res.data;
 }
 
+export async function uploadProfileSignup(data) {
+    const res = await axios.post(`${basicConfig.api_url}/upload/signup`, data, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+
+    return res.data;
+}
+
 //Upload Single File
 export async function uploadFile(data) {
     const res = await axios.post(`${basicConfig.api_url}/upload`, data, {

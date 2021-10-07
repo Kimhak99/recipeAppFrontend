@@ -20,7 +20,12 @@
           class="d-flex justify-center"
           align-self="center"
         >
-          <v-btn fab small color="pink" class="mt-n6" @click="$router.push('/recipe')"
+          <v-btn
+            fab
+            small
+            color="pink"
+            class="mt-n6"
+            @click="$router.push('/recipe')"
             ><v-icon>fas fa-plus</v-icon></v-btn
           >
         </v-col>
@@ -31,8 +36,8 @@
         cols="12"
         lg="4"
         sm="6"
-        v-for="img in images"
-        :key="img"
+        v-for="(item, key) in simulateRecipeData"
+        :key="key"
         class="d-flex flex-column justify-space-between align-center py-6"
       >
         <v-hover v-slot="{ hover }" open-delay="200">
@@ -45,7 +50,7 @@
           >
             <v-app-bar flat color="rgba(0,0,0,0)">
               <!-- <v-spacer></v-spacer> -->
-              <h2 class="ml-1 grey--text-lighten-3">Cabage Salad</h2>
+              <h2 class="ml-1 grey--text-lighten-3">{{ item.title }}</h2>
               <!-- chorizo-mozarella-gnocchi-bake-cropped -->
               <v-spacer></v-spacer>
               <h5 class="ml-5" style="border-radius: 4px">by Tim</h5>
@@ -54,9 +59,13 @@
             <!-- <h5 class="ml-5 mt-n5">$4.99</h5> -->
             <div
               class="d-flex flex-column justify-space-between align-center"
-              style="height:230px;"
+              style="height: 230px"
             >
-              <v-img :src="img" max-height="100%" max-width="100%"></v-img>
+              <v-img
+                :src="item.images[0]"
+                max-height="100%"
+                max-width="100%"
+              ></v-img>
             </div>
             <v-app-bar flat color="rgba(0,0,0,0)">
               <v-chip class="ma-2" color="black" text-color="white" dense>
@@ -68,15 +77,20 @@
                     ><v-icon>fas fa-heart</v-icon></v-btn
                   >
                 </v-avatar>
-                18
+                {{ item.like }}
               </v-chip>
               <v-spacer />
               <v-btn fab small color="black"
                 ><v-icon>fas fa-comment-dots</v-icon></v-btn
               >
               <v-spacer />
-              <v-chip class="ma-2" color="grey lighten-3" text-color="red" dense>
-               25 min
+              <v-chip
+                class="ma-2"
+                color="grey lighten-3"
+                text-color="red"
+                dense
+              >
+                25 min
               </v-chip>
             </v-app-bar>
             <!-- <v-row>
@@ -111,6 +125,15 @@
 
 <script>
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
+import ahmok from "../assets/ahmok.jpg";
+import chickenSalad from "../assets/chickenSalad.jpg";
+import chorizo from "../assets/chorizo.jpg";
+import curry from "../assets/curry.jpg";
+import salad from "../assets/salad.jpg";
+import hamburger from "../assets/hamburger.jpg";
+import pasta from "../assets/pasta.jpg";
+import crab from "../assets/crab.jpg";
+import papayaSalad from "../assets/papayaSalad.jpg";
 
 export default {
   // components: { UserDashboardLayout },
@@ -121,27 +144,41 @@ export default {
   // },
   data() {
     return {
-      images: [
-        require("../assets/ahmok.jpg"),
-        require("../assets/chickenSalad.jpg"),
-        require("../assets/chorizo.jpg"),
-        require("../assets/curry.jpg"),
-        require("../assets/salad.jpg"),
-        require("../assets/hamburger.jpg"),
-        require("../assets/pasta.jpg"),
-        require("../assets/crab.jpg"),
-        require("../assets/papayaSalad.jpg"),
-      ],
-      foodTitles: [
-        "title11",
-        "title22",
-        "title33",
-        "title44",
-        "title55",
-        "title66",
-        "title77",
-        "title88",
-        "title99",
+      //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
+      recipeObj: {
+        images: [
+          require("../assets/ahmok.jpg"),
+          require("../assets/chickenSalad.jpg"),
+          require("../assets/chorizo.jpg"),
+          require("../assets/curry.jpg"),
+          require("../assets/salad.jpg"),
+          require("../assets/hamburger.jpg"),
+          require("../assets/pasta.jpg"),
+          require("../assets/crab.jpg"),
+          require("../assets/papayaSalad.jpg"),
+        ],
+        foodTitles: [
+          "title11",
+          "title22",
+          "title33",
+          "title44",
+          "title55",
+          "title66",
+          "title77",
+          "title88",
+          "title99",
+        ],
+      },
+      simulateRecipeData: [
+        { title: "ahmok", like: 12, images: [ahmok] },
+        { title: "papayaSalad", like: 12, images: [papayaSalad] },
+        { title: "crab", like: 12, images: [crab] },
+        { title: "pasta", like: 12, images: [pasta] },
+        { title: "hamburger", like: 12, images: [hamburger] },
+        { title: "salad", like: 12, images: [salad] },
+        { title: "curry", like: 12, images: [curry] },
+        { title: "chorizo", like: 12, images: [chorizo] },
+        { title: "chickenSalad", like: 12, images: [chickenSalad] },
       ],
     };
   },

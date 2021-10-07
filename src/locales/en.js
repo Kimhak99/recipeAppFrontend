@@ -17,4 +17,5 @@ export default {
     catName: "Category Name",
     fillRequire: "Please fill in all the required fields.",
 
+
 }

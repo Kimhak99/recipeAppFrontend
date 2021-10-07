@@ -39,9 +39,6 @@ export default {
       this.$store.dispatch("SetDrawer", !this.drawer);
     },
   },
-  created() {
-    console.log(this.drawer);
-  },
 };
 </script>
 

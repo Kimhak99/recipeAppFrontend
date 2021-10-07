@@ -69,6 +69,7 @@
               </v-col>
               <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
+                  :disabled="user.id"
                   label="Password"
                   type="password"
                   prepend-icon="lock"
@@ -76,13 +77,14 @@
                   v-model="user.password"
                 />
               </v-col>
-                <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
+              <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
+                  :disabled="user.id"
                   label="Confirm Password"
                   type="password"
                   prepend-icon="lock"
                   :rules="[Rules, matchingPasswords]"
-                  v-model="confirmPassword"
+                  v-model="user.confirmPassword"
                 />
               </v-col>
             </v-row>
@@ -115,11 +117,11 @@ export default {
   name: "UserCRUD",
   data() {
     return {
-      confirmPassword: "",
+      // confirmPassword: "",
       uploadedImg: undefined,
       // blankProfile: basicConfig.blank_profile_img,
       valid: false,
-      Rules:[(v) => !!v || "this field is required"],
+      Rules: [(v) => !!v || "this field is required"],
     };
   },
   props: {
@@ -145,14 +147,13 @@ export default {
       this.uploadedImg = undefined;
       this.$emit("update:dialog", false);
     },
-    matchingPasswords: function() {
-      if(this.user.password === this.confirmPassword) {
+    matchingPasswords: function () {
+      if (this.user.password === this.user.confirmPassword) {
         return true;
-      }
-      else {
+      } else {
         return "Passwords do not match.";
       }
-    }
+    },
   },
   watch: {
     dialog() {

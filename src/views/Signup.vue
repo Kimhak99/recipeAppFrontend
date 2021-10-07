@@ -139,8 +139,9 @@
 //TODO::upload image and clear form
 <script>
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
+// eslint-disable-next-line
 import { addUser } from "@/api/user";
-import { uploadFile } from "@/api/generalAPI";
+import { uploadProfileSignup } from "@/api/generalAPI";
 
 const newObj = () => {
   return {
@@ -179,19 +180,27 @@ export default {
     // },
     async validate() {
       if (this.$refs.form.validate()) {
-        if (
-          this.obj.profile_image != undefined &&
-          this.obj.profile_image != ""
-        ) {
+        if (this.uploadedImg != undefined && this.uploadedImg != "") {
           const fileImageForm = new FormData();
-          fileImageForm.append("file", this.obj.profile_image);
+          fileImageForm.append("file", this.uploadedImg);
 
-          await uploadFile(fileImageForm)
+          await uploadProfileSignup(fileImageForm)
             .then((res) => {
-              this.obj.profile_image = res.file.filename;
+              if (res.meta === 201) {
+                this.obj.profile_image = res.file.filename;
+                return;
+              }
+
+              console.log(res);
+              this.$toast.error(res.message);
+              return;
             })
-            .catch(console.log);
+            .catch((err) => {
+              console.log(err);
+              this.$toast.error(err.message);
+            });
         }
+
         addUser(this.obj)
           .then((res) => {
             if (res.meta == 2001) {
