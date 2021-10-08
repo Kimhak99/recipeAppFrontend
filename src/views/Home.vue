@@ -1,9 +1,9 @@
 <template>
   <v-container class="px-16">
     <v-row class="ma-12">
-      <v-btn class="mt-9" small dark fab @click="test"><v-icon>fas fa-search</v-icon></v-btn>
+      <v-btn class="mt-9 mr-2" small dark fab @click="searchBtn"><v-icon>fas fa-search</v-icon></v-btn>
       <v-toolbar flat  v-if="searchBar" class="mt-6">
-      <v-row class=" mt-10">
+      <v-row class="mt-10">
         <v-col cols="12" sm="12">
           <v-text-field
             full-width
@@ -14,6 +14,8 @@
             flat
             background-color="black lighten-3"
             dark
+            v-model="test"
+            clearable
           />
         </v-col>
         <v-col
@@ -48,7 +50,6 @@
             small
             color="pink"
             class="mt-9"
-            
             @click="$router.push('/recipe')"
             ><v-icon>fas fa-plus</v-icon></v-btn
           >
@@ -243,10 +244,16 @@ export default {
     };
   },
   methods: {
-    test() {
-
-         this.searchBar = this.searchBar === true ? false : true
-      console.log("search bar show is true");
+    searchBtn() {
+     
+      if(this.test == null) {
+       this.searchBar = this.searchBar === true ? false : true
+      }
+      else {
+          console.log("do the search")
+          this.test=null;
+      }
+      
     }
   }
 };
