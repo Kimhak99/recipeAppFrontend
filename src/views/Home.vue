@@ -7,7 +7,6 @@
         <v-col cols="12" sm="12">
           <v-text-field
             full-width
-            append-icon="search"
             filled
             dense
             solo
@@ -251,7 +250,7 @@ export default {
       }
       else {
           console.log("do the search")
-          this.test=null;
+          
       }
       
     }
