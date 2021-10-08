@@ -1,5 +1,17 @@
 <template>
   <v-container class="px-16">
+    <v-row class="ma-12">
+      <v-flex v-for="(item, key) in stimulateCategoryData" :key="key" class="text-center">
+        <v-avatar size="100" class="red lighten-2">
+          <v-img
+            :src="item.images[0]"
+            max-height="100%"
+            max-width="100%"
+          ></v-img>
+        </v-avatar>
+        <h5 class="mt-3">{{item.name}}</h5>
+      </v-flex>
+    </v-row>
     <v-toolbar flat>
       <v-row class="ml-6">
         <v-col cols="12" sm="11">
@@ -134,6 +146,10 @@ import hamburger from "../assets/hamburger.jpg";
 import pasta from "../assets/pasta.jpg";
 import crab from "../assets/crab.jpg";
 import papayaSalad from "../assets/papayaSalad.jpg";
+import snack from "../assets/snack.jpg";
+import other from "../assets/other.png";
+import special from "../assets/special.jpg";
+import western from "../assets/western.jpg";
 
 export default {
   // components: { UserDashboardLayout },
@@ -145,30 +161,6 @@ export default {
   data() {
     return {
       //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
-      recipeObj: {
-        images: [
-          require("../assets/ahmok.jpg"),
-          require("../assets/chickenSalad.jpg"),
-          require("../assets/chorizo.jpg"),
-          require("../assets/curry.jpg"),
-          require("../assets/salad.jpg"),
-          require("../assets/hamburger.jpg"),
-          require("../assets/pasta.jpg"),
-          require("../assets/crab.jpg"),
-          require("../assets/papayaSalad.jpg"),
-        ],
-        foodTitles: [
-          "title11",
-          "title22",
-          "title33",
-          "title44",
-          "title55",
-          "title66",
-          "title77",
-          "title88",
-          "title99",
-        ],
-      },
       simulateRecipeData: [
         { title: "ahmok", like: 12, images: [ahmok] },
         { title: "papayaSalad", like: 12, images: [papayaSalad] },
@@ -180,6 +172,15 @@ export default {
         { title: "chorizo", like: 12, images: [chorizo] },
         { title: "chickenSalad", like: 12, images: [chickenSalad] },
       ],
+      stimulateCategoryData: [
+        {name: "Asian", images:[ahmok]},
+        {name: "Western", images:[western]},
+        {name: "Fast Food", images:[hamburger]},
+        {name: "Snack", images:[snack]},
+        {name: "Vegetarian", images:[salad]},
+        {name: "Special Occassion", images:[special]},
+        {name: "Other", images:[other]},
+      ]
     };
   },
 };
