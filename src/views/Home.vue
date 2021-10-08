@@ -1,18 +1,59 @@
 <template>
   <v-container class="px-16">
     <v-row class="ma-12">
-      <v-flex v-for="(item, key) in stimulateCategoryData" :key="key" class="text-center">
+      <v-btn class="mt-9" small dark fab @click="test"><v-icon>fas fa-search</v-icon></v-btn>
+      <v-toolbar flat  v-if="searchBar" class="mt-6">
+      <v-row class=" mt-10">
+        <v-col cols="12" sm="12">
+          <v-text-field
+            full-width
+            append-icon="search"
+            filled
+            dense
+            solo
+            flat
+            background-color="black lighten-3"
+            dark
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          sm="1"
+          class="d-flex justify-center"
+          align-self="center"
+        >
+         
+        </v-col>
+      </v-row>
+    </v-toolbar>
+
+      <v-flex
+      v-if="!searchBar"
+        v-for="(item, key) in stimulateCategoryData"
+        :key="key"
+        class="text-center"
+      >
         <v-avatar size="100" class="red lighten-2">
+          
           <v-img
             :src="item.images[0]"
             max-height="100%"
             max-width="100%"
           ></v-img>
         </v-avatar>
-        <h5 class="mt-3">{{item.name}}</h5>
+        <h5 class="mt-3">{{ item.name }}</h5>
       </v-flex>
+       <v-btn
+            fab
+            small
+            color="pink"
+            class="mt-9"
+            
+            @click="$router.push('/recipe')"
+            ><v-icon>fas fa-plus</v-icon></v-btn
+          >
     </v-row>
-    <v-toolbar flat>
+    <!-- <v-toolbar flat>
       <v-row class="ml-6">
         <v-col cols="12" sm="11">
           <v-text-field
@@ -42,7 +83,7 @@
           >
         </v-col>
       </v-row>
-    </v-toolbar>
+    </v-toolbar> -->
     <v-row class="mt-n6" align="center" justify="center">
       <v-col
         cols="12"
@@ -61,12 +102,25 @@
             dark
           >
             <v-app-bar flat color="rgba(0,0,0,0)">
-              <!-- <v-spacer></v-spacer> -->
-              <h2 class="ml-1 grey--text-lighten-3">{{ item.title }}</h2>
-              <!-- chorizo-mozarella-gnocchi-bake-cropped -->
-              <v-spacer></v-spacer>
-              <h5 class="ml-5" style="border-radius: 4px">by Tim</h5>
-              <!-- <v-btn fab x-small color="pink"><v-icon>fas fa-plus</v-icon></v-btn> -->
+              <h2
+                class="ml-1 grey--text-lighten-3"
+                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis"
+              >
+                {{ item.title }}
+              </h2>
+              <v-spacer />
+
+              <v-chip class="ma-2" color="black" text-color="white" dense>
+                <v-avatar left>
+                  <!-- <v-icon color="yellow">
+                    fas fa-thumbs-up
+                  </v-icon> -->
+                  <v-btn fab x-small color="pink"
+                    ><v-icon>fas fa-heart</v-icon></v-btn
+                  >
+                </v-avatar>
+                {{ item.like }}
+              </v-chip>
             </v-app-bar>
             <!-- <h5 class="ml-5 mt-n5">$4.99</h5> -->
             <div
@@ -80,17 +134,11 @@
               ></v-img>
             </div>
             <v-app-bar flat color="rgba(0,0,0,0)">
-              <v-chip class="ma-2" color="black" text-color="white" dense>
-                <v-avatar left>
-                  <!-- <v-icon color="yellow">
-                    fas fa-thumbs-up
-                  </v-icon> -->
-                  <v-btn fab x-small color="pink"
-                    ><v-icon>fas fa-heart</v-icon></v-btn
-                  >
-                </v-avatar>
-                {{ item.like }}
-              </v-chip>
+              <h5
+                style="border-radius: 4px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis"
+              >
+                by {{ item.by }}
+              </h5>
               <v-spacer />
               <v-btn fab small color="black"
                 ><v-icon>fas fa-comment-dots</v-icon></v-btn
@@ -160,29 +208,47 @@ export default {
   // },
   data() {
     return {
+      searchBar: false,
       //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
       simulateRecipeData: [
-        { title: "ahmok", like: 12, images: [ahmok] },
-        { title: "papayaSalad", like: 12, images: [papayaSalad] },
-        { title: "crab", like: 12, images: [crab] },
-        { title: "pasta", like: 12, images: [pasta] },
-        { title: "hamburger", like: 12, images: [hamburger] },
-        { title: "salad", like: 12, images: [salad] },
-        { title: "curry", like: 12, images: [curry] },
-        { title: "chorizo", like: 12, images: [chorizo] },
-        { title: "chickenSalad", like: 12, images: [chickenSalad] },
+        {
+          title: "Ah Mok",
+          by: "Phary",
+          like: 12,
+          images: [ahmok],
+        },
+        { title: "Papaya Salad", by: "Tim", like: 12, images: [papayaSalad] },
+        { title: "Fried Crab", by: "Kolly", like: 12, images: [crab] },
+        { title: "Pasta", by: "Anna", like: 12, images: [pasta] },
+        { title: "hamburger", by: "Kimmy", like: 12, images: [hamburger] },
+        { title: "Salad", by: "Samantha", like: 12, images: [salad] },
+        { title: "Curry", by: "Porky", like: 12, images: [curry] },
+        { title: "Chorizo", by: "Minhie", like: 12, images: [chorizo] },
+        {
+          title: "Chicken Salad",
+          by: "Teachhay",
+          like: 12,
+          images: [chickenSalad],
+        },
       ],
       stimulateCategoryData: [
-        {name: "Asian", images:[ahmok]},
-        {name: "Western", images:[western]},
-        {name: "Fast Food", images:[hamburger]},
-        {name: "Snack", images:[snack]},
-        {name: "Vegetarian", images:[salad]},
-        {name: "Special Occassion", images:[special]},
-        {name: "Other", images:[other]},
-      ]
+        { name: "Asian", images: [ahmok] },
+        { name: "Western", images: [western] },
+        { name: "Fast Food", images: [hamburger] },
+        { name: "Snack", images: [snack] },
+        { name: "Vegetarian", images: [salad] },
+        { name: "Special Occassion", images: [special] },
+        { name: "Other", images: [other] },
+      ],
     };
   },
+  methods: {
+    test() {
+
+         this.searchBar = this.searchBar === true ? false : true
+      console.log("search bar show is true");
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
