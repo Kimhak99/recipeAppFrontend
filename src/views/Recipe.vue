@@ -56,31 +56,29 @@
                           <v-icon>mdi-plus</v-icon>
                         </v-btn>
                       </v-col>
-
-                      <v-col
-                        cols="12"
-                        v-for="(item, key) in cooking_steps_str"
-                        :key="key"
-                      >
-                        <v-text-field
-                          :label="$t('step')"
-                          outlined
-                          v-model="item.cooking_steps"
-                        />
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        v-if="cooking_steps_str.length > 1"
-                        class="d-flex justify-end"
-                      >
-                        <v-btn
-                          color="red"
-                          outlined
-                          @click="deletecookingSteps(item)"
+                      <v-row>
+                        <v-col cols="12" lg="10">
+                          <v-text-field
+                            :label="$t('step')"
+                            outlined
+                            v-model="item.cooking_steps"
+                          />
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          lg="2"
+                          v-if="cooking_steps_str.length > 1"
+                          class="d-flex justify-end"
                         >
-                          <v-icon>mdi-delete</v-icon>
-                        </v-btn>
-                      </v-col>
+                          <v-btn
+                            color="red"
+                            outlined
+                            @click="deletecookingSteps(item)"
+                          >
+                            <v-icon>mdi-delete</v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-row>
                     </v-row>
                   </v-col>
                 </v-row>
@@ -98,14 +96,14 @@ const newObj = () => {
   return {
     id: "",
     recipe_title: "",
-    images: Array,
-    ingredients: Array,
-    cooking_steps: Array,
+    images: [],
+    ingredients: [],
+    cooking_steps: [],
     description: "",
     prep_time: "",
     cooking_time: "",
     category_id: "",
-    comments: Array,
+    comments: [],
     user_id: "",
     num_of_like: 0,
     num_of_dislike: 0,
@@ -123,7 +121,7 @@ export default {
     newCookingStep() {
       // const obj = {};
       console.log("length of step ", this.cooking_steps_str);
-      this.cooking_steps_str++;
+      this.cooking_steps_str.push(obj)
     },
     deletecookingSteps(item) {
       this.cooking_steps_str.splice(this.cooking_steps_str.indexOf(item), 1);
