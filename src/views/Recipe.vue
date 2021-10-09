@@ -56,29 +56,37 @@
                           <v-icon>mdi-plus</v-icon>
                         </v-btn>
                       </v-col>
-                      <v-row>
-                        <v-col cols="12" lg="10">
-                          <v-text-field
-                            :label="$t('step')"
-                            outlined
-                            v-model="item.cooking_steps"
-                          />
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          lg="2"
-                          v-if="cooking_steps_str.length > 1"
-                          class="d-flex justify-end"
-                        >
-                          <v-btn
-                            color="red"
-                            outlined
-                            @click="deletecookingSteps(item)"
+
+                      <v-col
+                        cols="12"
+                        v-for="(item, key) in cooking_steps_str"
+                        :key="key"
+                      >
+                        <v-row>
+                          <v-col cols="12" lg="10">
+                            <v-text-field
+                              :label="$t('step')"
+                              outlined
+                              v-model="item.cooking_steps"
+                            />
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            lg="2"
+                           
+                            class="d-flex justify-end"
                           >
-                            <v-icon>mdi-delete</v-icon>
-                          </v-btn>
-                        </v-col>
-                      </v-row>
+                            <v-btn
+                              color="red"
+                              class="mt-2"
+                              outlined
+                              @click="deletecookingSteps(item)"
+                            >
+                              <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-col>
                     </v-row>
                   </v-col>
                 </v-row>
@@ -119,16 +127,15 @@ export default {
 
   methods: {
     newCookingStep() {
-      // const obj = {};
       console.log("length of step ", this.cooking_steps_str);
-      this.cooking_steps_str.push(obj)
+      this.cooking_steps_str.push({});
     },
     deletecookingSteps(item) {
       this.cooking_steps_str.splice(this.cooking_steps_str.indexOf(item), 1);
     },
   },
   mounted() {
-    this.cooking_steps_str = 1;
+    // this.cooking_steps_str.length = 1;
     this.recipeObj = newObj();
   },
 };
