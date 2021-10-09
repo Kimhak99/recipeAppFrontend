@@ -149,7 +149,7 @@ const newObj = () => {
     category_name: "",
     image: "",
     remark: "",
-    is_active: Boolean,
+    is_active: true,
   };
 };
 
