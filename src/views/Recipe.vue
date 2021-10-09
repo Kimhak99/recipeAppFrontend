@@ -114,17 +114,15 @@ const newObj = () => {
 };
 export default {
   name: "Recipe",
-  data() {
-    return {
-      recipeObj: {},
-      cooking_steps_str: Array,
-    };
-  },
+  data: () => ({
+    recipeObj: {},
+    cooking_steps_str: [],
+  }),
 
   methods: {
     newCookingStep() {
       // const obj = {};
-      console.log("length of step ", this.cooking_steps_str.length);
+      console.log("length of step ", this.cooking_steps_str);
       this.cooking_steps_str++;
     },
     deletecookingSteps(item) {
