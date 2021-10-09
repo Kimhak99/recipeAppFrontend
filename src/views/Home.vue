@@ -88,7 +88,7 @@
       <v-col
         cols="12"
         lg="4"
-        sm="6"
+        md="6"
         v-for="(item, key) in simulateRecipeData"
         :key="key"
         class="d-flex flex-column justify-space-between align-center py-6"

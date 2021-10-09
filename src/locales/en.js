@@ -16,6 +16,9 @@ export default {
     remark: "Remark",
     catName: "Category Name",
     fillRequire: "Please fill in all the required fields.",
+    description: "Description",
+    cookingSteps: "Cooking Steps",
+    step: "Step",
 
 
 }
