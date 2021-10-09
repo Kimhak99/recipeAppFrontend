@@ -150,8 +150,8 @@ const newObj = () => {
     confirmPassword: "",
     email: "",
     profile_image: "",
-    is_admin: Boolean,
-    is_active: Boolean,
+    is_admin: false,
+    is_active: true,
   };
 };
 

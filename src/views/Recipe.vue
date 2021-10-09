@@ -107,7 +107,7 @@ const newObj = () => {
     user_id: "",
     num_of_like: 0,
     num_of_dislike: 0,
-    is_active: Boolean,
+    is_active: true,
   };
 };
 export default {
