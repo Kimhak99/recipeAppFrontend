@@ -27,15 +27,19 @@
               <v-container fluid>
                 <v-row class="pt-2">
                   <v-col cols="12" md="6">
-                    sdfd
+                    <v-btn color="silver" class="mt-4" width="100%" height="200px">
+                      
+    <img src="https://randomuser.me/api/portraits/men/1.jpg">
+
+                        </v-btn>
                   </v-col>
                   <v-col cols="12" md="6">
                     <v-row>
                       <v-col class="py-0" cols="12">
                         <v-text-field
-                          label="Food Title"
+                          :label="$t('foodTitle')"
                           type="text"
-                          prepend-icon="restaurant"
+                          prepend-icon="ramen_dining"
                           v-model="recipeObj.recipe_title"
                         />
                       </v-col>
@@ -47,45 +51,101 @@
                           v-model="recipeObj.description"
                         />
                       </v-col>
-                      <v-col cols="12" class="pa-0 my-2 d-flex align-center">
-                        <span class="mr-auto" style="font-weight: bold;">
-                          <v-icon>mdi-chef-hat</v-icon>
-                          {{ $t("cookingSteps") }}</span
-                        >
-                        <v-btn color="primary" @click="newCookingStep">
-                          <v-icon>mdi-plus</v-icon>
-                        </v-btn>
-                      </v-col>
 
-                      <v-col
-                        cols="12"
-                        v-for="(item, key) in cooking_steps_str"
-                        :key="key"
-                      >
-                        <v-row>
-                          <v-col cols="12" lg="10">
-                            <v-text-field
-                              :label="$t('step')"
-                              outlined
-                              v-model="item.cooking_steps"
-                            />
-                          </v-col>
+                      <!-- ingredients -->
+                      <v-col cols="12">
+                        <v-card class="pa-4" elevation="2">
                           <v-col
                             cols="12"
-                            lg="2"
-                           
-                            class="d-flex justify-end"
+                            class="pa-0 my-2 d-flex align-center"
                           >
-                            <v-btn
-                              color="red"
-                              class="mt-2"
-                              outlined
-                              @click="deletecookingSteps(item)"
+                            <span class="mr-auto" style="font-weight: bold;">
+                              <v-icon>mdi-spoon-sugar</v-icon>
+                              {{ $t("ingredients") }}</span
                             >
-                              <v-icon>mdi-delete</v-icon>
+                            <v-btn color="primary" @click="newIngredient">
+                              <v-icon>mdi-plus</v-icon>
                             </v-btn>
                           </v-col>
-                        </v-row>
+
+                          <v-col
+                            cols="12"
+                            v-for="(item, key) in ingredients_str"
+                            :key="key"
+                          >
+                            <v-row>
+                              <v-col cols="12" lg="10" class="pa-0">
+                                <v-text-field
+                                  :label="$t('ingredient')"
+                                  outlined
+                                  v-model="item.ingredients"
+                                />
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                lg="2"
+                                class="d-flex justify-end pa-0"
+                              >
+                                <v-btn
+                                  color="red"
+                                  class="mt-2"
+                                  outlined
+                                  @click="deleteIngredient(item)"
+                                >
+                                  <v-icon>mdi-delete</v-icon>
+                                </v-btn>
+                              </v-col>
+                            </v-row>
+                          </v-col>
+                        </v-card>
+                      </v-col>
+
+                      <!-- cooking steps -->
+                      <v-col cols="12">
+                        <v-card class="pa-4" elevation="2">
+                          <v-col
+                            cols="12"
+                            class="pa-0 my-2 d-flex align-center"
+                          >
+                            <span class="mr-auto" style="font-weight: bold;">
+                              <v-icon>mdi-chef-hat</v-icon>
+                              {{ $t("cookingSteps") }}</span
+                            >
+                            <v-btn color="primary" @click="newCookingStep">
+                              <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                          </v-col>
+
+                          <v-col
+                            cols="12"
+                            v-for="(item, key) in cooking_steps_str"
+                            :key="key"
+                          >
+                            <v-row>
+                              <v-col cols="12" lg="10" class="pa-0">
+                                <v-text-field
+                                  :label="$t('step')"
+                                  outlined
+                                  v-model="item.cooking_steps"
+                                />
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                lg="2"
+                                class="d-flex justify-end pa-0"
+                              >
+                                <v-btn
+                                  color="red"
+                                  class="mt-2"
+                                  outlined
+                                  @click="deletecookingSteps(item)"
+                                >
+                                  <v-icon>mdi-delete</v-icon>
+                                </v-btn>
+                              </v-col>
+                            </v-row>
+                          </v-col>
+                        </v-card>
                       </v-col>
                     </v-row>
                   </v-col>
@@ -107,6 +167,7 @@ const newObj = () => {
     images: [],
     ingredients: [],
     cooking_steps: [],
+    recipe_images: [],
     description: "",
     prep_time: "",
     cooking_time: "",
@@ -123,6 +184,7 @@ export default {
   data: () => ({
     recipeObj: {},
     cooking_steps_str: [],
+    ingredients_str: [],
   }),
 
   methods: {
@@ -132,6 +194,12 @@ export default {
     },
     deletecookingSteps(item) {
       this.cooking_steps_str.splice(this.cooking_steps_str.indexOf(item), 1);
+    },
+    newIngredient() {
+      this.ingredients_str.push({});
+    },
+    deleteIngredient(item) {
+      this.ingredients_str.splice(this.ingredients_str.indexOf(item), 1);
     },
   },
   mounted() {

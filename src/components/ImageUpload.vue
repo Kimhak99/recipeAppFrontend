@@ -4,8 +4,7 @@
       elevation="0"
       height="100px"
       width="100px"
-      :style="`background-image: url(${profilePic}); background-position: 50% 0; background-size: cover; background-color: rgba(0, 0, 0, 0)}`"
-      class="btnStyle"
+      
     >
       <v-icon @click="imgClick" color="white">fas fa-camera</v-icon>
       <span v-if="image">&nbsp;&nbsp;</span>

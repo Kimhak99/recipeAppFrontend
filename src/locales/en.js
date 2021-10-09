@@ -19,6 +19,9 @@ export default {
     description: "Description",
     cookingSteps: "Cooking Steps",
     step: "Step",
+    ingredients: "Ingredients",
+    ingredient: "Ingredient",
+    foodTitle: "Food Title",
 
 
 }
