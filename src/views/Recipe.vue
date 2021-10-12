@@ -26,7 +26,7 @@
             <v-form ref="form" lazy-validation>
               <v-container fluid>
                 <v-row class="pt-2">
-                  <v-col cols="12" md="6">
+                  <v-col cols="12" md="6" class="pr-8">
                     <!-- for img upload -->
                     <v-row>
                       <v-col cols="12" class="pa-0">
@@ -141,7 +141,7 @@
                       </v-col>
                     </v-row>
                   </v-col>
-                  <v-col cols="12" md="6">
+                  <v-col cols="12" md="6" class="pl-8">
                     <v-row>
                       <!-- <v-col class="py-0" cols="12">
                         <v-text-field
