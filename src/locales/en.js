@@ -22,6 +22,11 @@ export default {
     ingredients: "Ingredients",
     ingredient: "Ingredient",
     foodTitle: "Food Title",
+    recipImg: "Recipe Images",
+    prepTime: "Preparation Time",
+    cookTime: "Cooking Time",
+    cancel: "Cancel",
+    addrecipe: "Add Recipe"
 
 
 }

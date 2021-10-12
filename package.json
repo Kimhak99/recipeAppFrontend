@@ -17,6 +17,7 @@
     "i18n-js": "^3.8.0",
     "material-design-icons": "^3.0.1",
     "roboto-fontface": "*",
+    "v-viewer": "^1.6.4",
     "vee-validate": "^3.4.13",
     "vue": "^2.6.11",
     "vue-i18n": "^8.25.1",

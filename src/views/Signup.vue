@@ -136,7 +136,7 @@
   </v-app>
 </template>
 
-//TODO::upload image and clear form
+//TODO:: clear form
 <script>
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
 // eslint-disable-next-line
