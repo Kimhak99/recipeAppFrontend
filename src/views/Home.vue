@@ -1,57 +1,58 @@
 <template>
   <v-container class="px-16">
     <v-row class="ma-12">
-      <v-btn class="mt-9 mr-2" small dark fab @click="searchBtn"><v-icon>fas fa-search</v-icon></v-btn>
-      <v-toolbar flat  v-if="searchBar" class="mt-6">
-      <v-row class="mt-10">
-        <v-col cols="12" sm="12">
-          <v-text-field
-            full-width
-            filled
-            dense
-            solo
-            flat
-            background-color="black lighten-3"
-            dark
-            v-model="test"
-            clearable
-          />
-        </v-col>
-        <v-col
-          cols="12"
-          sm="1"
-          class="d-flex justify-center"
-          align-self="center"
-        >
-         
-        </v-col>
-      </v-row>
-    </v-toolbar>
+      <v-btn class="mt-9 mr-2" small dark fab @click="searchBtn"
+        ><v-icon>fas fa-search</v-icon></v-btn
+      >
+      <v-toolbar flat v-if="searchBar" class="mt-6">
+        <v-row class="mt-10">
+          <v-col cols="12" sm="12">
+            <v-text-field
+              full-width
+              filled
+              dense
+              solo
+              flat
+              background-color="black lighten-3"
+              dark
+              v-model="test"
+              clearable
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            sm="1"
+            class="d-flex justify-center"
+            align-self="center"
+          >
+          </v-col>
+        </v-row>
+      </v-toolbar>
 
       <v-flex
-      v-if="!searchBar"
+        v-if="!searchBar"
         v-for="(item, key) in stimulateCategoryData"
         :key="key"
         class="text-center"
       >
         <v-avatar size="100" class="red lighten-2">
-          
           <v-img
             :src="item.images[0]"
             max-height="100%"
             max-width="100%"
+            style="cursor: pointer"
           ></v-img>
         </v-avatar>
         <h5 class="mt-3">{{ item.name }}</h5>
       </v-flex>
-       <v-btn
-            fab
-            small
-            color="pink"
-            class="mt-9"
-            @click="$router.push('/recipe')"
-            ><v-icon>fas fa-plus</v-icon></v-btn
-          >
+      <v-btn
+        fab
+        small
+        color="pink"
+        class="mt-9"
+        @click="$router.push('/recipe')"
+        ><v-icon>fas fa-plus</v-icon></v-btn
+      >
     </v-row>
     <!-- <v-toolbar flat>
       <v-row class="ml-6">
@@ -131,6 +132,8 @@
                 :src="item.images[0]"
                 max-height="100%"
                 max-width="100%"
+                style="cursor: pointer"
+                @click="$router.push('/recipedetail/0')"
               ></v-img>
             </div>
             <v-app-bar flat color="rgba(0,0,0,0)">
@@ -244,17 +247,13 @@ export default {
   },
   methods: {
     searchBtn() {
-     
-      if(this.test == null) {
-       this.searchBar = this.searchBar === true ? false : true
+      if (this.test == null) {
+        this.searchBar = this.searchBar === true ? false : true;
+      } else {
+        console.log("do the search");
       }
-      else {
-          console.log("do the search")
-          
-      }
-      
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
