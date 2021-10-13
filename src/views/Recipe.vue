@@ -125,6 +125,8 @@
                           <v-col cols="12" md="6">
                             <v-autocomplete
                               :items="categoryList"
+                              :item-text="(item) => item.category_name"
+                              :item-value="(item) => item.id"
                               label="Category"
                               clearable
                               v-model="recipeObj.category_id"
@@ -294,7 +296,6 @@ const newObj = () => {
     images: [],
     ingredients: [],
     cooking_steps: [],
-    recipe_images: [],
     description: "",
     prep_time: "",
     cooking_time: "",
@@ -363,21 +364,40 @@ export default {
     },
     async handleAdd() {
       if (this.$refs.form.validate()) {
-        this.recipeObj.user_id = this.userInfo.id;
-        this.recipeObj.images = this.file.filter((p) => typeof p == typeof "");
+        this.recipeObj.user_id = this.userInfo._id;
+        this.recipeObj.images = this.file.filter( p => typeof p == typeof "");
+        this.recipeObj.cooking_steps = this.cooking_steps_str;
+        this.recipeObj.ingredients = this.ingredients_str;
+
+        console.log("file: ", this.file)
+
+        if (this.tempFile.length > 0) {
+          for(let p of this.tempFile){
+            await removeFile(p).catch(err => {
+              console.log("Remove File Error", err);
+            });
+          }
+          // await this.tempFile.forEach(async p => {
+          //   await removeFile(p).catch(err => {
+          //     console.log("Remove File Error", err);
+          //   });
+          // });
+        }
 
         if (this.file.length > 0) {
           const files = this.file.filter((p) => p instanceof File);
 
           const fileForm = new FormData();
-          files.forEach((p) => {
+
+          files.forEach( p => {
             fileForm.append("file", p);
           });
 
           if (files.length > 0) {
             await uploadFiles(fileForm)
               .then((res) => {
-                res.files.forEach((p) => this.recipeObj.images.push(p.md5));
+                console.log("res", res);
+                res.file.forEach((p) => this.recipeObj.images.push(p.filename));
               })
               .catch(console.log);
           }
@@ -386,7 +406,7 @@ export default {
           await addRecipe(this.recipeObj)
             .then((res) => {
               if (res.meta == 2001) {
-                this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
+                this.$toast.success(res.message); 
                 console.log("added recipe: ", this.recipeObj);
               } else {
                 this.$toast.error("Erorr - " + res.meta);
@@ -418,14 +438,14 @@ export default {
   },
 
   mounted() {
-    console.log("user id", this.userInfo._id)
+    console.log("user id", this.userInfo._id);
     // this.cooking_steps_str.length = 1;
     this.recipeObj = newObj();
     listCategory()
       .then((res) => {
         console.log(res);
         if (res.meta == 2001) {
-          this.categoryList= res.data;
+          this.categoryList = res.data;
           console.log("category name: ", res.data);
         }
       })
