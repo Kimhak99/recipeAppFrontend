@@ -61,7 +61,17 @@ const general = {
       path: '/recipedetail/:id',
       name: 'RecipeDetail',
       component: () => import('../views/RecipeDetail.vue')
-    }
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: () => import('../views/Signup.vue')
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: () => import('../views/Signin.vue')
+    },
   ]
 }
 
@@ -74,16 +84,6 @@ export default new Router({
       name: 'NotFound',
       path: '*',
       component: () => import('../views/404'),
-    },
-    {
-      path: '/signup',
-      name: 'Signup',
-      component: () => import('../views/Signup.vue')
-    },
-    {
-      path: '/signin',
-      name: 'Signin',
-      component: () => import('../views/Signin.vue')
     },
   ],
 })

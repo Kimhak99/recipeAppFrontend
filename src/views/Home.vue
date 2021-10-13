@@ -15,7 +15,7 @@
               flat
               background-color="black lighten-3"
               dark
-              v-model="test"
+              v-model="search.keyword"
               clearable
             />
           </v-col>
@@ -105,7 +105,11 @@
             <v-app-bar flat color="rgba(0,0,0,0)">
               <h2
                 class="ml-1 grey--text-lighten-3"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis"
+                style="
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                "
               >
                 {{ item.title }}
               </h2>
@@ -138,7 +142,12 @@
             </div>
             <v-app-bar flat color="rgba(0,0,0,0)">
               <h5
-                style="border-radius: 4px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis"
+                style="
+                  border-radius: 4px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                "
               >
                 by {{ item.by }}
               </h5>
@@ -202,6 +211,16 @@ import other from "../assets/other.png";
 import special from "../assets/special.jpg";
 import western from "../assets/western.jpg";
 
+const newSearch = () => {
+  return {
+    keyword: "",
+    limit: "",
+    category: "",
+  };
+}; // these are the variable u use on backend, so im wondering if type is the same.. will we call it here?
+// we add type here so we know for sure taht it will send type to backend, then in backend we can use sth.type;// can we use other word beside type?
+//anything u want, just need to make sure we can in backend by its correct name too, just fyi
+
 export default {
   // components: { UserDashboardLayout },
   name: "Home",
@@ -211,7 +230,8 @@ export default {
   // },
   data() {
     return {
-      searchBar: false,
+      search: newSearch(),
+      searchBar: false, //
       //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
       simulateRecipeData: [
         {
@@ -247,61 +267,18 @@ export default {
   },
   methods: {
     searchBtn() {
-      if (this.test == null) {
-        this.searchBar = this.searchBar === true ? false : true;
-      } else {
-        console.log("do the search");
-      }
+      if (!this.search.keyword) return (this.searchBar = !this.searchBar); // lol
+
+      console.log("do the search");
+
+      // if (this.test == null) {
+      //   this.searchBar = this.searchBar? false : true;
+      // } else {
+      //   console.log("do the search");
+      // }
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-// .rankGoodsBox {
-//     width: 124px;
-//     overflow: hidden;
-//     height: 170px;
-//     border-radius: 8px;
-//     box-shadow: 0px 0px 5px rgba($color: #000000, $alpha: 0.2);
-//     .rankImg {
-//       margin: auto;
-//       margin-bottom: 20px;
-//       width: 100%;
-//       height: 100px;
-//       border-radius: 8px;
-//       border-bottom-right-radius: 0px;
-//       border-bottom-left-radius: 0px;
-//       box-shadow: 1px 2px 16px rgba($color: #000000, $alpha: 0.2);
-
-//       overflow: hidden;
-//       img {
-//         height: 100%;
-//         width: 100%;
-//         object-fit: cover;
-//       }
-//     }
-//     .goodsTitleRank {
-
-//       background: #fff;
-//       // width: 100px;
-//       height: 44px;
-//       border-bottom-left-radius: 6px;
-//       border-bottom-right-radius: 6px;
-//       text-align: center;
-//       .van-ellipsis{
-//         padding: 0 8px;
-//       }
-//       // padding: 10px 6px 0 6px;
-//       .rankNumber {
-//         padding: 0 8px;
-//         text-align: center;
-//         margin-top: 8px;
-//         height: 20px;
-//         text-overflow: ellipsis;
-//         overflow: hidden;
-//         white-space: nowrap;
-//         line-height: 1;
-//       }
-//     }
-//   }
 </style>

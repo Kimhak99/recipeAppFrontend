@@ -22,10 +22,11 @@ router.beforeEach((to, from, next) => {
             next();
         }
     }
-    else if (to.path != '/signin') {
-        console.log(2);
-        next({ path: '/signin', replace: true })
-    } else {
+    // else if (to.path != '/signin') {
+    //     console.log(2);
+    //     next({ path: '/signin', replace: true })
+    // }
+    else {
         console.log(3);
         next()
     }
