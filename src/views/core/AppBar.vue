@@ -1,5 +1,3 @@
-
-
 <template>
   <v-app-bar fixed color="black" elevate-on-scroll dark app>
     <v-btn @click="handleDrawer" icon v-if="$vuetify.breakpoint.xs">
@@ -11,25 +9,37 @@
     <v-spacer></v-spacer>
 
     <v-btn
-      @click="$router.push({ name: 'Signin' }).catch(() => {})"
+      v-if="!this.userInfo._id"
+      @click="$router.push({ path: '/signin' })"
       class="mr-5 test"
     >
       {{ $t("signin") }}
     </v-btn>
 
-    <v-btn @click="$router.push({ name: 'Signup' }).catch(() => {})">
+    <v-btn v-if="!this.userInfo._id" @click="$router.push({ path: '/signup' })">
       {{ $t("signup") }}
     </v-btn>
+    <span v-if="this.userInfo._id" class="px-3" style="color:red;  text-transform: uppercase; font-weight: bold">{{this.userInfo.username}}</span>
+    <v-badge v-if="this.userInfo._id" bordered bottom color="green" dot offset-x="10" offset-y="10">
+      <v-avatar size="40">
+        <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img>
+      </v-avatar>
+    </v-badge>
   </v-app-bar>
 </template>
 
+//TODO::display profile image from userInfo
+
 <script>
 import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Appbar",
   data() {
-    return {};
+    return {
+    
+    };
   },
   computed: {
     ...mapState(["drawer"]),
@@ -39,6 +49,10 @@ export default {
       this.$store.dispatch("SetDrawer", !this.drawer);
     },
   },
+  computed: {
+    ...mapGetters(["userInfo"]),
+  },
+
 };
 </script>
 

@@ -1,148 +1,149 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="8">
-        <!-- u dont need the above row and col, jsut fyi -->
-        <v-card class="elevation-12">
-          <v-row class="fill-height">
-            <v-col cols="12" md="4" style="background-color: #b71c1c">
-              <v-card-text class="white--text mt-0">
-                <h3 class="text-center display-1">Welcome Back!</h3>
-                <h4 class="text-center my-4 mb-8">
-                  To Keep connected with us, please log in!
-                </h4>
-              </v-card-text>
-              <div class="text-center mt-8">
-                <v-btn
-                  rounded
-                  outlined
-                  dark
-                  @click="$router.push({ name: 'Signin' }).catch(() => {})"
-                  style="background-color: white; color: #b71c1c"
-                  >SIGN IN</v-btn
-                >
-              </div>
-            </v-col>
+  <v-container
+    class="d-flex justify-center align-items-center fill-height"
+    fluid
+  >
+    <!-- u dont need the above row and col, jsut fyi -->
+    <v-card class="elevation-4" style="border-radius: 12px">
+      <v-row no-gutters>
+        <v-col
+          cols="12"
+          md="4"
+          style="background-color: #b71c1c; border-radius: 12px 0 0 12px"
+        >
+          <v-card-text class="text-center white--text">
+            <h3 class="display-1">Welcome Back!</h3>
+            <h4 class="my-4">
+              To Keep connected with us, please log in!
+            </h4>
+            <v-btn
+              rounded
+              outlined
+              dark
+              @click="$router.push({ path: '/signin' })"
+              style="background-color: white; color: #b71c1c"
+              >SIGN IN</v-btn
+            >
+          </v-card-text>
+        </v-col>
 
-            <v-col cols="12" md="8">
-              <v-card-text class="mt-0">
-                <div class="display-2" style="color: #b71c1c">
-                  Create an Account
-                </div>
-                <div class="text-center mt-4">
-                  <v-btn class="mx-2" fab color="black" outlined>
-                    <v-icon>fab fa-facebook-f</v-icon>
-                  </v-btn>
-                  <v-btn class="mx-2" fab color="black" outlined>
-                    <v-icon>fab fa-google-plus-g</v-icon>
-                  </v-btn>
-                  <v-btn class="mx-2" fab color="black" outlined>
-                    <v-icon>fab fa-instagram</v-icon>
-                  </v-btn>
-                </div>
-                <h4 class="text-center mt-4">
-                  Ensure your email for registration
-                </h4>
-                <v-form v-model="valid" ref="form" lazy-validation>
-                  <v-row>
-                    <v-col
-                      class="py-0"
-                      cols="12"
-                      lg="2"
-                      md="2"
-                      sm="4"
-                      style="height: 100%; width: 100%"
-                    >
-                      <ImageUpload
-                        :image.sync="uploadedImg"
-                        :avatar="obj.profile_image"
-                      />
-
-                      <!-- <img :src="blankProfile" alt="" /> -->
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <v-text-field
-                        label="Firstname"
-                        name="Firstname"
-                        prepend-icon="person"
-                        v-model="obj.firstname"
-                        type="text"
-                        color="#B71C1C"
-                      />
-                    </v-col>
-                    <v-col>
-                      <v-text-field
-                        label="Lastname"
-                        name="Lastname"
-                        type="text"
-                        prepend-icon="person"
-                        v-model="obj.lastname"
-                        color="#B71C1C"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <v-text-field
-                        label="Username"
-                        name="Username"
-                        prepend-icon="person"
-                        v-model="obj.username"
-                        type="text"
-                        color="#B71C1C"
-                      />
-                    </v-col>
-                    <v-col>
-                      <v-text-field
-                        label="Email"
-                        name="Email"
-                        prepend-icon="email"
-                        v-model="obj.email"
-                        type="text"
-                        color="#B71C1C"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <v-text-field
-                        label="Password"
-                        name="Password"
-                        v-model="obj.password"
-                        prepend-icon="lock"
-                        type="text"
-                        color="#B71C1C"
-                      />
-                    </v-col>
-                    <v-col>
-                      <v-text-field
-                        label="Confirm Password"
-                        name="ConfirmPassword"
-                        v-model="confirmPassword"
-                        prepend-icon="lock"
-                        type="text"
-                        color="#B71C1C"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-form>
-              </v-card-text>
-              <div class="text-center">
-                <v-btn
-                  @click="validate"
-                  rounded
-                  dark
-                  style="background-color: #b71c1c"
-                  >SIGN UP</v-btn
+        <v-col cols="12" md="8" style="border-radius: 12px">
+          <v-card-text>
+            <div class="display-2" style="color: #b71c1c">
+              Create an Account
+            </div>
+            <div class="text-center mt-4">
+              <v-btn class="mx-2" fab color="black" outlined>
+                <v-icon>fab fa-facebook-f</v-icon>
+              </v-btn>
+              <v-btn class="mx-2" fab color="black" outlined>
+                <v-icon>fab fa-google-plus-g</v-icon>
+              </v-btn>
+              <v-btn class="mx-2" fab color="black" outlined>
+                <v-icon>fab fa-instagram</v-icon>
+              </v-btn>
+            </div>
+            <h4 class="text-center mt-4">
+              Ensure your email for registration
+            </h4>
+            <v-form v-model="valid" ref="form" lazy-validation>
+              <v-row>
+                <v-col
+                  class="py-0"
+                  cols="12"
+                  lg="2"
+                  md="2"
+                  sm="4"
+                  style="height: 100%; width: 100%"
                 >
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
+                  <ImageUpload
+                    :image.sync="uploadedImg"
+                    :avatar="obj.profile_image"
+                  />
+
+                  <!-- <img :src="blankProfile" alt="" /> -->
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    label="Firstname"
+                    name="Firstname"
+                    prepend-icon="person"
+                    v-model="obj.firstname"
+                    type="text"
+                    color="#B71C1C"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="Lastname"
+                    name="Lastname"
+                    type="text"
+                    prepend-icon="person"
+                    v-model="obj.lastname"
+                    color="#B71C1C"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    label="Username"
+                    name="Username"
+                    prepend-icon="person"
+                    v-model="obj.username"
+                    type="text"
+                    color="#B71C1C"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="Email"
+                    name="Email"
+                    prepend-icon="email"
+                    v-model="obj.email"
+                    type="text"
+                    color="#B71C1C"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    label="Password"
+                    name="Password"
+                    v-model="obj.password"
+                    prepend-icon="lock"
+                    type="text"
+                    color="#B71C1C"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="Confirm Password"
+                    name="ConfirmPassword"
+                    v-model="confirmPassword"
+                    prepend-icon="lock"
+                    type="text"
+                    color="#B71C1C"
+                  />
+                </v-col>
+              </v-row>
+            </v-form>
+            <div class="text-center mt-3">
+              <v-btn
+                @click="validate"
+                rounded
+                dark
+                style="background-color: #b71c1c"
+                >SIGN UP</v-btn
+              >
+            </div>
+          </v-card-text>
+        </v-col>
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 

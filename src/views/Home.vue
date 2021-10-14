@@ -281,4 +281,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
+// https://www.youtube.com/watch?v=2_E5uoiLCLY
+//https://www.youtube.com/watch?v=_hzIwvuSXpc
 </style>
+
