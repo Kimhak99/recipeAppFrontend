@@ -456,7 +456,7 @@ export default {
   },
 
   mounted() {
-       this.resetForm();
+    this.resetForm();
     console.log("user id", this.userInfo._id);
     // this.cooking_steps_str.length = 1;
     this.recipeObj = newObj();
