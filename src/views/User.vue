@@ -13,7 +13,7 @@
           <!-- <v-sheet> -->
           <v-toolbar-items class="d-flex align-center">
             <v-row>
-              <v-col cols="12" lg="6" md="6" sm="6">
+              <v-col cols="12" sm="6">
                 <v-text-field
                   label="Search"
                   v-model="search.keyword"

@@ -26,7 +26,11 @@ export default {
     prepTime: "Preparation Time",
     cookTime: "Cooking Time",
     cancel: "Cancel",
-    addrecipe: "Add Recipe"
+    addrecipe: "Add Recipe",
+    setting: "SETTING",
+    editProfile: "Edit Profile",
+    resetPwd: "Reset Password",
+    deleteAccount: "Delete Account"
 
 
 }

@@ -53,7 +53,7 @@ const general = {
       component: Recipe
     },
     {
-      path: '/userprofile',
+      path: '/userprofile/:id',
       name: 'UserProfile',
       component: () => import('../views/UserProfile.vue')
     },

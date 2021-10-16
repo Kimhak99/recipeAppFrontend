@@ -231,7 +231,7 @@ export default {
   // },
   data() {
     return {
-      datas: [],
+      data: [],
       search: newSearch(),
       searchBar: false, //
       //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
@@ -281,6 +281,7 @@ export default {
     },
   },
   mounted() {
+    this.data = [];
     listRecipeV2(this.search)
       .then((res) => {
         if (res.meta == 2001) {
@@ -289,8 +290,8 @@ export default {
             return true;
           }
 
-          this.datas = res.datas;
-          console.log(this.datas);
+          this.data = res.datas;
+          console.log(this.data);
         }
       })
       .catch((err) => {
