@@ -21,7 +21,7 @@
     </v-btn>
     <span v-if="this.userInfo._id" class="px-3" style="color:red;  text-transform: uppercase; font-weight: bold">{{this.userInfo.username}}</span>
     <v-badge v-if="this.userInfo._id" bordered bottom color="green" dot offset-x="10" offset-y="10">
-      <v-avatar size="40">
+      <v-avatar size="40" style="cursor: pointer" @click="$router.push({ path:'/userProfile' }).catch(()=>{})">
         <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img>
       </v-avatar>
     </v-badge>

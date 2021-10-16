@@ -69,7 +69,7 @@
               </v-col>
               <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
-                  :disabled="user.id"
+                  :disabled="user.id ? true: false"
                   label="Password"
                   type="password"
                   prepend-icon="lock"
@@ -79,7 +79,7 @@
               </v-col>
               <v-col class="py-0" cols="12" lg="4" md="4" sm="6">
                 <v-text-field
-                  :disabled="user.id"
+                  :disabled="user.id ? true: false"
                   label="Confirm Password"
                   type="password"
                   prepend-icon="lock"

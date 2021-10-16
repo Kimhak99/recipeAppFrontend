@@ -71,6 +71,7 @@
                     name="Firstname"
                     prepend-icon="person"
                     v-model="obj.firstname"
+                    :rules="Rules"
                     type="text"
                     color="#B71C1C"
                   />
@@ -82,6 +83,7 @@
                     type="text"
                     prepend-icon="person"
                     v-model="obj.lastname"
+                    :rules="Rules"
                     color="#B71C1C"
                   />
                 </v-col>
@@ -93,6 +95,7 @@
                     name="Username"
                     prepend-icon="person"
                     v-model="obj.username"
+                    :rules="Rules"
                     type="text"
                     color="#B71C1C"
                   />
@@ -103,6 +106,7 @@
                     name="Email"
                     prepend-icon="email"
                     v-model="obj.email"
+                    :rules="Rules"
                     type="text"
                     color="#B71C1C"
                   />
@@ -114,6 +118,7 @@
                     label="Password"
                     name="Password"
                     v-model="obj.password"
+                    :rules="Rules"
                     prepend-icon="lock"
                     type="text"
                     color="#B71C1C"
@@ -123,7 +128,8 @@
                   <v-text-field
                     label="Confirm Password"
                     name="ConfirmPassword"
-                    v-model="confirmPassword"
+                    :rules="[Rules, matchingPasswords]"
+                    v-model="obj.confirmPassword"
                     prepend-icon="lock"
                     type="text"
                     color="#B71C1C"
@@ -160,6 +166,7 @@ const newObj = () => {
     firstname: "",
     lastname: "",
     password: "",
+    confirmPassword: "",
     email: "",
     profile_image: "",
     is_admin: Boolean,
@@ -178,9 +185,9 @@ export default {
   // },
   data: () => ({
     valid: false,
-    confirmPassword: "",
     uploadedImg: undefined,
     obj: newObj(),
+    Rules: [(v) => !!v || "this field is required"],
   }),
   methods: {
     // handleClick() {
@@ -226,7 +233,15 @@ export default {
             console.log("Add User Error", err);
           });
       }
+      this.$refs.form.reset();
       this.resetForm();
+    },
+    matchingPasswords: function() {
+      if (this.obj.password === this.obj.confirmPassword) {
+        return true;
+      } else {
+        return "Passwords do not match.";
+      }
     },
   },
 };

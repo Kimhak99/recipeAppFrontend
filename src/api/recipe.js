@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 
-export function listRecipe(data) {
+export function listRecipeV2(data) {
     return request({
         url: '/recipe/list',
         method: 'post',

@@ -26,6 +26,7 @@ Vue.mixin({
     resetForm() {
       this.$nextTick(() => {
         this.$refs.form.resetValidation();
+      
       });
     },
     checkAvatar(item) {

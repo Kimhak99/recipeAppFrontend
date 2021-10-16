@@ -101,6 +101,7 @@
                           type="text"
                           prepend-icon="ramen_dining"
                           v-model="recipeObj.recipe_title"
+                          :rules="Rules"
                         />
                       </v-col>
 
@@ -112,6 +113,7 @@
                               type="text"
                               prepend-icon="schedule"
                               v-model="recipeObj.prep_time"
+                              :rules="Rules"
                             />
                           </v-col>
                           <v-col cols="12" md="3">
@@ -120,6 +122,7 @@
                               type="text"
                               prepend-icon="schedule"
                               v-model="recipeObj.cooking_time"
+                              :rules="Rules"
                             />
                           </v-col>
                           <v-col cols="12" md="6">
@@ -130,6 +133,7 @@
                               label="Category"
                               clearable
                               v-model="recipeObj.category_id"
+                              :rules="Rules"
                             />
                           </v-col>
                         </v-row>
@@ -189,6 +193,7 @@
                                   :label="$t('ingredient')"
                                   outlined
                                   v-model="item.ingredients"
+                                  :rules="Rules"
                                 />
                               </v-col>
                               <v-col
@@ -237,6 +242,7 @@
                                   :label="$t('step')"
                                   outlined
                                   v-model="item.cooking_steps"
+                                  :rules="Rules"
                                 />
                               </v-col>
                               <v-col
@@ -318,6 +324,7 @@ export default {
     file: [],
     tempFile: [],
     // blankImg: serverConfig.blank_product_img,
+    Rules: [(v) => !!v || "this field is required"],
   }),
 
   methods: {
@@ -365,15 +372,15 @@ export default {
     async handleAdd() {
       if (this.$refs.form.validate()) {
         this.recipeObj.user_id = this.userInfo._id;
-        this.recipeObj.images = this.file.filter( p => typeof p == typeof "");
+        this.recipeObj.images = this.file.filter((p) => typeof p == typeof "");
         this.recipeObj.cooking_steps = this.cooking_steps_str;
         this.recipeObj.ingredients = this.ingredients_str;
 
-        console.log("file: ", this.file)
+        console.log("file: ", this.file);
 
         if (this.tempFile.length > 0) {
-          for(let p of this.tempFile){
-            await removeFile(p).catch(err => {
+          for (let p of this.tempFile) {
+            await removeFile(p).catch((err) => {
               console.log("Remove File Error", err);
             });
           }
@@ -389,7 +396,7 @@ export default {
 
           const fileForm = new FormData();
 
-          files.forEach( p => {
+          files.forEach((p) => {
             fileForm.append("file", p);
           });
 
@@ -406,7 +413,7 @@ export default {
           await addRecipe(this.recipeObj)
             .then((res) => {
               if (res.meta == 2001) {
-                this.$toast.success(res.message); 
+                this.$toast.success(res.message);
                 console.log("added recipe: ", this.recipeObj);
               } else {
                 this.$toast.error("Erorr - " + res.meta);
@@ -432,12 +439,24 @@ export default {
             });
         }
       }
+      (this.cooking_steps_str = []),
+        (this.ingredients_str = []),
+        (this.file = []);
+      this.tempFile = [];
+      this.$refs.form.reset();
       this.resetForm();
     },
-    handleCancel() {},
+    handleCancel() {
+      (this.file = []), (this.tempFile = []);
+      (this.cooking_steps_str = []),
+        (this.ingredients_str = []),
+        this.resetForm();
+      this.$refs.form.reset();
+    },
   },
 
   mounted() {
+       this.resetForm();
     console.log("user id", this.userInfo._id);
     // this.cooking_steps_str.length = 1;
     this.recipeObj = newObj();

@@ -196,6 +196,7 @@
 </template>
 
 <script>
+import { listRecipeV2 } from "@/api/recipe";
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
 import ahmok from "../assets/ahmok.jpg";
 import chickenSalad from "../assets/chickenSalad.jpg";
@@ -230,6 +231,7 @@ export default {
   // },
   data() {
     return {
+      datas: [],
       search: newSearch(),
       searchBar: false, //
       //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
@@ -278,11 +280,26 @@ export default {
       // }
     },
   },
+  mounted() {
+    listRecipeV2(this.search)
+      .then((res) => {
+        if (res.meta == 2001) {
+          if (res.datas.length == 0) {
+            this.$toast("No Data Found");
+            return true;
+          }
+
+          this.datas = res.datas;
+          console.log(this.datas);
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  },
 };
 </script>
 <style lang="scss" scoped>
-
 // https://www.youtube.com/watch?v=2_E5uoiLCLY
 //https://www.youtube.com/watch?v=Qc-LFzxoU6Q
 </style>
-
