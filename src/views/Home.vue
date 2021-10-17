@@ -1,9 +1,12 @@
 <template>
   <v-container class="px-16">
     <v-row class="ma-12">
-      <v-btn class="mt-9 mr-2" small dark fab @click="searchBtn"
-        ><v-icon>fas fa-search</v-icon></v-btn
-      >
+      <v-col>
+        <v-btn class="mt-9 mr-2" small dark fab @click="searchBtn"
+          ><v-icon>fas fa-search</v-icon></v-btn
+        >
+      </v-col>
+
       <v-toolbar flat v-if="searchBar" class="mt-6">
         <v-row class="mt-10">
           <v-col cols="12" sm="12">
@@ -29,7 +32,7 @@
         </v-row>
       </v-toolbar>
 
-      <v-flex
+      <!-- <v-flex
         v-if="!searchBar"
         v-for="(item, key) in stimulateCategoryData"
         :key="key"
@@ -44,7 +47,27 @@
           ></v-img>
         </v-avatar>
         <h5 class="mt-3">{{ item.name }}</h5>
-      </v-flex>
+      </v-flex> -->
+      <div class="box">
+        <div
+          class="secondBox"
+          v-if="!searchBar"
+          v-for="(item, key) in stimulateCategoryData"
+          :key="key"
+        >
+          <!-- <div class="slide-img"> -->
+          <v-img
+            alt="Bhutan"
+            class="imgItem"
+            :src="item.images[0]"
+            max-height="100%"
+            max-width="100%"
+            style="cursor: pointer; border-radius: 50%"
+          ></v-img>
+          <!-- </div> -->
+        </div>
+      </div>
+
       <v-btn
         fab
         small
@@ -263,6 +286,9 @@ export default {
         { name: "Snack", images: [snack] },
         { name: "Vegetarian", images: [salad] },
         { name: "Special Occassion", images: [special] },
+        { name: "Asian", images: [ahmok] },
+        { name: "Western", images: [western] },
+        { name: "Fast Food", images: [hamburger] },
         { name: "Other", images: [other] },
       ],
     };
@@ -303,4 +329,20 @@ export default {
 <style lang="scss" scoped>
 // https://www.youtube.com/watch?v=2_E5uoiLCLY
 //https://www.youtube.com/watch?v=Qc-LFzxoU6Q
+.box {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.secondBox {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 10px 0 10px;
+}
 </style>
