@@ -1,38 +1,64 @@
 <template>
   <v-container class="px-16">
-    <v-row class="ma-12">
-      <v-col>
-        <v-btn class="mt-9 mr-2" small dark fab @click="searchBtn"
+    <v-row class="mt-6 d-flex justify-center align-center">
+      <v-col cols="1">
+        <v-btn class="" small dark fab @click="searchBtn"
           ><v-icon>fas fa-search</v-icon></v-btn
         >
       </v-col>
 
-      <v-toolbar flat v-if="searchBar" class="mt-6">
-        <v-row class="mt-10">
-          <v-col cols="12" sm="12">
-            <v-text-field
-              full-width
-              filled
-              dense
-              solo
-              flat
-              background-color="black lighten-3"
-              dark
-              v-model="search.keyword"
-              clearable
-            />
-          </v-col>
-          <v-col
-            cols="12"
-            sm="1"
-            class="d-flex justify-center"
-            align-self="center"
-          >
-          </v-col>
-        </v-row>
-      </v-toolbar>
+      <v-col cols="10" class="pa-0" v-if="searchBar">
+        <v-toolbar flat class="">
+          <!-- <v-row class="mt-10"> -->
+          <!-- <v-col cols="12"> -->
+          <v-text-field
+            full-width
+            filled
+            dense
+            solo
+            flat
+            hide-details=""
+            background-color="black lighten-3"
+            dark
+            v-model="search.keyword"
+            clearable
+          />
+          <!-- </v-col> -->
+          <!-- </v-row> -->
+        </v-toolbar>
+      </v-col>
 
-      <!-- <v-flex
+      <v-col cols="10" class="pa-0" v-else>
+        <div class="box">
+          <div
+            class="secondBox"
+            v-for="(item, key) in stimulateCategoryData"
+            :key="key"
+          >
+            <v-img
+              alt="Bhutan"
+              class="imgItem"
+              :src="item.images[0]"
+              max-height="100%"
+              max-width="100%"
+            ></v-img>
+          </div>
+        </div>
+      </v-col>
+
+      <v-col cols="1" class="d-flex justify-end">
+        <v-btn
+          fab
+          small
+          color="pink"
+          class="mt-"
+          @click="$router.push('/recipe')"
+          ><v-icon>fas fa-plus</v-icon></v-btn
+        >
+      </v-col>
+    </v-row>
+
+    <!-- <v-flex
         v-if="!searchBar"
         v-for="(item, key) in stimulateCategoryData"
         :key="key"
@@ -48,35 +74,7 @@
         </v-avatar>
         <h5 class="mt-3">{{ item.name }}</h5>
       </v-flex> -->
-      <div class="box">
-        <div
-          class="secondBox"
-          v-if="!searchBar"
-          v-for="(item, key) in stimulateCategoryData"
-          :key="key"
-        >
-          <!-- <div class="slide-img"> -->
-          <v-img
-            alt="Bhutan"
-            class="imgItem"
-            :src="item.images[0]"
-            max-height="100%"
-            max-width="100%"
-            style="cursor: pointer; border-radius: 50%"
-          ></v-img>
-          <!-- </div> -->
-        </div>
-      </div>
 
-      <v-btn
-        fab
-        small
-        color="pink"
-        class="mt-9"
-        @click="$router.push('/recipe')"
-        ><v-icon>fas fa-plus</v-icon></v-btn
-      >
-    </v-row>
     <!-- <v-toolbar flat>
       <v-row class="ml-6">
         <v-col cols="12" sm="11">
@@ -108,7 +106,8 @@
         </v-col>
       </v-row>
     </v-toolbar> -->
-    <v-row class="mt-n6" align="center" justify="center">
+
+    <v-row class="mt-6" align="center" justify="center">
       <v-col
         cols="12"
         lg="4"
@@ -295,7 +294,7 @@ export default {
   },
   methods: {
     searchBtn() {
-      if (!this.search.keyword) return (this.searchBar = !this.searchBar); // lol
+      if (!this.search.keyword) return (this.searchBar = !this.searchBar); // so this one noo need?
 
       console.log("do the search");
 
@@ -317,7 +316,7 @@ export default {
           }
 
           this.data = res.datas;
-          console.log(this.data);
+          console.log(this.data); //cant log this
         }
       })
       .catch((err) => {
@@ -335,14 +334,62 @@ export default {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+  padding-bottom: 12px;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
+  &:hover {
+    cursor: grab;
+  }
+  &:active {
+    cursor: grabbing;
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background: #000000;
+  }
+  &::-webkit-scrollbar-track {
+    background: #6e6e6e;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  &::-webkit-scrollbar-track:hover {
+    background: #666666;
+  }
+  &::-webkit-scrollbar-track:active {
+    background: #333333;
+  }
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  //u can playaround with the style on the site and paste the result here, okay
 }
-.scroll::-webkit-scrollbar {
-  display: none;
-}
+
 .secondBox {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
-  margin: 0 10px 0 10px;
+  margin: 0 10px;
+  cursor: pointer;
+  .imgItem {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 </style>

@@ -28,10 +28,10 @@
                     <v-card class="mx-auto" max-width="100%" tile>
                       <v-list dense>
                         <v-subheader
-                          style="font-weight: bold; font-size:14px"
+                          style="font-weight: bold; font-size: 14px"
                           >{{ $t("setting") }}</v-subheader
                         >
-                        <v-list-item-group color="primary">                  
+                        <v-list-item-group color="primary">
                           <v-list-item @click="handleEdit">
                             <v-list-item-icon>
                               <v-icon>mdi-account-edit</v-icon>
@@ -113,7 +113,7 @@
                   <v-col cols="12" class="py-4">
                     <h3
                       class="text-center"
-                      style="text-transform: uppercase; font-weight: bold;"
+                      style="text-transform: uppercase; font-weight: bold"
                     >
                       {{ this.userInfo.username + "'s" }} Recipe List
                     </h3>
@@ -239,7 +239,7 @@ export default {
   methods: {
     handleEdit() {
       this.dialog = true;
-      // this.obj = this.newObj;
+      this.obj = this.userInfo;
     },
     handleUser() {},
   },

@@ -19,10 +19,32 @@
     <v-btn v-if="!this.userInfo._id" @click="$router.push({ path: '/signup' })">
       {{ $t("signup") }}
     </v-btn>
-    <span v-if="this.userInfo._id" class="px-3" style="color:red; text-transform: uppercase; font-weight: bold">{{this.userInfo.username}}</span>
-    <v-badge v-if="this.userInfo._id" bordered bottom color="green" dot offset-x="10" offset-y="10">
-      <v-avatar size="40" style="cursor: pointer" @click="$router.push({ path:'/userProfile/0' }).catch(()=>{})">
-        <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img>
+    <span
+      v-if="this.userInfo._id"
+      class="px-3"
+      style="color: red; text-transform: uppercase; font-weight: bold"
+      >{{ this.userInfo.username }}</span
+    >
+    <v-badge
+      v-if="this.userInfo._id"
+      bordered
+      bottom
+      color="green"
+      dot
+      offset-x="10"
+      offset-y="10"
+    >
+      <v-avatar
+        size="40"
+        style="cursor: pointer"
+        @click="$router.push({ path: '/userProfile/0' }).catch(() => {})"
+      >
+        <!-- <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img> -->
+        <!-- http://localhost:5000/file/askfjklasjfsdf.png -->
+        <v-img :src="checkAvatar(userInfo.profile_image)"></v-img>
+        <!-- do you want to give it another go? ok -->
+        <!-- know it doesnt work.. should just ask u how, me right now 😶😶😶-->
+        <!-- what does usrInfor.profile_image store? the string stores image url pointing to a file in db. oh. to display it, we need to point to file url with the string value -->
       </v-avatar>
     </v-badge>
   </v-app-bar>
@@ -37,9 +59,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Appbar",
   data() {
-    return {
-    
-    };
+    return {};
   },
   computed: {
     ...mapState(["drawer"]),
@@ -52,7 +72,6 @@ export default {
   computed: {
     ...mapGetters(["userInfo"]),
   },
-
 };
 </script>
 
