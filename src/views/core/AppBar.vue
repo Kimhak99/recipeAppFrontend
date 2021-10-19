@@ -63,15 +63,14 @@ export default {
   },
   computed: {
     ...mapState(["drawer"]),
+    ...mapGetters(["userInfo"]),
   },
   methods: {
     handleDrawer() {
       this.$store.dispatch("SetDrawer", !this.drawer);
     },
   },
-  computed: {
-    ...mapGetters(["userInfo"]),
-  },
+ 
 };
 </script>
 

@@ -110,7 +110,7 @@
                           <v-col cols="12" md="3">
                             <v-text-field
                               :label="$t('prepTime')"
-                              type="text"
+                              type="number"
                               prepend-icon="schedule"
                               v-model="recipeObj.prep_time"
                               :rules="Rules"
@@ -119,7 +119,7 @@
                           <v-col cols="12" md="3">
                             <v-text-field
                               :label="$t('cookTime')"
-                              type="text"
+                              type="number"
                               prepend-icon="schedule"
                               v-model="recipeObj.cooking_time"
                               :rules="Rules"
@@ -303,8 +303,8 @@ const newObj = () => {
     ingredients: [],
     cooking_steps: [],
     description: "",
-    prep_time: "",
-    cooking_time: "",
+    prep_time: 0,
+    cooking_time: 0,
     category_id: "",
     comments: [],
     user_id: "",

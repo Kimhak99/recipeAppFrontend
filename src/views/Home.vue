@@ -32,18 +32,18 @@
         <div class="box">
           <div
             class="secondBox"
-            v-for="(item, key) in stimulateCategoryData"
+            v-for="(item, key) in catList"
             :key="key"
           >
             <v-img
               alt="Bhutan"
               class="imgItem"
-              :src="item.images[0]"
+              :src="checkAvatar(item.image)"
               max-height="100%"
               max-width="100%"
             ></v-img>
             <div class="categoryName">
-              <h5>{{ item.name }}</h5>
+              <h5>{{ item.category_name }}</h5>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@
         cols="12"
         lg="4"
         md="6"
-        v-for="(item, key) in simulateRecipeData"
+        v-for="(item, key) in data"
         :key="key"
         class="d-flex flex-column justify-space-between align-center py-6"
       >
@@ -136,7 +136,7 @@
                   text-overflow: ellipsis;
                 "
               >
-                {{ item.title }}
+                {{ data.recipe_title }}
               </h2>
               <v-spacer />
 
@@ -149,7 +149,7 @@
                     ><v-icon>fas fa-heart</v-icon></v-btn
                   >
                 </v-avatar>
-                {{ item.like }}
+                {{ item.num_of_like }}
               </v-chip>
             </v-app-bar>
             <!-- <h5 class="ml-5 mt-n5">$4.99</h5> -->
@@ -158,7 +158,7 @@
               style="height: 230px"
             >
               <v-img
-                :src="item.images[0]"
+                :src="checkAvatar(item.images[0])"
                 max-height="100%"
                 max-width="100%"
                 style="cursor: pointer"
@@ -174,7 +174,7 @@
                   text-overflow: ellipsis;
                 "
               >
-                by {{ item.by }}
+                by {{  }}
               </h5>
               <v-spacer />
               <v-btn fab small color="black"
@@ -187,7 +187,7 @@
                 text-color="red"
                 dense
               >
-                25 min
+                {{item.cooking_time + item.prep_time + " min"}}
               </v-chip>
             </v-app-bar>
             <!-- <v-row>
@@ -222,6 +222,9 @@
 
 <script>
 import { listRecipeV2 } from "@/api/recipe";
+import {
+  listCategory,
+} from "@/api/category";
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
 import ahmok from "../assets/ahmok.jpg";
 import chickenSalad from "../assets/chickenSalad.jpg";
@@ -257,6 +260,7 @@ export default {
   data() {
     return {
       data: [],
+      catList: [],
       search: newSearch(),
       searchBar: false, //
       //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
@@ -281,21 +285,60 @@ export default {
           images: [chickenSalad],
         },
       ],
-      stimulateCategoryData: [
-        { name: "Asian", images: [ahmok] },
-        { name: "Western", images: [western] },
-        { name: "Fast Food", images: [hamburger] },
-        { name: "Snack", images: [snack] },
-        { name: "Vegetarian", images: [salad] },
-        { name: "Special Occassion", images: [special] },
-        { name: "Asian", images: [ahmok] },
-        { name: "Western", images: [western] },
-        { name: "Fast Food", images: [hamburger] },
-        { name: "Other", images: [other] },
-      ],
+      // stimulateCategoryData: [
+      //   { name: "Asian", images: [ahmok] },
+      //   { name: "Western", images: [western] },
+      //   { name: "Fast Food", images: [hamburger] },
+      //   { name: "Snack", images: [snack] },
+      //   { name: "Vegetarian", images: [salad] },
+      //   { name: "Special Occassion", images: [special] },
+      //   { name: "Asian", images: [ahmok] },
+      //   { name: "Western", images: [western] },
+      //   { name: "Fast Food", images: [hamburger] },
+      //   { name: "Other", images: [other] },
+      // ],
     };
   },
   methods: {
+    getData() {
+       listCategory(this.search)
+        .then((res) => {
+          console.log(res);
+          if (res.meta == 2001) {
+            this.tableLoading = false;
+
+            if (res.data.length == 0) {
+              this.$toast("No Data Found");
+              return true;
+            }
+
+            res.data.forEach((p, i) => (p.itemNo = i + 1));
+            this.catList = res.data;
+            console.log("cate list: ", this.catList)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$toast.error(`Error - ${err.meta}`);
+        });
+
+      this.data = [];
+    listRecipeV2(this.search)
+      .then((res) => {
+        if (res.meta == 2001) {
+          if (res.datas.length == 0) {
+            this.$toast("No Data Found");
+            return true;
+          }
+
+          this.data = res.datas;
+          console.log("recipe: ", this.data); //cant log this
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+    },
     searchBtn() {
       if (!this.search.keyword) return (this.searchBar = !this.searchBar); // so this one noo need?
 
@@ -309,22 +352,7 @@ export default {
     },
   },
   mounted() {
-    this.data = [];
-    listRecipeV2(this.search)
-      .then((res) => {
-        if (res.meta == 2001) {
-          if (res.datas.length == 0) {
-            this.$toast("No Data Found");
-            return true;
-          }
-
-          this.data = res.datas;
-          console.log(this.data); //cant log this
-        }
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
+    this.getData();
   },
 };
 </script>
@@ -399,10 +427,13 @@ export default {
 .categoryName {
   // mt-3 d-flex justify-center align-center" ;
   text-align: center;
-  margin: 10px 0;
   overflow-x: hidden;
+  margin-top: 8px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background-color: ;
+   &:hover {
+     color: coral;
+    overflow: visible;
+  }
 }
 </style>

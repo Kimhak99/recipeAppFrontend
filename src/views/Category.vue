@@ -71,7 +71,7 @@
             <template v-slot:[`item.image`]="{ item }">
               <v-img
                 :src="checkAvatar(item.image)"
-                width="65px"
+                width="70px"
                 height="70px"
                 style="margin: 10px; border-radius: 50px"
               />
