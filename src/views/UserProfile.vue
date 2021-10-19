@@ -9,7 +9,7 @@
                 <v-row no-gutters>
                   <v-col cols="12" style="background-color: blue">
                     <v-img
-                      :src="require('../assets/salad.jpg')"
+                      :src="checkAvatar(userInfo.profile_image)"
                       width="100%"
                       height="250"
                     ></v-img>
@@ -249,7 +249,7 @@ export default {
     ],
   }),
   methods: {
-     getData() {
+    getData() {
       this.datas = [];
       this.tableLoading = true;
 
@@ -282,9 +282,9 @@ export default {
       this.obj = this.userInfo;
       this.obj.id = this.userInfo._id;
       this.obj.confirmPassword = this.userInfo.password;
-      console.log("id ", this.obj.id)
+      console.log("id ", this.obj.id);
     },
-   async handleUser(item, imagefile) {
+    async handleUser(item, imagefile) {
       this.dialog = false;
 
       if (imagefile != undefined && imagefile != "") {
@@ -298,19 +298,19 @@ export default {
           .catch(console.log);
       }
 
-        updateUser(item)
-          .then((res) => {
-            if (res.meta == 2001) {
-              // this.getData();
-              this.$toast.success(res.message);
-            } else {
-              console.log("edit", res);
-              this.$toast.error("Error - " + res.meta);
-            }
-          })
-          .catch((err) => {
-            console.log("Edit User Error", err);
-          });
+      updateUser(item)
+        .then((res) => {
+          if (res.meta == 2001) {
+            // this.getData();
+            this.$toast.success(res.message);
+          } else {
+            console.log("edit", res);
+            this.$toast.error("Error - " + res.meta);
+          }
+        })
+        .catch((err) => {
+          console.log("Edit User Error", err);
+        });
     },
   },
   computed: {

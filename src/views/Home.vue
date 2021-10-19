@@ -30,11 +30,7 @@
 
       <v-col cols="10" class="pa-0" v-else>
         <div class="box">
-          <div
-            class="secondBox"
-            v-for="(item, key) in catList"
-            :key="key"
-          >
+          <div class="secondBox" v-for="(item, key) in catList" :key="key">
             <v-img
               alt="Bhutan"
               class="imgItem"
@@ -128,7 +124,7 @@
             dark
           >
             <v-app-bar flat color="rgba(0,0,0,0)">
-              <h2
+              <h4
                 class="ml-1 grey--text-lighten-3"
                 style="
                   overflow: hidden;
@@ -136,8 +132,8 @@
                   text-overflow: ellipsis;
                 "
               >
-                {{ data.recipe_title }}
-              </h2>
+                {{ item.recipe_title }}
+              </h4>
               <v-spacer />
 
               <v-chip class="ma-2" color="black" text-color="white" dense>
@@ -174,7 +170,7 @@
                   text-overflow: ellipsis;
                 "
               >
-                by {{  }}
+                by {{}}
               </h5>
               <v-spacer />
               <v-btn fab small color="black"
@@ -187,7 +183,7 @@
                 text-color="red"
                 dense
               >
-                {{item.cooking_time + item.prep_time + " min"}}
+                {{ item.cooking_time + item.prep_time + " min" }}
               </v-chip>
             </v-app-bar>
             <!-- <v-row>
@@ -222,9 +218,8 @@
 
 <script>
 import { listRecipeV2 } from "@/api/recipe";
-import {
-  listCategory,
-} from "@/api/category";
+// import { listUser } from "@/api/recipe";
+import { listCategory } from "@/api/category";
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
 import ahmok from "../assets/ahmok.jpg";
 import chickenSalad from "../assets/chickenSalad.jpg";
@@ -259,6 +254,7 @@ export default {
   // },
   data() {
     return {
+      // userList: [],
       data: [],
       catList: [],
       search: newSearch(),
@@ -301,7 +297,7 @@ export default {
   },
   methods: {
     getData() {
-       listCategory(this.search)
+      listCategory()
         .then((res) => {
           console.log(res);
           if (res.meta == 2001) {
@@ -311,10 +307,8 @@ export default {
               this.$toast("No Data Found");
               return true;
             }
-
-            res.data.forEach((p, i) => (p.itemNo = i + 1));
             this.catList = res.data;
-            console.log("cate list: ", this.catList)
+            console.log("cate list: ", this.catList);
           }
         })
         .catch((err) => {
@@ -323,21 +317,21 @@ export default {
         });
 
       this.data = [];
-    listRecipeV2(this.search)
-      .then((res) => {
-        if (res.meta == 2001) {
-          if (res.datas.length == 0) {
-            this.$toast("No Data Found");
-            return true;
-          }
+      listRecipeV2(this.search)
+        .then((res) => {
+          if (res.meta == 2001) {
+            if (res.datas.length == 0) {
+              this.$toast("No Data Found");
+              return true;
+            }
 
-          this.data = res.datas;
-          console.log("recipe: ", this.data); //cant log this
-        }
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
+            this.data = res.datas;
+            console.log("recipe: ", this.data); //cant log this
+          }
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     },
     searchBtn() {
       if (!this.search.keyword) return (this.searchBar = !this.searchBar); // so this one noo need?
@@ -431,8 +425,8 @@ export default {
   margin-top: 8px;
   white-space: nowrap;
   text-overflow: ellipsis;
-   &:hover {
-     color: coral;
+  &:hover {
+    color: coral;
     overflow: visible;
   }
 }
