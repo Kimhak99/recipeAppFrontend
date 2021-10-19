@@ -403,5 +403,6 @@ export default {
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  background-color: ;
 }
 </style>
