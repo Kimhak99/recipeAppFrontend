@@ -5,7 +5,7 @@
       <v-col cols="12">
         <v-card class="px-4">
           <v-card-title>
-            <v-icon large color="#b71c1c"> mdi-account-group </v-icon
+            <v-icon large color="#b71c1c"> mdi-table-large </v-icon
             ><span class="ml-2 mt-1 display-1" style="font-weight: bold">{{
               $t("category")
             }}</span></v-card-title
@@ -253,7 +253,7 @@ export default {
     async handleCategory(item, imagefile) {
       this.dialog = false;
 
-       if (imagefile != undefined && imagefile != "") {
+      if (imagefile != undefined && imagefile != "") {
         const fileImageForm = new FormData();
         fileImageForm.append("file", imagefile);
 

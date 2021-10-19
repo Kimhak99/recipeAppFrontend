@@ -26,6 +26,12 @@
                   </v-col>
                   <v-col cols="12">
                     <v-card class="mx-auto" max-width="100%" tile>
+                      <!-- <v-card-title>
+                        <v-icon large color="#b71c1c1"> mdi-cog </v-icon
+                        ><span class="ml-2" style="font-weight: bold">
+                          {{ $t("setting") }}
+                        </span>
+                      </v-card-title> -->
                       <v-list dense>
                         <v-subheader
                           style="font-weight: bold; font-size: 14px"

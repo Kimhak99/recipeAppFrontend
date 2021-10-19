@@ -1,17 +1,15 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="800px">
     <v-card class="pa-0" elevation="2">
+      <v-card-title>
+        <v-icon large color="#b71c1c1"> mdi-account-check </v-icon
+        ><span class="ml-2 display-1" style="font-weight: bold">
+          {{ $t("user") }}
+        </span>
+      </v-card-title>
       <v-card-text class="pb-0">
         <v-form v-model="valid" ref="form" lazy-validation>
           <v-container fluid>
-            <v-row class="pt-2">
-              <v-col cols="12" class="pa-0">
-                <span class="display-2">
-                  <v-icon left class="pb-1"> mdi-apple-finder </v-icon>
-                  {{ $t("userInfo") }}
-                </span>
-              </v-col>
-            </v-row>
             <v-row>
               <v-col
                 class="py-0"

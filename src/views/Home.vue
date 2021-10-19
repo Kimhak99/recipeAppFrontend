@@ -2,7 +2,7 @@
   <v-container class="px-16">
     <v-row class="mt-6 d-flex justify-center align-center">
       <v-col cols="1">
-        <v-btn class="" small dark fab @click="searchBtn"
+        <v-btn class="" small dark fab @click="handleSearch(undefined)"
           ><v-icon>fas fa-search</v-icon></v-btn
         >
       </v-col>
@@ -21,6 +21,8 @@
             background-color="black lighten-3"
             dark
             v-model="search.keyword"
+            @click:clear="handleSearch('')"
+            @keyup.enter="handleSearch(undefined)"
             clearable
           />
           <!-- </v-col> -->
@@ -333,10 +335,16 @@ export default {
           console.log("err", err);
         });
     },
-    searchBtn() {
+    handleSearch(item) {
       if (!this.search.keyword) return (this.searchBar = !this.searchBar); // so this one noo need?
-
-      console.log("do the search");
+      if (item == "") {
+        this.search = newSearch();
+      }
+      this.getData();
+      setTimeout(() => {
+        this.search = newSearch();
+      }, 500);
+      console.log("do the search: ", this.search.keyword);
 
       // if (this.test == null) {
       //   this.searchBar = this.searchBar? false : true;
