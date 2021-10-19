@@ -83,6 +83,7 @@
                         <v-col cols="10" md="6" class="pt-2 ml-6">
                           <v-text-field
                             label="Search"
+                            v-model="search.keyword"
                             hint="Empty input will clear filter"
                             persistent-hint
                             clearable
@@ -140,7 +141,17 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { listUser, addUser, updateUser } from "@/api/user";
+import { uploadFile } from "@/api/generalAPI";
 import UserDashboardLayout from "../layouts/UserDashboardLayout";
+
+const newSearch = () => {
+  return {
+    limit: 0,
+    skip: 0,
+    keyword: "",
+  };
+};
 
 // const newObj = () => {
 //   return {
@@ -162,9 +173,9 @@ import UserDashboardLayout from "../layouts/UserDashboardLayout";
 // };
 const newObj = () => {
   return {
-    id: "1111",
-    firstname: "hello",
-    lastname: "hi",
+    id: "",
+    firstname: "",
+    lastname: "",
     password: "",
     confirmPassword: "",
     email: "",
@@ -184,6 +195,7 @@ export default {
     this.$emit(`update:layout`, UserDashboardLayout);
   },
   data: () => ({
+    search: newSearch(),
     dialog: false,
     obj: newObj(),
     tableLoading: false,
@@ -237,11 +249,69 @@ export default {
     ],
   }),
   methods: {
+     getData() {
+      this.datas = [];
+      this.tableLoading = true;
+
+      listUser(this.search)
+        .then((res) => {
+          // console.log("Res", res);
+          if (res.meta == 2001) {
+            this.tableLoading = false;
+
+            if (res.data.length == 0) {
+              this.$toast("No Data Found");
+              return true;
+            }
+
+            res.data.forEach((p, i) => (p.itemNo = i + 1));
+            // res.data.forEach((p) =>
+            //   p.is_admin == 1 ? (p.is_admin = "Admin") : (p.is_admin = "User")//move this to the table? //yep and why need to loop twice
+            // );
+            this.datas = res.data;
+            console.log(this.datas);
+          }
+        })
+        .catch((err) => {
+          console.log("err", err);
+          // this.$toast.error(`Error - ${err.meta}`);
+        });
+    },
     handleEdit() {
       this.dialog = true;
       this.obj = this.userInfo;
+      this.obj.id = this.userInfo._id;
+      this.obj.confirmPassword = this.userInfo.password;
+      console.log("id ", this.obj.id)
     },
-    handleUser() {},
+   async handleUser(item, imagefile) {
+      this.dialog = false;
+
+      if (imagefile != undefined && imagefile != "") {
+        const fileImageForm = new FormData();
+        fileImageForm.append("file", imagefile);
+
+        await uploadFile(fileImageForm)
+          .then((res) => {
+            item.profile_image = res.file.filename;
+          })
+          .catch(console.log);
+      }
+
+        updateUser(item)
+          .then((res) => {
+            if (res.meta == 2001) {
+              // this.getData();
+              this.$toast.success(res.message);
+            } else {
+              console.log("edit", res);
+              this.$toast.error("Error - " + res.meta);
+            }
+          })
+          .catch((err) => {
+            console.log("Edit User Error", err);
+          });
+    },
   },
   computed: {
     ...mapGetters(["userInfo"]),

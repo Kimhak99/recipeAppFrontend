@@ -37,7 +37,7 @@
       <v-avatar
         size="40"
         style="cursor: pointer"
-        @click="$router.push({ path: '/userProfile/0' }).catch(() => {})"
+        @click="$router.push({ path: '/userProfile/'+ userInfo._id}).catch(() => {})"
       >
         <!-- <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img> -->
         <!-- http://localhost:5000/file/askfjklasjfsdf.png -->

@@ -42,6 +42,9 @@
               max-height="100%"
               max-width="100%"
             ></v-img>
+            <div class="categoryName">
+              <h5>{{ item.name }}</h5>
+            </div>
           </div>
         </div>
       </v-col>
@@ -329,6 +332,7 @@ export default {
 // https://www.youtube.com/watch?v=2_E5uoiLCLY
 //https://www.youtube.com/watch?v=Qc-LFzxoU6Q
 .box {
+  height: 140px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -391,5 +395,13 @@ export default {
     height: 100%;
     object-fit: cover;
   }
+}
+.categoryName {
+  // mt-3 d-flex justify-center align-center" ;
+  text-align: center;
+  margin: 10px 0;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
