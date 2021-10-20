@@ -147,7 +147,7 @@
                       </v-col>
                     </v-row>
                   </v-col>
-                  <v-col cols="12" md="6" class="pl-8">
+                  <v-col cols="12" md="6" class="pr-8">
                     <v-row>
                       <!-- <v-col class="py-0" cols="12">
                         <v-text-field
@@ -269,7 +269,7 @@
               </v-container>
             </v-form>
           </v-card-text>
-          <v-card-actions class="pt-6 pb-6 pr-6">
+          <v-card-actions class="pt-6 pb-6 pr-8 mr-4">
             <v-spacer />
 
             <v-btn color="success" class="mx-6 px-6" @click="handleAdd">
