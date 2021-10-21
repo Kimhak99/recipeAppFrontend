@@ -16,7 +16,7 @@
                 lg="2"
                 md="2"
                 sm="4"
-                class="d-flex justify-center align-center"
+                style="height: 100%; width: 100%"
               >
                 <ImageUpload
                   :image.sync="uploadedImg"
