@@ -5,7 +5,7 @@
         <v-card class="pa-16" elevation="2">
           <v-card-title primary-title class="justify-center">
             <span class="ml-2 mt-1 display-1" style="font-weight: bold">
-              This is the recipe title
+              {{ data.recipe_title }}
             </span></v-card-title
           >
           <v-card-actions class="justify-center">
@@ -13,18 +13,18 @@
             <!-- <v-btn value="recent"> -->
             <span
               class="m-10 px-5"
-              style="border-right:1px solid rgba(0,0,0,0.2)"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.2)"
               ><v-icon class="mr-2">mdi-history</v-icon>35 min</span
             >
             <!-- </v-btn> -->
             <span
               class="m-10 px-5"
-              style="border-right:1px solid rgba(0,0,0,0.2)"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.2)"
               ><v-icon class="mr-2">mdi-heart</v-icon>28</span
             >
             <span
               class="m-10 px-5"
-              style="border-right:1px solid rgba(0,0,0,0.2)"
+              style="border-right: 1px solid rgba(0, 0, 0, 0.2)"
               ><v-icon class="mr-2">mdi-format-list-bulleted-type</v-icon
               >Asian</span
             >
@@ -41,13 +41,13 @@
               :src="require('../assets/salad.jpg')"
               height="100%"
               class="grey darken-4"
-              style=" border-radius: 8px;"
+              style="border-radius: 8px"
               cover
             ></v-img>
           </div>
 
           <div class="right">
-            <span style="font-weight:500; line-height:25px; ">
+            <span style="font-weight: 500; line-height: 25px">
               when an unknown printer took a galley of type and scrambled it to
               make a type specimen book. It has survived not only five
               centuries, but also the leap
@@ -64,8 +64,49 @@
 </template>
 
 <script>
+import { getRecipe } from "@/api/recipe";
 export default {
   name: "RecipeDetail",
+  data() {
+    return {
+      data: [],
+    };
+  },
+  methods: {
+    getData() {
+      this.data = [];
+      // listRecipeV2()
+      //   .then((res) => {
+      //     if (res.meta == 2001) {
+      //       if (res.datas.length == 0) {
+      //         this.$toast("No Data Found");
+      //         return true;
+      //       }
+
+      //       this.data = res.datas;
+      //       console.log("recipe: ", this.data);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log("err", err);
+      //   });
+
+      getRecipe(this.$route.params.id)
+        .then((res) => {
+          if (res.meta == 2001) {
+            this.data = res.data;
+            console.log(this.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  mounted() {
+    console.log(this.$route.params.id);
+    this.getData();
+  },
 };
 </script>
 

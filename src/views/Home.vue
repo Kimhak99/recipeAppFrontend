@@ -160,7 +160,7 @@
                 max-height="100%"
                 max-width="100%"
                 style="cursor: pointer"
-                @click="$router.push('/recipedetail/0')"
+                @click="$router.push('/recipedetail/' + item.id)"
               ></v-img>
             </div>
             <v-app-bar flat color="rgba(0,0,0,0)">
@@ -172,7 +172,7 @@
                   text-overflow: ellipsis;
                 "
               >
-                by {{}}
+                by {{ item.user_id.username }}
               </h5>
               <v-spacer />
               <v-btn fab small color="black"
@@ -298,6 +298,16 @@ export default {
     };
   },
   methods: {
+    // handleLike() {
+    //   updateRecipe({ id: "", like: like++ })
+    //     .then()
+    //     .catch();
+    // },
+    // handleDislike() {
+    //   updateRecipe({ id: "", dislike: dislike++ })
+    //     .then()
+    //     .catch();
+    // },
     getData() {
       listCategory()
         .then((res) => {
