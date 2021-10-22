@@ -435,7 +435,7 @@ export default {
               }
             })
             .catch((err) => {
-              console.log("Edit User Error", err);
+              console.log("Edit Recipe Error", err);
             });
         }
       }

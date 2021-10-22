@@ -14,31 +14,31 @@
             <span
               class="m-10 px-5"
               style="border-right: 1px solid rgba(0, 0, 0, 0.2)"
-              ><v-icon class="mr-2">mdi-history</v-icon>35 min</span
+              ><v-icon class="mr-2">mdi-history</v-icon> {{ data.cooking_time + data.prep_time + " min" }}</span
             >
             <!-- </v-btn> -->
             <span
               class="m-10 px-5"
               style="border-right: 1px solid rgba(0, 0, 0, 0.2)"
-              ><v-icon class="mr-2">mdi-heart</v-icon>28</span
+              ><v-icon class="mr-2" color="pink">mdi-heart</v-icon>{{data.num_of_like}}</span
             >
             <span
               class="m-10 px-5"
               style="border-right: 1px solid rgba(0, 0, 0, 0.2)"
               ><v-icon class="mr-2">mdi-format-list-bulleted-type</v-icon
-              >Asian</span
+              >{{data.category_id.category_name}}</span
             >
             <!-- </v-bottom-navigation> -->
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12"  >
         <!-- <v-row no-gutters>
               <v-col cols="12" sm="6"> -->
         <div class="containerBox">
-          <div class="left">
+          <div class="left" >
             <v-img
-              :src="require('../assets/salad.jpg')"
+               :src="checkAvatar(data.images[0])"
               height="100%"
               class="grey darken-4"
               style="border-radius: 8px"

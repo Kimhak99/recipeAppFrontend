@@ -143,7 +143,7 @@
                   <!-- <v-icon color="yellow">
                     fas fa-thumbs-up
                   </v-icon> -->
-                  <v-btn fab x-small color="pink"
+                  <v-btn fab x-small color="pink" @click="handleLike(item)"
                     ><v-icon>fas fa-heart</v-icon></v-btn
                   >
                 </v-avatar>
@@ -219,7 +219,7 @@
 </template>
 
 <script>
-import { listRecipeV2 } from "@/api/recipe";
+import { listRecipeV2, updateRecipe } from "@/api/recipe";
 // import { listUser } from "@/api/recipe";
 import { listCategory } from "@/api/category";
 // import UserDashboardLayout from "../layouts/UserDashboardLayout";
@@ -298,11 +298,20 @@ export default {
     };
   },
   methods: {
-    // handleLike() {
-    //   updateRecipe({ id: "", like: like++ })
-    //     .then()
-    //     .catch();
-    // },
+    handleLike(item) {
+      // console.log("item: ", item.id)
+      // updateRecipe({ id: item.id, num_of_like: num_of_like++ })
+      //   .then((res) => {
+      //         if (res.meta == 2001) {
+      //           this.getData();
+      //         } else {
+      //           console.log("edit", res);
+      //         }
+      //       })
+      //       .catch((err) => {
+      //         console.log("Edit Recipe Error", err);
+      //       });
+        },
     // handleDislike() {
     //   updateRecipe({ id: "", dislike: dislike++ })
     //     .then()
