@@ -30,7 +30,12 @@ export default {
     setting: "SETTING",
     editProfile: "Edit Profile",
     resetPwd: "Reset Password",
-    deleteAccount: "Delete Account"
+    deleteAccount: "Delete Account",
+    reset: "Reset Password",
+    currentPwd: "Current Password",
+    newPwd: "New Password",
+    confirmPwd: "Confirm Password",
+
 
 
 }

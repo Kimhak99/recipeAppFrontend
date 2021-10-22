@@ -48,7 +48,7 @@
                               }}</v-list-item-title>
                             </v-list-item-content>
                           </v-list-item>
-                          <v-list-item @click="$router.push({ path: '/home' })">
+                          <v-list-item @click="handleResetDialog">
                             <v-list-item-icon>
                               <v-icon>mdi-account-key</v-icon>
                             </v-list-item-icon>
@@ -139,6 +139,11 @@
             </v-row>
           </v-card-text>
         </v-card>
+        <ResetPwdCRUD
+          :resetPwd="resetObj"
+          :dialog.sync="resetDialog"
+          @handleData="handleReset"
+        />
         <UserCRUD :user="obj" :dialog.sync="dialog" @handleData="handleUser" />
       </v-col>
     </v-row>
@@ -156,6 +161,13 @@ const newSearch = () => {
     limit: 0,
     skip: 0,
     keyword: "",
+  };
+};
+const newResetObj = () => {
+  return {
+    current_password: "",
+    new_password: "",
+    confirm_password: "",
   };
 };
 
@@ -196,12 +208,15 @@ export default {
   name: "UserProfile",
   components: {
     UserCRUD: () => import("@/components/UserCRUD"),
+    ResetPwdCRUD: () => import("@/components/ResetPwdCRUD"),
   },
-  created() {
-    this.$emit(`update:layout`, UserDashboardLayout);
-  },
+  // created() {
+  //   this.$emit(`update:layout`, UserDashboardLayout);
+  // },
   data: () => ({
     search: newSearch(),
+    resetDialog: false,
+    resetObj: newResetObj(),
     dialog: false,
     obj: newObj(),
     tableLoading: false,
@@ -282,6 +297,12 @@ export default {
           console.log("err", err);
           // this.$toast.error(`Error - ${err.meta}`);
         });
+    },
+    handleResetDialog(){
+      this.resetDialog = true;
+    },
+    handleReset() {
+
     },
     handleEdit() {
       this.dialog = true;
