@@ -299,18 +299,18 @@ export default {
   },
   methods: {
     handleLike(item) {
-      // console.log("item: ", item.id)
-      // updateRecipe({ id: item.id, num_of_like: num_of_like++ })
-      //   .then((res) => {
-      //         if (res.meta == 2001) {
-      //           this.getData();
-      //         } else {
-      //           console.log("edit", res);
-      //         }
-      //       })
-      //       .catch((err) => {
-      //         console.log("Edit Recipe Error", err);
-      //       });
+      console.log("item: ", item.id)
+      updateRecipe({ id: item.id, num_of_like: item.num_of_like++ })
+        .then((res) => {
+              if (res.meta == 2001) {
+                // this.getData();
+              } else {
+                console.log("edit", res);
+              }
+            })
+            .catch((err) => {
+              console.log("Edit Recipe Error", err);
+            });
         },
     // handleDislike() {
     //   updateRecipe({ id: "", dislike: dislike++ })
