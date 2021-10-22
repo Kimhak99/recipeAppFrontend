@@ -305,8 +305,16 @@ export default {
       this.getData();
     },
     handleLike(item) {
-      console.log("item: ", item.id)
-      updateRecipe({ id: item.id, num_of_like: item.num_of_like++ })
+      //=========another way=========
+      // const temp = JSON.parse(JSON.stringify(item));
+      // temp.num_of_like += 1;
+      // temp.category_id = temp.category_id.id;
+      // temp.user_id = temp.user_id.id;
+      // temp.comments = temp.comments.map(p => p.id);
+      // updateRecipe(temp)
+
+      item.num_of_like += 1;
+      updateRecipe({ id: item.id, num_of_like: item.num_of_like })
         .then((res) => {
               if (res.meta == 2001) {
                 // this.getData();
