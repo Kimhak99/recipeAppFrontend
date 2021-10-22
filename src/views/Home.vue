@@ -32,7 +32,7 @@
 
       <v-col cols="10" class="pa-0" v-else>
         <div class="box">
-          <div class="secondBox" v-for="(item, key) in catList" :key="key">
+          <div class="secondBox" v-for="(item, key) in catList" :key="key" @click="handleCategory(item)">
             <v-img
               alt="Bhutan"
               class="imgItem"
@@ -242,6 +242,7 @@ const newSearch = () => {
     keyword: "",
     limit: "",
     category: "",
+    type: 1
   };
 }; // these are the variable u use on backend, so im wondering if type is the same.. will we call it here?
 // we add type here so we know for sure taht it will send type to backend, then in backend we can use sth.type;// can we use other word beside type?
@@ -298,6 +299,12 @@ export default {
     };
   },
   methods: {
+    handleCategory(item){
+      console.log(item.id)
+      this.search.category = item.id;
+      this.getData();
+       
+    },
     handleLike(item) {
       console.log("item: ", item.id)
       updateRecipe({ id: item.id, num_of_like: item.num_of_like++ })
