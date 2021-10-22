@@ -303,7 +303,6 @@ export default {
       console.log(item.id)
       this.search.category = item.id;
       this.getData();
-       
     },
     handleLike(item) {
       console.log("item: ", item.id)
@@ -361,16 +360,16 @@ export default {
           console.log("err", err);
         });
     },
-    handleSearch(item) {
+    handleSearch() {
+      this.search.type = 0;
+       console.log("this search, ", this.search)
       if (!this.search.keyword) return (this.searchBar = !this.searchBar); // so this one noo need?
-      if (item == "") {
-        this.search = newSearch();
-      }
       this.getData();
+     
       setTimeout(() => {
         this.search = newSearch();
       }, 500);
-      console.log("do the search: ", this.search.keyword);
+  
 
       // if (this.test == null) {
       //   this.searchBar = this.searchBar? false : true;
