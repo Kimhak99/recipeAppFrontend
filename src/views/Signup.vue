@@ -153,10 +153,8 @@
   </v-container>
 </template>
 
-//TODO:: clear form
 <script>
-// import UserDashboardLayout from "../layouts/UserDashboardLayout";
-// eslint-disable-next-line
+
 import { addUser } from "@/api/user";
 import { uploadProfileSignup } from "@/api/generalAPI";
 

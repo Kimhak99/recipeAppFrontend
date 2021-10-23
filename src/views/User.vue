@@ -298,7 +298,7 @@ export default {
           .then((res) => {
             if (res.meta == 2001) {
               this.getData();
-              this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
+              this.$toast.success(res.message);
               console.log("added item: ", item);
             } else {
               this.$toast.error("Erorr - " + res.meta);
@@ -309,7 +309,6 @@ export default {
             console.log("Add User Error", err);
           });
       } else {
-        console.log(item);
 
         updateUser(item)
           .then((res) => {

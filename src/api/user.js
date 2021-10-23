@@ -38,3 +38,4 @@ export function deleteUser(id){
         method: 'delete'
     })
 }
+

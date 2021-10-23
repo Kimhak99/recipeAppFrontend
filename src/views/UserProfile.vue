@@ -154,7 +154,7 @@
 import { mapGetters } from "vuex";
 import { listUser, addUser, updateUser } from "@/api/user";
 import { uploadFile } from "@/api/generalAPI";
-import UserDashboardLayout from "../layouts/UserDashboardLayout";
+import { resetPassword } from "@/api/generalAPI";
 
 const newSearch = () => {
   return {
@@ -298,11 +298,25 @@ export default {
           // this.$toast.error(`Error - ${err.meta}`);
         });
     },
-    handleResetDialog(){
+    handleResetDialog() {
       this.resetDialog = true;
+      this.resetObj = newResetObj();
     },
-    handleReset() {
-
+    handleReset(item) {
+      this.resetDialog = false;
+      resetPassword(item)
+        .then((res) => {
+          if (res.meta == 2001) {
+            this.$toast.success(res.message);
+            console.log("Password reset: ", item);
+          } else {
+            this.$toast.error("Erorr - " + res.meta);
+            console.log("Reset Password Error", res);
+          }
+        })
+        .catch((err) => {
+          console.log("Reset Password Error", err);
+        });
     },
     handleEdit() {
       this.dialog = true;

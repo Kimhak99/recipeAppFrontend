@@ -15,7 +15,7 @@
                 :label="$t('currentPwd')"
                 type="password"
                 outlined
-                :rules="rule"
+                :rules="Rules"
                 v-model="resetPwd.current_password"
               />
             </v-col>
@@ -23,7 +23,7 @@
               <v-text-field
                 :label="$t('newPwd')"
                 type="password"
-                :rules="rule"
+                :rules="Rules"
                 outlined
                 v-model="resetPwd.new_password"
               />
@@ -31,7 +31,7 @@
             <v-col class="py-0" cols="12">
               <v-text-field
                 :label="$t('confirmPwd')"
-                :rules="rule"
+                :rules="[Rules, matchingPasswords]"
                 type="password"
                 outlined
                 v-model="resetPwd.confirm_password"
@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       valid: false,
-      rule: [(v) => !!v || "This field is required."],
+      Rules: [(v) => !!v || "This field is required."],
     };
   },
   props: {
@@ -78,6 +78,13 @@ export default {
       this.$emit("update:dialog", false);
       this.$refs.form.resetValidation();
     },
+    matchingPasswords: function () {
+      if(this.resetPwd.new_password === this.resetPwd.confirm_password) {
+        return true;
+      } else {
+        return "Passwords do not match.";
+      }
+    }
   },
   resetValidation() {
     this.$refs.form.resetValidation();

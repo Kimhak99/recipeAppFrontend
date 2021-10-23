@@ -87,6 +87,13 @@ export function login(data) {
 //         data: data,
 //     })
 // }
+export function resetPassword(data){
+    return request({
+        url: "/resetpassword",
+        method: "post",
+        data: data
+    })
+}
 
 export function getUserInfo() {
     return request({
