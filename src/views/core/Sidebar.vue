@@ -61,7 +61,7 @@ export default {
       selectedItem: 0,
       items: [
         { icon: "fas fa-home", route: "/home" },
-        { icon: "fas fa-utensils", route: "/recipe" },
+        { icon: "fas fa-utensils", route: "/recipe/" + 0 },
         { icon: "fas fa-grip-horizontal", route: "/category" },
         { icon: "fas fa-users", route: "/user" },
       ],

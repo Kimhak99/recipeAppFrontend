@@ -13,6 +13,7 @@ import "@/permission";
 import basicConfig from "./utils/basicConfig";
 import "viewerjs/dist/viewer.css";
 import VueViewer from "v-viewer";
+import moment from 'moment'
 
 Vue.use(VueViewer);
 VueViewer.setDefaults({
@@ -70,6 +71,7 @@ Vue.use(Toast, {
   position: POSITION.TOP_CENTER,
   timeout: 3000,
 });
+Vue.prototype.moment = moment;
 
 new Vue({
   router,

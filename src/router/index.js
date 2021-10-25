@@ -53,6 +53,10 @@ const general = {
       component: Recipe
     },
     {
+      path: '/recipe/:id',
+      component: () => import('../views/Recipe.vue')
+    },
+    {
       path: '/userprofile/:id',
       name: 'UserProfile',
       component: () => import('../views/UserProfile.vue')

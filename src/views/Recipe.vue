@@ -291,7 +291,7 @@
 <script>
 import { uploadFiles } from "@/api/generalAPI";
 import { urlImg, removeFile } from "@/utils/generalFunc";
-import { addRecipe, updateRecipe } from "@/api/recipe";
+import { addRecipe, updateRecipe, getRecipe } from "@/api/recipe";
 import { listCategory } from "@/api/category";
 import { mapGetters } from "vuex";
 
@@ -456,22 +456,44 @@ export default {
   },
 
   mounted() {
-    this.resetForm();
-    console.log("user id", this.userInfo._id);
-    // this.cooking_steps_str.length = 1;
-    this.recipeObj = newObj();
-    listCategory()
-      .then((res) => {
-        console.log(res);
-        if (res.meta == 2001) {
-          this.categoryList = res.data;
-          console.log("category name: ", res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        this.$toast.error(`Error - ${err.meta}`);
-      });
+    if (this.$route.params.id == 0) {
+      this.resetForm();
+      this.recipeObj = newObj();
+      listCategory()
+        .then((res) => {
+          console.log(res);
+          if (res.meta == 2001) {
+            this.categoryList = res.data;
+            console.log("category name: ", res.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$toast.error(`Error - ${err.meta}`);
+        });
+    } else {
+      getRecipe(this.$route.params.id)
+        .then((res) => {
+          if (res.meta == 2001) {
+                this.recipeObj = res.data;
+              //   if (this.recipeObj.images.length) {
+              // this.recipeObj.images.forEach(p => this.file.push(p));
+            //}
+            
+             if(this.recipeObj.ingredients.length > 0){
+               this.ingredients_str = this.recipeObj.ingredients.map((p, k) => ({key: p, value:k}))
+             }
+               if(this.recipeObj.cooking_steps.length > 0){
+               this.cooking_steps_str = this.recipeObj.cooking_steps;
+             }
+            this.data = res.data;
+            console.log(this.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   },
   computed: {
     ...mapGetters(["userInfo"]),

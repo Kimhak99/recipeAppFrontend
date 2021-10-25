@@ -1,14 +1,14 @@
 <template>
   <v-dialog v-model="dialogDelete" max-width="500px">
-    <v-card>
-      <v-card-title class="display-2 pa-2 deleteTitle">
+    <v-card class="pa-0" elevation="2">
+      <v-card-title class="">
+        <v-icon mini color="red" class="mt-1 mr-2">mdi-message-alert</v-icon>
         <!-- {{ $vuetify.lang.t("$vuetify.delCurrentPersonInfo") }} -->
-        {{ message || `Are you sure you want to delete ${ deleteObj[objKey] || `this record` } ?`}}
+        <span>{{ message || `Are you sure you want to delete ${ deleteObj[objKey] || `this record` } ?`}}</span>
       </v-card-title>
 
-      <v-card-actions>
+      <v-card-actions class="pb-6 pr-8">
         <v-spacer />
-
         <v-btn
           color="blue darken-1"
           outlined
@@ -17,13 +17,9 @@
           Cancel
         </v-btn>
 
-        <v-spacer />
-
         <v-btn color="red darken-1" @click="$emit('handleDelete', deleteObj)">
           Confirm
         </v-btn>
-
-        <v-spacer />
       </v-card-actions>
     </v-card>
   </v-dialog>

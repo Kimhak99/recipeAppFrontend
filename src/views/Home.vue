@@ -53,7 +53,7 @@
           small
           color="pink"
           class="mt-"
-          @click="$router.push('/recipe')"
+          @click="$router.push('/recipe/'+0)"
           ><v-icon>fas fa-plus</v-icon></v-btn
         >
       </v-col>
@@ -241,6 +241,7 @@ const newSearch = () => {
   return {
     keyword: "",
     limit: "",
+    skip: "",
     category: "",
     type: 1
   };
@@ -361,7 +362,7 @@ export default {
             }
 
             this.data = res.datas;
-            console.log("recipe: ", this.data); //cant log this
+            console.log("recipe: ", this.data); 
           }
         })
         .catch((err) => {
