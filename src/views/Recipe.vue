@@ -474,10 +474,9 @@ export default {
     } else {
       getRecipe(this.$route.params.id)
         .then((res) => {
+          console.log("res data: ", res.data)
           if (res.meta == 2001) {
                 this.recipeObj = res.data;
-                this.recipeObj.description = "test"
-                console.log("edit recipe: ", res.data)
               //   if (this.recipeObj.images.length) {
               // this.recipeObj.images.forEach(p => this.file.push(p));
             //}
