@@ -317,7 +317,7 @@ export default {
   name: "Recipe",
   data: () => ({
     categoryList: [],
-    recipeObj: {},
+    recipeObj: newObj(),
     cooking_steps_str: [],
     ingredients_str: [],
     // imgUrl: serverConfig.file_url,
@@ -458,7 +458,7 @@ export default {
   mounted() {
     if (this.$route.params.id == 0) {
       this.resetForm();
-      this.recipeObj = newObj();
+      // this.recipeObj = newObj();
       listCategory()
         .then((res) => {
           console.log(res);
@@ -476,6 +476,7 @@ export default {
         .then((res) => {
           if (res.meta == 2001) {
                 this.recipeObj = res.data;
+                this.recipeObj.description = "test"
                 console.log("edit recipe: ", res.data)
               //   if (this.recipeObj.images.length) {
               // this.recipeObj.images.forEach(p => this.file.push(p));

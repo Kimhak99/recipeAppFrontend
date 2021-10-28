@@ -86,7 +86,7 @@
                         cover
                       ></v-img>
                       <v-row>
-                        <v-col cols="10" md="6" class="pt-2 ml-6">
+                        <v-col cols="10" md="6" class="pt-4 ml-6">
                           <v-text-field
                             label="Search"
                             v-model="search.keyword"
@@ -471,7 +471,8 @@ export default {
         .then((res) => {
           if (res.meta == 2001) {
             this.$toast.success(res.message);
-          } else {
+          }
+          else {
             this.$toast.error("Erorr - " + res.message);
             console.log("Reset Password Error", res);
           }
