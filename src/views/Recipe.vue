@@ -192,7 +192,7 @@
                                 <v-text-field
                                   :label="$t('ingredient')"
                                   outlined
-                                  v-model="item.ingredients"
+                                  v-model="item.ingredients" 
                                   :rules="Rules"
                                 />
                               </v-col>
@@ -476,15 +476,18 @@ export default {
         .then((res) => {
           if (res.meta == 2001) {
                 this.recipeObj = res.data;
+                console.log("edit recipe: ", res.data)
               //   if (this.recipeObj.images.length) {
               // this.recipeObj.images.forEach(p => this.file.push(p));
             //}
             
              if(this.recipeObj.ingredients.length > 0){
-               this.ingredients_str = this.recipeObj.ingredients.map((p, k) => ({key: p, value:k}))
+               this.ingredients_str = this.recipeObj.ingredients;
+               console.log("ingredients: ", this.ingredients_str)
              }
                if(this.recipeObj.cooking_steps.length > 0){
                this.cooking_steps_str = this.recipeObj.cooking_steps;
+               console.log("cooking_steps: ", this.cooking_steps_str)
              }
             this.data = res.data;
             console.log(this.data);

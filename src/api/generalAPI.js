@@ -94,10 +94,16 @@ export function resetPassword(data){
         data: data
     })
 }
-
+export function forgetPassword(data){
+    return request({
+        url: "/forgetPassword",
+        method: "post",
+        data: data
+    })
+}
 export function getUserInfo() {
     return request({
         url: "/user/info",
-        method: "get",//if u want to access body u need to change to post and pass data along//let me show u the shortcut
+        method: "get",
     })
 }

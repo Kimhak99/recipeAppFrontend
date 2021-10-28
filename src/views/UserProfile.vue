@@ -472,7 +472,7 @@ export default {
           if (res.meta == 2001) {
             this.$toast.success(res.message);
           } else {
-            this.$toast.error("Erorr - " + res.meta);
+            this.$toast.error("Erorr - " + res.message);
             console.log("Reset Password Error", res);
           }
         })

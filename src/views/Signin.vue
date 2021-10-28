@@ -58,7 +58,7 @@
             <!-- <h3 class="text-right mt-3">Forget your password</h3> -->
 
             <div class="d-flex justify-end">
-              <v-btn text>Forget your password?</v-btn>
+              <v-btn @click="handleForgetDialog">Forget your password?</v-btn>
             </div>
 
             <div class="text-center mt-3">
@@ -99,24 +99,60 @@
         </v-col>
       </v-row>
     </v-card>
+    <ForgetPwdCRUD
+      :forgetPwd="forgetObj"
+      :dialog.sync="forgetDialog"
+      @handleData="handleForget"
+    />
   </v-container>
 </template>
 
 <script>
+import { forgetPassword } from "@/api/generalAPI";
+const newForgetObj = () => {
+  return {
+    email: "",
+    new_password: "",
+    confirm_password: "",
+  };
+};
 import { meta } from "../utils/enum";
 
 export default {
   name: "Signin",
+    components: {
+    ForgetPwdCRUD: () => import("@/components/ForgetPwdCRUD"),
+    },
   data: () => ({
     step: 1,
     username: "",
     password: "",
     isLoading: false,
+    forgetDialog: false,
+    forgetObj : newForgetObj(),
   }),
   methods: {
+    handleForgetDialog() {
+      this.forgetDialog = true;
+      this.forgetObj = newForgetObj();
+    },
+      handleForget(item) {
+      this.forgetDialog = false;
+      forgetPassword(item)
+      console.log("forget item: ", item)
+        .then((res) => {
+          if (res.meta == 2001) {
+            this.$toast.success(res.message);
+          } else {
+            this.$toast.error("Erorr - " + res.meta);
+            console.log("Forget Password Error", res);
+          }
+        })
+        .catch((err) => {
+          console.log("Forget Password Error", err);
+        });
+    },
     handleClick() {
-      console.log(this.username, this.password);
-
       this.isLoading = true;
       this.$store
         .dispatch("Login", { username: this.username, password: this.password })
