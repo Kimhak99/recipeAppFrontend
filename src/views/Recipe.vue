@@ -18,11 +18,11 @@
         <v-card class="px-4" elevation="2">
           <v-card-title>
             <v-icon large color="#b71c1c1"> mdi-silverware-variant </v-icon
-            ><span class="ml-2 mt-2 display-1" style="font-weight:bold">
+            ><span class="ml-2 mt-2 display-1" style="font-weight: bold">
               {{ $t("recipe") }}
             </span>
           </v-card-title>
-          <v-card-text class=" pb-0">
+          <v-card-text class="pb-0">
             <v-form ref="form" lazy-validation>
               <v-container fluid>
                 <v-row class="pt-2">
@@ -47,7 +47,13 @@
                         </v-btn>
 
                         <span
-                          class="mt-2 d-flex align-end font-weight-bold error--text"
+                          class="
+                            mt-2
+                            d-flex
+                            align-end
+                            font-weight-bold
+                            error--text
+                          "
                         >
                           only JPG or PNG format and must be less than 2MB
                         </span>
@@ -79,7 +85,12 @@
                                   <img
                                     :src="getImgPreviewUrl(img)"
                                     draggable
-                                    style="height: 120px; width: 120px; margin-right: 10px; object-fit: cover"
+                                    style="
+                                      height: 120px;
+                                      width: 120px;
+                                      margin-right: 10px;
+                                      object-fit: cover;
+                                    "
                                   />
                                   <!-- @click="$emit('update:dialog', false)" -->
 
@@ -173,7 +184,7 @@
                             cols="12"
                             class="pa-0 my-2 d-flex align-center"
                           >
-                            <span class="mr-auto" style="font-weight: bold;">
+                            <span class="mr-auto" style="font-weight: bold">
                               <v-icon>mdi-spoon-sugar</v-icon>
                               {{ $t("ingredients") }}</span
                             >
@@ -192,7 +203,7 @@
                                 <v-text-field
                                   :label="$t('ingredient')"
                                   outlined
-                                  v-model="item.ingredients" 
+                                  v-model="item.value"
                                   :rules="Rules"
                                 />
                               </v-col>
@@ -222,7 +233,7 @@
                             cols="12"
                             class="pa-0 my-2 d-flex align-center"
                           >
-                            <span class="mr-auto" style="font-weight: bold;">
+                            <span class="mr-auto" style="font-weight: bold">
                               <v-icon>mdi-chef-hat</v-icon>
                               {{ $t("cookingSteps") }}</span
                             >
@@ -241,7 +252,7 @@
                                 <v-text-field
                                   :label="$t('step')"
                                   outlined
-                                  v-model="item.cooking_steps"
+                                  v-model="item.value"
                                   :rules="Rules"
                                 />
                               </v-col>
@@ -474,21 +485,23 @@ export default {
     } else {
       getRecipe(this.$route.params.id)
         .then((res) => {
-          console.log("res data: ", res.data)
+          console.log("res data: ", res.data);
           if (res.meta == 2001) {
-                this.recipeObj = res.data;
-              //   if (this.recipeObj.images.length) {
-              // this.recipeObj.images.forEach(p => this.file.push(p));
+            this.recipeObj = res.data;
+            //   if (this.recipeObj.images.length) {
+            // this.recipeObj.images.forEach(p => this.file.push(p));
             //}
-            
-             if(this.recipeObj.ingredients.length > 0){
-               this.ingredients_str = this.recipeObj.ingredients;
-               console.log("ingredients: ", this.ingredients_str)
-             }
-               if(this.recipeObj.cooking_steps.length > 0){
-               this.cooking_steps_str = this.recipeObj.cooking_steps;
-               console.log("cooking_steps: ", this.cooking_steps_str)
-             }
+
+            if (this.recipeObj.ingredients.length > 0) {
+              this.ingredients_str = this.recipeObj.ingredients.map(
+                (k, p) => p[k]
+              );
+            }
+
+            if (this.recipeObj.cooking_steps.length > 0) {
+              this.cooking_steps_str = this.recipeObj.cooking_steps;
+              console.log("cooking_steps: ", this.cooking_steps_str);
+            }
             this.data = res.data;
             console.log(this.data);
           }
