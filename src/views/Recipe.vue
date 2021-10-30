@@ -203,7 +203,7 @@
                                 <v-text-field
                                   :label="$t('ingredient')"
                                   outlined
-                                  v-model="item.value"
+                                  v-model="ingredients_str[key]"
                                   :rules="Rules"
                                 />
                               </v-col>
@@ -252,7 +252,7 @@
                                 <v-text-field
                                   :label="$t('step')"
                                   outlined
-                                  v-model="item.value"
+                                  v-model="cooking_steps_str[key]"
                                   :rules="Rules"
                                 />
                               </v-col>
@@ -341,13 +341,13 @@ export default {
   methods: {
     newCookingStep() {
       console.log("length of step ", this.cooking_steps_str);
-      this.cooking_steps_str.push({});
+      this.cooking_steps_str.push("");
     },
     deletecookingSteps(item) {
       this.cooking_steps_str.splice(this.cooking_steps_str.indexOf(item), 1);
     },
     newIngredient() {
-      this.ingredients_str.push({});
+      this.ingredients_str.push("");
     },
     deleteIngredient(item) {
       this.ingredients_str.splice(this.ingredients_str.indexOf(item), 1);
@@ -467,40 +467,38 @@ export default {
   },
 
   mounted() {
+    listCategory()
+      .then((res) => {
+        console.log(res);
+        if (res.meta == 2001) {
+          this.categoryList = res.data;
+          console.log("category: ", res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.$toast.error(`Error - ${err.meta}`);
+      });
     if (this.$route.params.id == 0) {
       this.resetForm();
-      // this.recipeObj = newObj();
-      listCategory()
-        .then((res) => {
-          console.log(res);
-          if (res.meta == 2001) {
-            this.categoryList = res.data;
-            console.log("category name: ", res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$toast.error(`Error - ${err.meta}`);
-        });
     } else {
       getRecipe(this.$route.params.id)
         .then((res) => {
           console.log("res data: ", res.data);
           if (res.meta == 2001) {
             this.recipeObj = res.data;
-            //   if (this.recipeObj.images.length) {
-            // this.recipeObj.images.forEach(p => this.file.push(p));
-            //}
+
+            if (this.recipeObj.images.length) {
+              this.recipeObj.images.forEach((p) => this.file.push(p));
+              // console.log("img: ", this.file);
+            }
 
             if (this.recipeObj.ingredients.length > 0) {
-              this.ingredients_str = this.recipeObj.ingredients.map(
-                (k, p) => p[k]
-              );
+              this.ingredients_str = this.recipeObj.ingredients;
             }
 
             if (this.recipeObj.cooking_steps.length > 0) {
               this.cooking_steps_str = this.recipeObj.cooking_steps;
-              console.log("cooking_steps: ", this.cooking_steps_str);
             }
             this.data = res.data;
             console.log(this.data);
