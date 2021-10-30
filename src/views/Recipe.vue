@@ -437,12 +437,13 @@ export default {
               console.log("Add User Error", err);
             });
         } else {
-          const temp = JSON.parse(JSON.stringify(item));
+          // this.recipeObj.user_id = this.userInfo._id;
+          //     this.recipeObj.images = this.file.filter((p) => typeof p == typeof "");
+          //     this.recipeObj.cooking_steps = this.cooking_steps_str;
+          //     this.recipeObj.ingredients = this.ingredients_str;
+          this.recipeObj.category_id = this.recipeObj.category_id.id;
+          this.recipeObj.comments = this.recipeObj.comments.map((p) => p.id);
 
-          this.recipeObj.category_id =   this.recipeObj.category_id.id;
-            this.recipeObj.user_id =   this.recipeObj.user_id.id;
-            this.recipeObj.comments =   this.recipeObj.comments.map((p) => p.id);
-  
           updateRecipe(this.recipeObj)
             .then((res) => {
               if (res.meta == 2001) {
@@ -467,6 +468,7 @@ export default {
     },
     handleCancel() {
       (this.file = []), (this.tempFile = []);
+
       (this.cooking_steps_str = []),
         (this.ingredients_str = []),
         this.resetForm();
