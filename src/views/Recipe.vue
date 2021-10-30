@@ -81,7 +81,6 @@
                                   class="pitem"
                                   v-for="(img, imgk) in scope.images"
                                   :key="imgk"
-                                  
                                 >
                                   <v-img
                                     :src="getImgPreviewUrl(img)"
@@ -306,6 +305,7 @@ import { urlImg, removeFile } from "@/utils/generalFunc";
 import { addRecipe, updateRecipe, getRecipe } from "@/api/recipe";
 import { listCategory } from "@/api/category";
 import { mapGetters } from "vuex";
+import basicConfig from "../utils/basicConfig";
 
 const newObj = () => {
   return {
@@ -379,6 +379,7 @@ export default {
       this.file.splice(this.file.indexOf(item), 1);
     },
     getImgPreviewUrl(img) {
+      if (typeof img == typeof "") return basicConfig.file_url + img;
       return URL.createObjectURL(img);
     },
     async handleAdd() {
@@ -436,11 +437,17 @@ export default {
               console.log("Add User Error", err);
             });
         } else {
+          const temp = JSON.parse(JSON.stringify(item));
+
+          this.recipeObj.category_id =   this.recipeObj.category_id.id;
+            this.recipeObj.user_id =   this.recipeObj.user_id.id;
+            this.recipeObj.comments =   this.recipeObj.comments.map((p) => p.id);
+  
           updateRecipe(this.recipeObj)
             .then((res) => {
               if (res.meta == 2001) {
-                this.getData();
                 this.$toast.success(res.message);
+                console.log("saved edited recipe: ", res);
               } else {
                 console.log("edit", res);
                 this.$toast.error("Error - " + res.meta);
@@ -459,7 +466,6 @@ export default {
       this.resetForm();
     },
     handleCancel() {
-     
       (this.file = []), (this.tempFile = []);
       (this.cooking_steps_str = []),
         (this.ingredients_str = []),
@@ -492,7 +498,6 @@ export default {
 
             if (this.recipeObj.images.length) {
               this.recipeObj.images.forEach((p) => this.file.push(p));
-              console.log("img: ", this.file);
             }
 
             if (this.recipeObj.ingredients.length > 0) {
