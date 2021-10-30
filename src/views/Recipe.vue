@@ -81,8 +81,9 @@
                                   class="pitem"
                                   v-for="(img, imgk) in scope.images"
                                   :key="imgk"
+                                  
                                 >
-                                  <img
+                                  <v-img
                                     :src="getImgPreviewUrl(img)"
                                     draggable
                                     style="
@@ -288,7 +289,7 @@
             </v-btn>
 
             <v-btn @click="handleCancel" color="error" outlined class="px-6">
-              {{ $t("cancel") }}
+              {{ $t("clearForm") }}
             </v-btn>
 
             <v-spacer v-if="$vuetify.breakpoint.xsOnly" />
@@ -458,6 +459,7 @@ export default {
       this.resetForm();
     },
     handleCancel() {
+     
       (this.file = []), (this.tempFile = []);
       (this.cooking_steps_str = []),
         (this.ingredients_str = []),
@@ -490,7 +492,7 @@ export default {
 
             if (this.recipeObj.images.length) {
               this.recipeObj.images.forEach((p) => this.file.push(p));
-              // console.log("img: ", this.file);
+              console.log("img: ", this.file);
             }
 
             if (this.recipeObj.ingredients.length > 0) {

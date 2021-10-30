@@ -35,7 +35,8 @@ export default {
     currentPwd: "Current Password",
     newPwd: "New Password",
     confirmPwd: "Confirm Password",
-    email: "Email"
+    email: "Email",
+    clearForm: "Clear Form"
 
 
 
