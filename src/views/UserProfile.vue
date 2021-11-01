@@ -186,13 +186,13 @@
         </v-card>
 
         <DeleteDialog
-           v-if="isDeleteRecipe"
+          v-if="isDeleteRecipe"
           :dialogDelete.sync="deleteDialog"
           :deleteObj="recipeObj"
           @handleDelete="handleDeleteConfirm"
         />
         <DeleteDialog
-           v-if="!isDeleteRecipe"
+          v-if="!isDeleteRecipe"
           :dialogDelete.sync="deleteDialog"
           :deleteObj="obj"
           @handleDelete="handleDeleteConfirm"
@@ -419,19 +419,19 @@ export default {
     handleDeleteConfirm(item) {
       this.deleteDialog = false;
       if (this.isDeleteRecipe) {
-       deleteRecipe(item.id)
-        .then((res) => {
-          if (res.meta == 2001) {
-            this.$toast.success(res.message);
-            this.getData();
-          } else {
-            this.$toast.error("Error - " + res.meta);
-            console.log("Delete Error", res);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        deleteRecipe(item.id)
+          .then((res) => {
+            if (res.meta == 2001) {
+              this.$toast.success(res.message);
+              this.getData();
+            } else {
+              this.$toast.error("Error - " + res.meta);
+              console.log("Delete Error", res);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         this.isDeleteRecipe = false;
       } else {
         deleteUser(this.userInfo._id)
@@ -451,6 +451,7 @@ export default {
     },
 
     logout() {
+      console.log("log out");
       this.$store.dispatch("LogOut").then(() => {
         this.$router.push({ path: "/signin" });
       });
@@ -474,8 +475,7 @@ export default {
         .then((res) => {
           if (res.meta == 2001) {
             this.$toast.success(res.message);
-          }
-          else {
+          } else {
             this.$toast.error("Erorr - " + res.message);
             console.log("Reset Password Error", res);
           }
@@ -485,7 +485,7 @@ export default {
         });
     },
     handleEditRecipe(item) {
-        //  item.category_id = item.category_id.id;
+      //  item.category_id = item.category_id.id;
       this.$router.push("/recipe/" + item.id);
     },
     handleEdit() {

@@ -120,29 +120,29 @@ import { meta } from "../utils/enum";
 
 export default {
   name: "Signin",
-    components: {
+  components: {
     ForgetPwdCRUD: () => import("@/components/ForgetPwdCRUD"),
-    },
+  },
   data: () => ({
     step: 1,
     username: "",
     password: "",
     isLoading: false,
     forgetDialog: false,
-    forgetObj : newForgetObj(),
+    forgetObj: newForgetObj(),
   }),
   methods: {
     handleForgetDialog() {
       this.forgetDialog = true;
       this.forgetObj = newForgetObj();
     },
-      handleForget(item) {
+    handleForget(item) {
       this.forgetDialog = false;
       forgetPassword(item)
-      console.log("forget item: ", item)
         .then((res) => {
           if (res.meta == 2001) {
             this.$toast.success(res.message);
+            console.log("item: ", item);
           } else {
             this.$toast.error("Erorr - " + res.meta);
             console.log("Forget Password Error", res);
