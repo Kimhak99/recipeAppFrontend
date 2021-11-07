@@ -39,13 +39,27 @@
               <v-col cols="12" sm="6"> -->
         <div class="containerBox">
           <div class="left">
-            <v-img
+            <!-- <v-img
               :src="checkAvatar(data.images[0])"
               height="100%"
               class="grey darken-4"
               style="border-radius: 8px"
               cover
-            ></v-img>
+            ></v-img> -->
+            <v-carousel
+              height="100%"
+              class="grey darken-4"
+              style="border-radius: 8px"
+              :show-arrows="false"
+            >
+              <v-carousel-item
+                v-for="(item, i) in data.images"
+                :key="i"
+                :src="checkAvatar(item)"
+                reverse-transition="fade-transition"
+                transition="fade-transition"
+              ></v-carousel-item>
+            </v-carousel>
           </div>
 
           <div class="right">
@@ -191,7 +205,7 @@ export default {
   background-color: #fddcc356;
 }
 .left {
-  width: 60%;
+  width: 50%;
   height: 600px;
   border-radius: 8px;
 }
@@ -213,6 +227,7 @@ export default {
     flex-direction: column;
     width: 100%;
   }
+
   .left {
     width: 70%;
     height: 420px;

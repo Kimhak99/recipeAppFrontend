@@ -286,9 +286,26 @@
             <v-btn color="success" class="mx-6 px-6" @click="handleAdd">
               {{ $t("addrecipe") }}
             </v-btn>
-
-            <v-btn @click="handleCancel" color="error" outlined class="px-6">
+            <v-btn
+              @click="clearForm"
+              color="primary"
+              outlined
+              class="mr-6 px-6"
+            >
               {{ $t("clearForm") }}
+            </v-btn>
+
+            <v-btn
+              @click="
+                $router
+                  .push({ path: '/userProfile/' + userInfo._id })
+                  .catch(() => {})
+              "
+              color="error"
+              outlined
+              class="px-6"
+            >
+              {{ $t("cancel") }}
             </v-btn>
 
             <v-spacer v-if="$vuetify.breakpoint.xsOnly" />
@@ -466,7 +483,7 @@ export default {
       this.$refs.form.reset();
       this.resetForm();
     },
-    handleCancel() {
+    clearForm() {
       (this.file = []), (this.tempFile = []);
 
       (this.cooking_steps_str = []),

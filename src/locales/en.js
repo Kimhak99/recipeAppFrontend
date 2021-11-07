@@ -36,6 +36,7 @@ export default {
     newPwd: "New Password",
     confirmPwd: "Confirm Password",
     email: "Email",
+    cancel: "Cancel",
     clearForm: "Clear Form"
 
 
