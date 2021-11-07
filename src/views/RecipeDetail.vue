@@ -54,7 +54,12 @@
               make a type specimen book. It has survived not only five
               centuries, but also the leap
             </span> -->
-            <v-card color="basil">
+            <v-card
+              color="basil"
+              max-height="400px"
+              width="100%"
+              style="overflow: auto"
+            >
               <!-- <v-card-title class="text-center justify-center py-6">
                 <span class="font-weight-bold text-h2 basil--text">BASiL</span>
               </v-card-title> -->
@@ -64,16 +69,44 @@
                 background-color="transparent"
                 color="basil"
                 grow
+                show-arrows
               >
-                <v-tab v-for="item in items.names" :key="item">
+                <v-tab v-for="item in items" :key="item">
                   {{ item }}
                 </v-tab>
               </v-tabs>
 
               <v-tabs-items v-model="tab">
-                <v-tab-item v-for="item in items.description" :key="item">
+                <v-tab-item>
                   <v-card color="basil" flat>
-                    <v-card-text>{{ item }}</v-card-text>
+                    <v-card-text>{{ data.description }}</v-card-text>
+                  </v-card>
+                </v-tab-item>
+
+                <v-tab-item>
+                  <v-card
+                    color="basil"
+                    flat
+                    v-for="(item, index) in data.ingredients"
+                    :key="item"
+                  >
+                    <v-card-text
+                      ><span style="font-weight: bold">{{ index + 1 }}.</span>
+                      {{ item }}</v-card-text
+                    >
+                  </v-card>
+                </v-tab-item>
+                <v-tab-item>
+                  <v-card
+                    color="basil"
+                    flat
+                    v-for="(item, index) in data.cooking_steps"
+                    :key="item"
+                  >
+                    <v-card-text>
+                      <span style="font-weight: bold">{{ index + 1 }}.</span>
+                      {{ item }}</v-card-text
+                    >
                   </v-card>
                 </v-tab-item>
               </v-tabs-items>
@@ -97,10 +130,7 @@ export default {
     return {
       data: [],
       tab: null,
-      items: {
-        names: ["Description", "Ingredients", "Steps"],
-        description: [],
-      },
+      items: ["Description", "Ingredients", "Steps"],
     };
   },
   methods: {
