@@ -16,7 +16,7 @@
         </div>
         <v-list flat class="mt-5">
           <v-list-item-group v-model="selectedItem" color="black">
-            <v-list-item
+            <!-- <v-list-item
               v-for="(item, i) in items"
               :key="i"
               active-class="border"
@@ -28,6 +28,60 @@
               <b></b>
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
+              </v-list-item-icon>
+            </v-list-item> -->
+
+            <v-list-item
+              @click="$router.push('/home')"
+              active-class="border"
+              :ripple="false"
+              class="ml-2 my-3"
+            >
+              <b></b>
+              <b></b>
+              <v-list-item-icon>
+                <v-icon>fas fa-home</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+
+            <v-list-item
+              @click="$router.push('/recipe/' + 0)"
+              active-class="border"
+              :ripple="false"
+              class="ml-2 my-3"
+            >
+              <b></b>
+              <b></b>
+              <v-list-item-icon>
+                <v-icon>fas fa-utensils</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+
+            <v-list-item
+              @click="$router.push('/category')"
+              v-if="this.userInfo.is_admin"
+              active-class="border"
+              :ripple="false"
+              class="ml-2 my-3"
+            >
+              <b></b>
+              <b></b>
+              <v-list-item-icon>
+                <v-icon>fas fa-grip-horizontal</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+
+            <v-list-item
+              @click="$router.push('/user')"
+              v-if="this.userInfo.is_admin"
+              active-class="border"
+              :ripple="false"
+              class="ml-2 my-3"
+            >
+              <b></b>
+              <b></b>
+              <v-list-item-icon>
+                <v-icon>fas fa-user</v-icon>
               </v-list-item-icon>
             </v-list-item>
           </v-list-item-group>
@@ -53,6 +107,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Sidebar",
   data() {
@@ -71,12 +126,13 @@ export default {
   },
   methods: {
     logout() {
-        this.$store.dispatch("LogOut").then(() => {
+      this.$store.dispatch("LogOut").then(() => {
         this.$router.push({ path: "/signin" });
       });
     },
   },
   computed: {
+    ...mapGetters(["userInfo"]),
     drawer: {
       get() {
         return this.$store.state.drawer;

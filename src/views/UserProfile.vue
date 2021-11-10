@@ -151,7 +151,20 @@
                         <v-tooltip top>
                           <template v-slot:activator="{ on, attrs }">
                             <v-icon
-                              class="mr-2"
+                              @click="$router.push('/recipedetail/' + item.id)"
+                              color="blue"
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              mdi-eye
+                            </v-icon>
+                          </template>
+                          <span>View</span>
+                        </v-tooltip>
+
+                        <v-tooltip top>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-icon
                               color="green"
                               @click.stop="handleEditRecipe(item)"
                               v-bind="attrs"
@@ -303,9 +316,10 @@ export default {
       },
       {
         text: "Image",
-        align: "start",
+        align: "center",
         sortable: false,
         value: "image",
+        width: "90px",
       },
       {
         text: "Recipe Title",
@@ -336,7 +350,7 @@ export default {
         text: "Action",
         align: "center",
         sortable: false,
-        width: "100",
+        width: "150",
         value: "actions",
       },
     ],

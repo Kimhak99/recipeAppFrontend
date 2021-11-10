@@ -239,7 +239,6 @@ export default {
 
       listUser(this.search)
         .then((res) => {
-          // console.log("Res", res);
           if (res.meta == 2001) {
             this.tableLoading = false;
 
@@ -249,9 +248,6 @@ export default {
             }
 
             res.data.forEach((p, i) => (p.itemNo = i + 1));
-            // res.data.forEach((p) =>
-            //   p.is_admin == 1 ? (p.is_admin = "Admin") : (p.is_admin = "User")//move this to the table? //yep and why need to loop twice
-            // );
             this.datas = res.data;
             console.log(this.datas);
           }
@@ -309,7 +305,6 @@ export default {
             console.log("Add User Error", err);
           });
       } else {
-
         updateUser(item)
           .then((res) => {
             if (res.meta == 2001) {

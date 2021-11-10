@@ -32,7 +32,12 @@
 
       <v-col cols="10" class="pa-0" v-else>
         <div class="box">
-          <div class="secondBox" v-for="(item, key) in catList" :key="key" @click="handleCategory(item)">
+          <div
+            class="secondBox"
+            v-for="(item, key) in catList"
+            :key="key"
+            @click="handleCategory(item)"
+          >
             <v-img
               alt="Bhutan"
               class="imgItem"
@@ -53,7 +58,7 @@
           small
           color="pink"
           class="mt-"
-          @click="$router.push('/recipe/'+0)"
+          @click="$router.push('/recipe/' + 0)"
           ><v-icon>fas fa-plus</v-icon></v-btn
         >
       </v-col>
@@ -232,10 +237,6 @@ import hamburger from "../assets/hamburger.jpg";
 import pasta from "../assets/pasta.jpg";
 import crab from "../assets/crab.jpg";
 import papayaSalad from "../assets/papayaSalad.jpg";
-import snack from "../assets/snack.jpg";
-import other from "../assets/other.png";
-import special from "../assets/special.jpg";
-import western from "../assets/western.jpg";
 
 const newSearch = () => {
   return {
@@ -243,11 +244,9 @@ const newSearch = () => {
     limit: "",
     skip: "",
     category: "",
-    type: 1
+    type: 1,
   };
-}; // these are the variable u use on backend, so im wondering if type is the same.. will we call it here?
-// we add type here so we know for sure taht it will send type to backend, then in backend we can use sth.type;// can we use other word beside type?
-//anything u want, just need to make sure we can in backend by its correct name too, just fyi
+};
 
 export default {
   // components: { UserDashboardLayout },
@@ -263,7 +262,7 @@ export default {
       catList: [],
       search: newSearch(),
       searchBar: false, //
-      //ur data strucutre make no sense, 2 diff arrays // make more sense? this is even worse
+
       simulateRecipeData: [
         {
           title: "Ah Mok",
@@ -300,8 +299,8 @@ export default {
     };
   },
   methods: {
-    handleCategory(item){
-      console.log(item.id)
+    handleCategory(item) {
+      console.log(item.id);
       this.search.category = item.id;
       this.getData();
     },
@@ -317,21 +316,17 @@ export default {
       item.num_of_like += 1;
       updateRecipe({ id: item.id, num_of_like: item.num_of_like })
         .then((res) => {
-              if (res.meta == 2001) {
-                // this.getData();
-              } else {
-                console.log("edit", res);
-              }
-            })
-            .catch((err) => {
-              console.log("Edit Recipe Error", err);
-            });
-        },
-    // handleDislike() {
-    //   updateRecipe({ id: "", dislike: dislike++ })
-    //     .then()
-    //     .catch();
-    // },
+          if (res.meta == 2001) {
+            // this.getData();
+          } else {
+            console.log("edit", res);
+          }
+        })
+        .catch((err) => {
+          console.log("Edit Recipe Error", err);
+        });
+    },
+
     getData() {
       listCategory()
         .then((res) => {
@@ -362,7 +357,7 @@ export default {
             }
 
             this.data = res.datas;
-            console.log("recipe: ", this.data); 
+            console.log("recipe: ", this.data);
           }
         })
         .catch((err) => {
@@ -371,20 +366,13 @@ export default {
     },
     handleSearch() {
       this.search.type = 0;
-       console.log("this search, ", this.search)
-      if (!this.search.keyword) return (this.searchBar = !this.searchBar); // so this one noo need?
+      console.log("this search, ", this.search);
+      if (!this.search.keyword) return (this.searchBar = !this.searchBar);
       this.getData();
-     
+
       setTimeout(() => {
         this.search = newSearch();
       }, 500);
-  
-
-      // if (this.test == null) {
-      //   this.searchBar = this.searchBar? false : true;
-      // } else {
-      //   console.log("do the search");
-      // }
     },
   },
   mounted() {
@@ -393,8 +381,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// https://www.youtube.com/watch?v=2_E5uoiLCLY
-//https://www.youtube.com/watch?v=Qc-LFzxoU6Q
 .box {
   height: 140px;
   display: flex;
@@ -445,7 +431,6 @@ export default {
   &::-webkit-scrollbar-corner {
     background: transparent;
   }
-  //u can playaround with the style on the site and paste the result here, okay
 }
 
 .secondBox {
