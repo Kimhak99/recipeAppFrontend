@@ -31,7 +31,7 @@ export default new Vuex.Store({
   },
   actions: {
     //invoke one of these
-    Login({ commit }, userInfo) { //here i use login, in view n route, i use signin.. ik, i can see that\, just pick up, ok
+    Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         return login(userInfo).then(res => {
           if (res.meta == meta.OK) {
@@ -52,7 +52,7 @@ export default new Vuex.Store({
         removeToken();
         resolve();
       })
-    }, //LogOut captial log captial out
+    },
     getUserInfo({ commit }) {
       return new Promise((resolve, reject) => {
         getUserInfo().then(res => {

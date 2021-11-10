@@ -263,27 +263,27 @@ export default {
       search: newSearch(),
       searchBar: false, //
 
-      simulateRecipeData: [
-        {
-          title: "Ah Mok",
-          by: "Phary",
-          like: 12,
-          images: [ahmok],
-        },
-        { title: "Papaya Salad", by: "Tim", like: 12, images: [papayaSalad] },
-        { title: "Fried Crab", by: "Kolly", like: 12, images: [crab] },
-        { title: "Pasta", by: "Anna", like: 12, images: [pasta] },
-        { title: "hamburger", by: "Kimmy", like: 12, images: [hamburger] },
-        { title: "Salad", by: "Samantha", like: 12, images: [salad] },
-        { title: "Curry", by: "Porky", like: 12, images: [curry] },
-        { title: "Chorizo", by: "Minhie", like: 12, images: [chorizo] },
-        {
-          title: "Chicken Salad",
-          by: "Teachhay",
-          like: 12,
-          images: [chickenSalad],
-        },
-      ],
+      // simulateRecipeData: [
+      //   {
+      //     title: "Ah Mok",
+      //     by: "Phary",
+      //     like: 12,
+      //     images: [ahmok],
+      //   },
+      //   { title: "Papaya Salad", by: "Tim", like: 12, images: [papayaSalad] },
+      //   { title: "Fried Crab", by: "Kolly", like: 12, images: [crab] },
+      //   { title: "Pasta", by: "Anna", like: 12, images: [pasta] },
+      //   { title: "hamburger", by: "Kimmy", like: 12, images: [hamburger] },
+      //   { title: "Salad", by: "Samantha", like: 12, images: [salad] },
+      //   { title: "Curry", by: "Porky", like: 12, images: [curry] },
+      //   { title: "Chorizo", by: "Minhie", like: 12, images: [chorizo] },
+      //   {
+      //     title: "Chicken Salad",
+      //     by: "Teachhay",
+      //     like: 12,
+      //     images: [chickenSalad],
+      //   },
+      // ],
       // stimulateCategoryData: [
       //   { name: "Asian", images: [ahmok] },
       //   { name: "Western", images: [western] },
@@ -376,8 +376,6 @@ export default {
     },
   },
   mounted() {
-    this.search = newSearch();
-
     this.getData();
   },
 };
