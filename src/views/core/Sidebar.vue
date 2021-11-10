@@ -32,7 +32,7 @@
             </v-list-item> -->
 
             <v-list-item
-              @click="$router.push('/home').catch(() => {})"
+              @click="refresh"
               active-class="border"
               :ripple="false"
               class="ml-2 my-3"
@@ -125,6 +125,12 @@ export default {
     };
   },
   methods: {
+    refresh() {
+      // this.$router.push("/home");
+      this.$route.matched.some(({ name }) => name === "Home")
+        ? window.location.reload()
+        : this.$router.push("/home").catch(() => {});
+    },
     logout() {
       this.$store.dispatch("LogOut").then(() => {
         this.$router.push({ path: "/signin" });

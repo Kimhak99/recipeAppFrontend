@@ -23,7 +23,7 @@
             </span>
           </v-card-title>
           <v-card-text class="pb-0">
-            <v-form ref="form" lazy-validation>
+            <v-form ref="form" lazy-validation :disabled="!this.userInfo._id">
               <v-container fluid>
                 <v-row class="pt-2">
                   <v-col cols="12" md="6" class="pr-8">
@@ -39,6 +39,7 @@
                       </v-col>
                       <v-col class="py-0" cols="12">
                         <v-btn
+                          :disabled="!this.userInfo._id"
                           color="primary"
                           class="mt-4"
                           @click="handleUploadClick"
@@ -188,7 +189,11 @@
                               <v-icon>mdi-spoon-sugar</v-icon>
                               {{ $t("ingredients") }}</span
                             >
-                            <v-btn color="primary" @click="newIngredient">
+                            <v-btn
+                              color="primary"
+                              @click="newIngredient"
+                              :disabled="!this.userInfo._id"
+                            >
                               <v-icon>mdi-plus</v-icon>
                             </v-btn>
                           </v-col>
@@ -237,7 +242,11 @@
                               <v-icon>mdi-chef-hat</v-icon>
                               {{ $t("cookingSteps") }}</span
                             >
-                            <v-btn color="primary" @click="newCookingStep">
+                            <v-btn
+                              color="primary"
+                              @click="newCookingStep"
+                              :disabled="!this.userInfo._id"
+                            >
                               <v-icon>mdi-plus</v-icon>
                             </v-btn>
                           </v-col>
@@ -283,7 +292,12 @@
           <v-card-actions class="pt-6 pb-6 pr-8 mr-4">
             <v-spacer />
 
-            <v-btn color="success" class="mx-6 px-6" @click="handleAdd">
+            <v-btn
+              color="success"
+              class="mx-6 px-6"
+              @click="handleAdd"
+              :disabled="!this.userInfo._id"
+            >
               {{ $t("addrecipe") }}
             </v-btn>
             <v-btn
@@ -291,6 +305,7 @@
               color="primary"
               outlined
               class="mr-6 px-6"
+              :disabled="!this.userInfo._id"
             >
               {{ $t("clearForm") }}
             </v-btn>
@@ -304,6 +319,7 @@
               color="error"
               outlined
               class="px-6"
+              :disabled="!this.userInfo._id"
             >
               {{ $t("cancel") }}
             </v-btn>
@@ -494,6 +510,9 @@ export default {
   },
 
   mounted() {
+    if (!this.userInfo._id) {
+      this.$toast.error("Please sign in before adding a recipe.");
+    }
     listCategory()
       .then((res) => {
         console.log(res);
