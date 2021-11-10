@@ -32,7 +32,7 @@
             </v-list-item> -->
 
             <v-list-item
-              @click="$router.push('/home')"
+              @click="$router.push('/home').catch(() => {})"
               active-class="border"
               :ripple="false"
               class="ml-2 my-3"
@@ -45,7 +45,7 @@
             </v-list-item>
 
             <v-list-item
-              @click="$router.push('/recipe/' + 0)"
+              @click="$router.push('/recipe/' + 0).catch(() => {})"
               active-class="border"
               :ripple="false"
               class="ml-2 my-3"
@@ -58,7 +58,7 @@
             </v-list-item>
 
             <v-list-item
-              @click="$router.push('/category')"
+              @click="$router.push('/category').catch(() => {})"
               v-if="this.userInfo.is_admin"
               active-class="border"
               :ripple="false"
@@ -72,7 +72,7 @@
             </v-list-item>
 
             <v-list-item
-              @click="$router.push('/user')"
+              @click="$router.push('/user').catch(() => {})"
               v-if="this.userInfo.is_admin"
               active-class="border"
               :ripple="false"

@@ -180,9 +180,9 @@
                 by {{ item.user_id.username }}
               </h5>
               <v-spacer />
-              <v-btn fab small color="black"
+              <!-- <v-btn fab small color="black"
                 ><v-icon>fas fa-comment-dots</v-icon></v-btn
-              >
+              > -->
               <v-spacer />
               <v-chip
                 class="ma-2"
@@ -376,6 +376,8 @@ export default {
     },
   },
   mounted() {
+    this.search = newSearch();
+
     this.getData();
   },
 };

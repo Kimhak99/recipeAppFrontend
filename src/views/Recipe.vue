@@ -69,7 +69,7 @@
                       </v-col>
                       <v-col cols="12">
                         <v-row v-if="file.length != 0">
-                          <v-col cols="4" class="pt-6">
+                          <v-col cols="12" class="pt-6">
                             <viewer
                               :images="file"
                               class="prop-image__preview"
