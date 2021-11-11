@@ -68,14 +68,13 @@
                           @change="(item) => handleFileChange(item)"
                         />
                       </v-col>
-                      <v-col cols="12" v-if="file.length != 0">
+                      <v-col cols="12" class="py-0">
                         <v-row v-if="file.length != 0">
                           <v-col cols="12" class="pt-6">
                             <viewer
                               :images="file"
                               class="prop-image__preview"
                               @close="$emit('update:dialog', true)"
-                              @
                             >
                               <template slot-scope="scope">
                                 <div
