@@ -317,7 +317,7 @@ export default {
       updateRecipe({ id: item.id, num_of_like: item.num_of_like })
         .then((res) => {
           if (res.meta == 2001) {
-            this.getData();
+            //this.getData();
           } else {
             console.log("edit", res);
           }
