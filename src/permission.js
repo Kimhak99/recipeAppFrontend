@@ -3,6 +3,8 @@ import store from './store';
 import Vue from "vue";
 
 router.beforeEach((to, from, next) => {
+    console.log(to.path);
+
     if (store.getters.token) {
         console.log(1);
 
@@ -10,33 +12,17 @@ router.beforeEach((to, from, next) => {
             store.dispatch("getUserInfo")
                 .then(res => {
                     if (res.user_info.is_admin) {
-                        router.addRoute(adminRoutes)
-                        next();
+                        router.addRoute(adminRoutes);
                     }
-                    else {
-                        next();
-                    }
+
+                    next({ path: to.path, replace: true });
                 })
         }
         else {
             next();
         }
     }
-    // else if (to.path != '/signin') {
-    //     console.log(2);
-    //     next({ path: '/signin', replace: true })
-    // }
     else {
-        console.log(3);
         next()
     }
 })
-
-Vue.mixin({
-    data() {
-        return {
-            functionName: ''
-        }
-    },
-
-});

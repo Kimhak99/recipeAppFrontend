@@ -32,7 +32,7 @@
             </v-list-item> -->
 
             <v-list-item
-              @click="refresh"
+              @click="$router.push('/home').catch(() => {})"
               active-class="border"
               :ripple="false"
               class="ml-2 my-3"
@@ -97,8 +97,8 @@
             text-align: center;
           "
         >
-          <v-btn text>
-            <v-icon @click="logout">fas fa-sign-out-alt</v-icon>
+          <v-btn text @click="logout">
+            <v-icon>fas fa-sign-out-alt</v-icon>
           </v-btn>
         </div>
       </v-navigation-drawer>
@@ -125,12 +125,12 @@ export default {
     };
   },
   methods: {
-    refresh() {
-      // this.$router.push("/home");
-      this.$route.matched.some(({ name }) => name === "Home")
-        ? window.location.reload()
-        : this.$router.push("/home").catch(() => {});
-    },
+    // refresh() {
+    //   // this.$router.push("/home");
+    //   this.$route.matched.some(({ name }) => name === "Home")
+    //     ? window.location.reload()
+    //     : this.$router.push("/home").catch(() => {}); //this is what i called dirty trick xd
+    // },
     logout() {
       this.$store.dispatch("LogOut").then(() => {
         this.$router.push({ path: "/signin" });

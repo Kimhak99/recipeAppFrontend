@@ -90,7 +90,7 @@
               outlined
               dark
               :loading="isLoading"
-              @click="$router.push({ path: '/signup' })"
+              @click="$router.push({ path: '/signup' }).catch(() => {})"
               style="background-color: white; color: #b71c1c"
             >
               SIGN UP
@@ -157,7 +157,10 @@ export default {
       this.$store
         .dispatch("Login", { username: this.username, password: this.password })
         .then((res) => {
-          if (res.meta == meta.OK) return this.$router.push("/");
+          if (res.meta == meta.OK) {
+            this.$router.push("/home");
+            return;
+          }
 
           this.$toast.error(res.message);
         })

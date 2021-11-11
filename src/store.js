@@ -37,8 +37,9 @@ export default new Vuex.Store({
           if (res.meta == meta.OK) {
             setToken(res.data);
             commit('SET_TOKEN', res.data);
+            resolve(res);
           }
-          resolve(res);
+          reject(res);
         }).catch(error => {
           reject(error);
         })

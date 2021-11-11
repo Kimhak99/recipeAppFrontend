@@ -2,9 +2,32 @@
   <v-container class="px-16">
     <v-row class="mt-6 d-flex justify-center align-center">
       <v-col cols="1">
-        <v-btn class="" small dark fab @click="handleSearch(undefined)"
-          ><v-icon>fas fa-search</v-icon></v-btn
-        >
+        <v-row>
+          <v-col cols="12">
+            <v-btn class="" small dark fab @click="handleSearch(undefined)">
+              <v-icon>fas fa-search</v-icon>
+            </v-btn>
+          </v-col>
+
+          <v-col cols="12">
+            <v-tooltip top v-if="isSearch">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class=""
+                  small
+                  dark
+                  fab
+                  @click="handleReset"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>fas fa-times</v-icon>
+                </v-btn>
+              </template>
+              <span>Reset Search</span>
+            </v-tooltip>
+          </v-col>
+        </v-row>
       </v-col>
 
       <v-col cols="10" class="pa-0" v-if="searchBar">
@@ -259,6 +282,7 @@ export default {
     return {
       // userList: [],
       data: [],
+      isSearch: false,
       catList: [],
       search: newSearch(),
       searchBar: false, //
@@ -300,8 +324,9 @@ export default {
   },
   methods: {
     handleCategory(item) {
-      console.log(item.id);
+      this.isSearch = true;
       this.search.category = item.id;
+      this.search.type = 1;
       this.getData();
     },
     handleLike(item) {
@@ -317,7 +342,7 @@ export default {
       updateRecipe({ id: item.id, num_of_like: item.num_of_like })
         .then((res) => {
           if (res.meta == 2001) {
-            //this.getData();
+            this.getData();
           } else {
             console.log("edit", res);
           }
@@ -328,26 +353,8 @@ export default {
     },
 
     getData() {
-      listCategory()
-        .then((res) => {
-          console.log(res);
-          if (res.meta == 2001) {
-            this.tableLoading = false;
-
-            if (res.data.length == 0) {
-              this.$toast("No Data Found");
-              return true;
-            }
-            this.catList = res.data;
-            console.log("cate list: ", this.catList);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$toast.error(`Error - ${err.meta}`);
-        });
-
       this.data = [];
+
       listRecipeV2(this.search)
         .then((res) => {
           if (res.meta == 2001) {
@@ -357,7 +364,6 @@ export default {
             }
 
             this.data = res.datas;
-            console.log("recipe: ", this.data);
           }
         })
         .catch((err) => {
@@ -366,16 +372,46 @@ export default {
     },
     handleSearch() {
       this.search.type = 0;
-      console.log("this search, ", this.search);
-      if (!this.search.keyword) return (this.searchBar = !this.searchBar);
+
+      if (!this.search.keyword) {
+        this.searchBar = !this.searchBar;
+        return;
+      }
+
+      this.isSearch = true;
       this.getData();
 
       setTimeout(() => {
-        this.search = newSearch();
+        this.search = newSearch(); // when this is called, it means seach.type=1 yep so it should work
       }, 500);
+    },
+    handleReset() {
+      this.isSearch = false;
+      this.search = newSearch();
+      this.getData();
     },
   },
   mounted() {
+    this.catList = [];
+
+    listCategory()
+      .then((res) => {
+        console.log(res);
+        if (res.meta == 2001) {
+          this.tableLoading = false;
+
+          if (res.data.length == 0) {
+            this.$toast("No Data Found");
+            return true;
+          }
+          this.catList = res.data;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.$toast.error(`Error - ${err.meta}`);
+      });
+
     this.getData();
   },
 };
