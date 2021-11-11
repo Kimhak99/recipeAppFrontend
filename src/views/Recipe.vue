@@ -68,42 +68,43 @@
                           @change="(item) => handleFileChange(item)"
                         />
                       </v-col>
-                      <v-col cols="12" class="py-0">
-                        <v-row v-if="file.length != 0">
-                          <v-col cols="12" class="pt-6">
-                            <viewer
-                              :images="file"
-                              class="prop-image__preview"
-                              @close="$emit('update:dialog', true)"
+                      <v-col v-if="file.length != 0">
+                        <!-- <v-row>
+                          <v-col cols="12" class="pt-6"> -->
+                        <viewer
+                          :images="file"
+                          class="prop-image__preview"
+                          @close="$emit('update:dialog', true)"
+                          @
+                        >
+                          >
+                          <template slot-scope="scope">
+                            <div
+                              class="pitem"
+                              v-for="(img, imgk) in scope.images"
+                              :key="imgk"
                             >
-                              <template slot-scope="scope">
-                                <div
-                                  class="pitem"
-                                  v-for="(img, imgk) in scope.images"
-                                  :key="imgk"
-                                >
-                                  <v-img
-                                    :src="getImgPreviewUrl(img)"
-                                    draggable
-                                    style="
-                                      height: 120px;
-                                      width: 120px;
-                                      margin-right: 10px;
-                                      object-fit: cover;
-                                    "
-                                  />
-                                  <!-- @click="$emit('update:dialog', false)" -->
+                              <img
+                                :src="getImgPreviewUrl(img)"
+                                draggable
+                                style="
+                                  height: 120px;
+                                  width: 120px;
+                                  margin-right: 10px;
+                                  object-fit: cover;
+                                "
+                              />
 
-                                  <v-icon
-                                    class="delbtn"
-                                    @click="handleFileRemove(img)"
-                                    >mdi-close</v-icon
-                                  >
-                                </div>
-                              </template>
-                            </viewer>
-                          </v-col>
-                        </v-row>
+                              <v-icon
+                                class="delbtn"
+                                @click="handleFileRemove(img)"
+                                >mdi-close</v-icon
+                              >
+                            </div>
+                          </template>
+                        </viewer>
+                        <!-- </v-col>
+                        </v-row> -->
                       </v-col>
                       <!-- end img upload -->
                       <v-col class="py-0" cols="12">
@@ -568,6 +569,7 @@ h1 {
     display: inline-block;
     position: relative;
     margin-right: 6px;
+    margin-bottom: 10px;
     .delbtn {
       cursor: pointer;
       position: absolute;
