@@ -68,7 +68,7 @@
                           @change="(item) => handleFileChange(item)"
                         />
                       </v-col>
-                      <v-col cols="12">
+                      <v-col cols="12" v-if="file.length != 0">
                         <v-row v-if="file.length != 0">
                           <v-col cols="12" class="pt-6">
                             <viewer
@@ -474,7 +474,7 @@ export default {
           //     this.recipeObj.images = this.file.filter((p) => typeof p == typeof "");
           //     this.recipeObj.cooking_steps = this.cooking_steps_str;
           //     this.recipeObj.ingredients = this.ingredients_str;
-          this.recipeObj.category_id = this.recipeObj.category_id.id;
+          // this.recipeObj.category_id = this.recipeObj.category_id.id;
           this.recipeObj.comments = this.recipeObj.comments.map((p) => p.id);
 
           updateRecipe(this.recipeObj)

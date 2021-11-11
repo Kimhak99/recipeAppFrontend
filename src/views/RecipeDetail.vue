@@ -171,9 +171,9 @@ export default {
           if (res.meta == 2001) {
             this.data = res.data;
             console.log(this.data);
-            this.items.description.push(this.data.description);
-            this.items.description.push(this.data.ingredients);
-            this.items.description.push(this.data.cooking_steps);
+            // this.items.description.push(this.data.description);
+            // this.items.description.push(this.data.ingredients);
+            // this.items.description.push(this.data.cooking_steps);
           }
         })
         .catch((err) => {
