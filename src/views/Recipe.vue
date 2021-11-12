@@ -210,6 +210,7 @@
                                   outlined
                                   v-model="ingredients_str[key]"
                                   :rules="Rules"
+                                  dense
                                 />
                               </v-col>
                               <v-col
@@ -219,7 +220,6 @@
                               >
                                 <v-btn
                                   color="red"
-                                  class="mt-2"
                                   outlined
                                   @click="deleteIngredient(item)"
                                 >
@@ -263,6 +263,7 @@
                                   outlined
                                   v-model="cooking_steps_str[key]"
                                   :rules="Rules"
+                                  dense
                                 />
                               </v-col>
                               <v-col
@@ -272,7 +273,6 @@
                               >
                                 <v-btn
                                   color="red"
-                                  class="mt-2"
                                   outlined
                                   @click="deletecookingSteps(item)"
                                 >
@@ -374,7 +374,7 @@ export default {
 
   methods: {
     newCookingStep() {
-      console.log("length of step ", this.cooking_steps_str);
+      console.log("length of step ", this.cooking_steps_str.length);
       this.cooking_steps_str.push("");
     },
     deletecookingSteps(item) {
@@ -501,10 +501,10 @@ export default {
     },
     clearForm() {
       (this.file = []), (this.tempFile = []);
+      this.cooking_steps_str.splice(0);
+      this.ingredients_str.splice(0);
 
-      (this.cooking_steps_str = []),
-        (this.ingredients_str = []),
-        this.resetForm();
+      this.resetForm();
       this.$refs.form.reset();
     },
   },

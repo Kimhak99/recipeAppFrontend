@@ -1,27 +1,27 @@
 <template>
   <v-container class="px-16">
-    <v-row class="mt-6 d-flex justify-center align-center">
+    <v-row class="mt-10 d-flex justify-center align-center">
       <v-col cols="1">
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" class="d-flex justify-center pa-0">
             <v-btn class="" small dark fab @click="handleSearch(undefined)">
               <v-icon>fas fa-search</v-icon>
             </v-btn>
           </v-col>
 
-          <v-col cols="12">
+          <v-col cols="12" class="d-flex justify-center pa-0">
             <v-tooltip top v-if="isSearch">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  class=""
+                  class="mt-1"
                   small
-                  dark
+                  color="green"
                   fab
                   @click="handleReset"
                   v-bind="attrs"
                   v-on="on"
                 >
-                  <v-icon>fas fa-times</v-icon>
+                  <v-icon>fas fa-redo</v-icon>
                 </v-btn>
               </template>
               <span>Reset Search</span>
@@ -30,7 +30,7 @@
         </v-row>
       </v-col>
 
-      <v-col cols="10" class="pa-0" v-if="searchBar">
+      <v-col cols="10" class="ma-0" v-if="searchBar">
         <v-toolbar flat class="">
           <!-- <v-row class="mt-10"> -->
           <!-- <v-col cols="12"> -->
@@ -75,13 +75,8 @@
         </div>
       </v-col>
 
-      <v-col cols="1" class="d-flex justify-end">
-        <v-btn
-          fab
-          small
-          color="pink"
-          class="mt-"
-          @click="$router.push('/recipe/' + 0)"
+      <v-col cols="1" class="d-flex justify-center pa-0">
+        <v-btn fab small color="pink" @click="$router.push('/recipe/' + 0)"
           ><v-icon>fas fa-plus</v-icon></v-btn
         >
       </v-col>
@@ -135,8 +130,17 @@
         </v-col>
       </v-row>
     </v-toolbar> -->
+    <v-row class="mt-6" align="center" justify="center" v-if="isEmptyData">
+      <v-col
+        cols="12"
+        lg="4"
+        md="6"
+        class="d-flex flex-column justify-space-between align-center py-6"
+        ><h1>There is no data.</h1></v-col
+      ></v-row
+    >
 
-    <v-row class="mt-6" align="center" justify="center">
+    <v-row class="mt-6" align="center" justify="center" v-else>
       <v-col
         cols="12"
         lg="4"
@@ -282,6 +286,7 @@ export default {
     return {
       // userList: [],
       data: [],
+      isEmptyData: false,
       isSearch: false,
       catList: [],
       search: newSearch(),
@@ -359,11 +364,13 @@ export default {
         .then((res) => {
           if (res.meta == 2001) {
             if (res.datas.length == 0) {
+              this.isEmptyData = true;
               this.$toast("No Data Found");
               return true;
+            } else {
+              this.isEmptyData = false;
+              this.data = res.datas;
             }
-
-            this.data = res.datas;
           }
         })
         .catch((err) => {
