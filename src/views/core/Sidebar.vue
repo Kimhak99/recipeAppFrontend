@@ -87,6 +87,7 @@
           </v-list-item-group>
         </v-list>
         <div
+          v-if="this.userInfo._id"
           style="
             position: abolute;
             bottom: 20px;

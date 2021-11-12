@@ -86,7 +86,12 @@
                 />
               </v-col>
             </v-row>
-            <v-row cols="12" justify="end" class="pr-2">
+            <v-row
+              cols="12"
+              justify="end"
+              class="pr-2"
+              v-if="userInfo.is_admin"
+            >
               <v-checkbox checked: false v-model="user.is_admin" label="Are you
               an admin?" />
             </v-row>
@@ -107,6 +112,7 @@
 
 <script>
 // import basicConfig from "../utils/basicConfig";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -159,6 +165,9 @@ export default {
         this.resetForm();
       }
     },
+  },
+  computed: {
+    ...mapGetters(["userInfo"]),
   },
 };
 </script>

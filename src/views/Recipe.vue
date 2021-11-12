@@ -500,10 +500,12 @@ export default {
       this.resetForm();
     },
     clearForm() {
-      (this.file = []), (this.tempFile = []);
-      this.cooking_steps_str.splice(0);
-      this.ingredients_str.splice(0);
-
+      this.$nextTick(() => {
+        this.file = [];
+        this.tempFile = [];
+        this.cooking_steps_str = [];
+        this.ingredients_str = [];
+      });
       this.resetForm();
       this.$refs.form.reset();
     },
