@@ -1,14 +1,19 @@
 import request from '@/utils/request';
 
-export function listRecipe(data) {
+export function listRecipeV2(data) {
     return request({
         url: '/recipe/list',
         method: 'post',
         data: data
     });
 }
-
-export function addRecipe(data){
+export function getRecipe(id) {
+    return request({
+        url: '/recipe/get/' + id,
+        method: 'get'
+    })
+}
+export function addRecipe(data) {
     return request({
         url: '/recipe/create',
         method: 'post',
@@ -16,7 +21,7 @@ export function addRecipe(data){
     })
 }
 
-export function updateRecipe(data){
+export function updateRecipe(data) {
     return request({
         url: '/recipe/update',
         method: 'post',
@@ -24,7 +29,7 @@ export function updateRecipe(data){
     })
 }
 
-export function deleteRecipe(id){
+export function deleteRecipe(id) {
     return request({
         url: '/recipe/delete/' + id,
         method: 'delete'

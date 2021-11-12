@@ -8,13 +8,13 @@ export function listUser(data) {
     });
 }
 
-export function getUser(id){
-    return request({
-        url: '/user/get/' + id,
-        method: 'get',
-        data: data
-    })
-}
+// export function getUser(id){
+//     return request({
+//         url: '/user/get/' + id,
+//         method: 'get',
+       
+//     })
+// }
 
 export function addUser(data){
     return request({
@@ -38,3 +38,4 @@ export function deleteUser(id){
         method: 'delete'
     })
 }
+

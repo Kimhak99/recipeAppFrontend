@@ -10,7 +10,7 @@
           </div>
         </v-col>
       </v-row> -->
-      <v-footer class="pa-3" color="#B71C1C" dark fixed>
+      <v-footer class="pa-3" color="black" dark fixed>
         <v-spacer></v-spacer>
         <div>{{$t("app_name")}} &nbsp; &copy; {{new Date().getFullYear()}}</div>
         <v-spacer></v-spacer>
