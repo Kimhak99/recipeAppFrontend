@@ -63,21 +63,12 @@
           </div>
 
           <div class="right">
-            <!-- <span style="font-weight: 500; line-height: 25px">
-              when an unknown printer took a galley of type and scrambled it to
-              make a type specimen book. It has survived not only five
-              centuries, but also the leap
-            </span> -->
             <v-card
               color="basil"
               max-height="400px"
               width="100%"
               style="overflow: auto"
             >
-              <!-- <v-card-title class="text-center justify-center py-6">
-                <span class="font-weight-bold text-h2 basil--text">BASiL</span>
-              </v-card-title> -->
-
               <v-tabs
                 v-model="tab"
                 background-color="transparent"
@@ -150,30 +141,12 @@ export default {
   methods: {
     getData() {
       this.data = [];
-      // listRecipeV2()
-      //   .then((res) => {
-      //     if (res.meta == 2001) {
-      //       if (res.datas.length == 0) {
-      //         this.$toast("No Data Found");
-      //         return true;
-      //       }
-
-      //       this.data = res.datas;
-      //       console.log("recipe: ", this.data);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log("err", err);
-      //   });
 
       getRecipe(this.$route.params.id)
         .then((res) => {
           if (res.meta == 2001) {
             this.data = res.data;
             console.log(this.data);
-            // this.items.description.push(this.data.description);
-            // this.items.description.push(this.data.ingredients);
-            // this.items.description.push(this.data.cooking_steps);
           }
         })
         .catch((err) => {

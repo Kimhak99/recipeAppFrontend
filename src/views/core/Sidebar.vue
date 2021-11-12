@@ -115,23 +115,15 @@ export default {
     return {
       // showSidebar: true,
       selectedItem: 0,
-      items: [
-        { icon: "fas fa-home", route: "/home" },
-        { icon: "fas fa-utensils", route: "/recipe/" + 0 },
-        { icon: "fas fa-grip-horizontal", route: "/category" },
-        { icon: "fas fa-users", route: "/user" },
-      ],
-      //remember that this is fixed item, so if u happened to change in index route
-      //need to change here too
+      // items: [
+      //   { icon: "fas fa-home", route: "/home" },
+      //   { icon: "fas fa-utensils", route: "/recipe/" + 0 },
+      //   { icon: "fas fa-grip-horizontal", route: "/category" },
+      //   { icon: "fas fa-users", route: "/user" },
+      // ],
     };
   },
   methods: {
-    // refresh() {
-    //   // this.$router.push("/home");
-    //   this.$route.matched.some(({ name }) => name === "Home")
-    //     ? window.location.reload()
-    //     : this.$router.push("/home").catch(() => {}); //this is what i called dirty trick xd
-    // },
     logout() {
       this.$store.dispatch("LogOut").then(() => {
         this.$router.push({ path: "/signin" });

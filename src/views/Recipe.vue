@@ -161,26 +161,13 @@
                   </v-col>
                   <v-col cols="12" md="6" class="pr-8">
                     <v-row>
-                      <!-- <v-col class="py-0" cols="12">
-                        <v-text-field
-                          :label="$t('foodTitle')"
-                          type="text"
-                          prepend-icon="ramen_dining"
-                          v-model="recipeObj.recipe_title"
-                        />
-                      </v-col>
-
-                      <v-col class="py-0" cols="12">
-                        <v-textarea
-                          :label="$t('description')"
-                          outlined
-                          v-model="recipeObj.description"
-                        />
-                      </v-col> -->
-
-                      <!-- ingredients -->
                       <v-col cols="12">
-                        <v-card class="pa-4" elevation="2">
+                        <v-card
+                          class="pa-4"
+                          elevation="2"
+                          max-height="350px"
+                          style="overflow: auto"
+                        >
                           <v-col
                             cols="12"
                             class="pa-0 my-2 d-flex align-center"
@@ -233,7 +220,12 @@
 
                       <!-- cooking steps -->
                       <v-col cols="12">
-                        <v-card class="pa-4" elevation="2">
+                        <v-card
+                          class="pa-4"
+                          elevation="2"
+                          max-height="350px"
+                          style="overflow: auto"
+                        >
                           <v-col
                             cols="12"
                             class="pa-0 my-2 d-flex align-center"
@@ -294,17 +286,17 @@
 
             <v-btn
               color="success"
-              class="mx-6 px-6"
+              class="ml-4 px-6"
               @click="handleAdd"
               :disabled="!this.userInfo._id"
             >
-              {{ $t("addrecipe") }}
+              {{ $t("save") }}
             </v-btn>
             <v-btn
               @click="clearForm"
               color="primary"
               outlined
-              class="mr-6 px-6"
+              class="mr-2 px-2 ml-4"
               :disabled="!this.userInfo._id"
             >
               {{ $t("clearForm") }}
@@ -318,7 +310,7 @@
               "
               color="error"
               outlined
-              class="px-6"
+              class="pr-6 pl-4"
               :disabled="!this.userInfo._id"
             >
               {{ $t("cancel") }}
@@ -470,12 +462,9 @@ export default {
               console.log("Add User Error", err);
             });
         } else {
-          // this.recipeObj.user_id = this.userInfo._id;
-          //     this.recipeObj.images = this.file.filter((p) => typeof p == typeof "");
-          //     this.recipeObj.cooking_steps = this.cooking_steps_str;
-          //     this.recipeObj.ingredients = this.ingredients_str;
-          // this.recipeObj.category_id = this.recipeObj.category_id.id;
           this.recipeObj.comments = this.recipeObj.comments.map((p) => p.id);
+          this.recipeObj.category_id = this.recipeObj.category_id.id;
+          console.log("recipe cate: ", this.recipeObj.category_id);
 
           updateRecipe(this.recipeObj)
             .then((res) => {
@@ -491,6 +480,7 @@ export default {
               console.log("Edit Recipe Error", err);
             });
         }
+        this.clearForm();
       }
       (this.cooking_steps_str = []),
         (this.ingredients_str = []),

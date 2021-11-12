@@ -55,8 +55,6 @@
               />
             </v-form>
 
-            <!-- <h3 class="text-right mt-3">Forget your password</h3> -->
-
             <div class="d-flex justify-end">
               <v-btn @click="handleForgetDialog">Forget your password?</v-btn>
             </div>

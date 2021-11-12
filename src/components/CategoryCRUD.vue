@@ -56,7 +56,6 @@
 </template>
 
 <script>
-// import basicConfig from "@/utils/basicConfig";
 export default {
   components: {
     ImageUpload: () => import("@/components/ImageUpload"),
@@ -65,7 +64,6 @@ export default {
   data() {
     return {
       uploadedImg: undefined,
-      // blankProfile: basicConfig.blank_profile_img,
       valid: false,
       rule: [(v) => !!v || "This field is required."],
     };

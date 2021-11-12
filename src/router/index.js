@@ -36,7 +36,6 @@ const general = {
   redirect: { name: 'Home' },
   component: () => import("../layouts/UserDashboardLayout.vue"),
   children: [
-    // ...adminRoutes.children,
     {
       path: '/home',
       name: 'Home',

@@ -3,7 +3,6 @@
     class="d-flex justify-center align-items-center fill-height"
     fluid
   >
-    <!-- u dont need the above row and col, jsut fyi -->
     <v-card class="elevation-4" style="border-radius: 12px">
       <v-row no-gutters>
         <v-col
@@ -13,9 +12,7 @@
         >
           <v-card-text class="text-center white--text">
             <h3 class="display-1">Welcome Back!</h3>
-            <h4 class="my-4">
-              To Keep connected with us, please log in!
-            </h4>
+            <h4 class="my-4">To Keep connected with us, please log in!</h4>
             <v-btn
               rounded
               outlined
@@ -43,9 +40,7 @@
                 <v-icon>fab fa-instagram</v-icon>
               </v-btn>
             </div>
-            <h4 class="text-center mt-4">
-              Ensure your email for registration
-            </h4>
+            <h4 class="text-center mt-4">Ensure your email for registration</h4>
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-row>
                 <v-col
@@ -154,7 +149,6 @@
 </template>
 
 <script>
-
 import { addUser } from "@/api/user";
 import { uploadProfileSignup } from "@/api/generalAPI";
 
@@ -220,7 +214,7 @@ export default {
         addUser(this.obj)
           .then((res) => {
             if (res.meta == 2001) {
-              this.$toast.success(res.message); //you are trying to access this component, when it does not exist or properly intergrade
+              this.$toast.success(res.message);
               console.log("added item: ", this.obj);
             } else {
               this.$toast.error("Erorr - " + res.meta);
@@ -234,7 +228,7 @@ export default {
       this.$refs.form.reset();
       this.resetForm();
     },
-    matchingPasswords: function() {
+    matchingPasswords: function () {
       if (this.obj.password === this.obj.confirmPassword) {
         return true;
       } else {

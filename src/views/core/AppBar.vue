@@ -37,14 +37,13 @@
       <v-avatar
         size="40"
         style="cursor: pointer"
-        @click="$router.push({ path: '/userProfile/'+ userInfo._id}).catch(() => {})"
+        @click="
+          $router.push({ path: '/userProfile/' + userInfo._id }).catch(() => {})
+        "
       >
         <!-- <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img> -->
         <!-- http://localhost:5000/file/askfjklasjfsdf.png -->
         <v-img :src="checkAvatar(userInfo.profile_image)"></v-img>
-        <!-- do you want to give it another go? ok -->
-        <!-- know it doesnt work.. should just ask u how, me right now 😶😶😶-->
-        <!-- what does usrInfor.profile_image store? the string stores image url pointing to a file in db. oh. to display it, we need to point to file url with the string value -->
       </v-avatar>
     </v-badge>
   </v-app-bar>
@@ -68,7 +67,6 @@ export default {
       this.$store.dispatch("SetDrawer", !this.drawer);
     },
   },
- 
 };
 </script>
 

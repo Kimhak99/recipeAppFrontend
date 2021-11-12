@@ -47,10 +47,7 @@ export default {
       this.$refs.avatarUpload.$refs.input.click();
     },
     imgRemove() {
-      // this.avatar = ""; //this is a variable from the parent components, cant directly assign
-      //new value to it;
-      this.$emit("update:image", undefined); //wat abt just this? can it remove?
-      //since you are using .sync, u neeed to update value by $emit event back to parent
+      this.$emit("update:image", undefined);
     },
   },
   computed: {

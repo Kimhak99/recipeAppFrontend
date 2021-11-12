@@ -4,7 +4,12 @@
       <v-card-title class="">
         <v-icon mini color="red" class="mt-1 mr-2">mdi-message-alert</v-icon>
         <!-- {{ $vuetify.lang.t("$vuetify.delCurrentPersonInfo") }} -->
-        <span>{{ message || `Are you sure you want to delete ${ deleteObj[objKey] || `this record` } ?`}}</span>
+        <span>{{
+          message ||
+          `Are you sure you want to delete ${
+            deleteObj[objKey] || `this record`
+          } ?`
+        }}</span>
       </v-card-title>
 
       <v-card-actions class="pb-6 pr-8">
@@ -28,6 +33,11 @@
 <script>
 export default {
   name: "DeleteDialog",
-  props: { dialogDelete: Boolean, deleteObj: Object, objKey: String, message: String },
+  props: {
+    dialogDelete: Boolean,
+    deleteObj: Object,
+    objKey: String,
+    message: String,
+  },
 };
 </script>
