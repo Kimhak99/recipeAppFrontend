@@ -1,76 +1,92 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home.vue';
+import Recipe from '../views/Recipe.vue';
 
 Vue.use(Router)
 
-export const adminRoutes = [
-  {
-    path: '/user',
-    name: 'User',
-    requiredAdmin: true,
-    component: () => import(/* webpackChunkName: "login" */'../views/User.vue')
-  },
-  {
-    path: '/category',
-    name: 'Category',
-    requiredAdmin: true,
-    component: () => import(/* webpackChunkName: "login" */'../views/Category.vue')
-  },
-];
+export const adminRoutes = {
+  path: "/",
+  name: "Main",
+  redirect: { name: 'Home' },
+  component: () => import("../layouts/UserDashboardLayout.vue"),
+  children: [
+    {
+      path: '/user',
+      name: 'User',
+      meta: {
+        requiredAdmin: true,
+      },
+      component: () => import('../views/User.vue')
+    },
+    {
+      path: '/category',
+      name: 'Category',
+      meta: {
+        requiredAdmin: true,
+      },
+      component: () => import('../views/Category.vue')
+    },
+  ]
+}
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    requiredAdmin: false,
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    requiredAdmin: false,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    requiredAdmin: false,
-    component: () => import(/* webpackChunkName: "signup" */ '../views/Signup.vue')
-  },
-  {
-    path: '/signin',
-    name: 'Signin',
-    requiredAdmin: false,
-    component: () => import(/* webpackChunkName: "login" */'../views/Signin.vue')
-  },
-  {
-    path: '/recipe',
-    name: 'Recipe',
-    requiredAdmin: false,
-    component: () => import(/* webpackChunkName: "login" */'../views/Recipe.vue')
-  },
-  {
-    path: '/userprofile',
-    name: 'UserProfile',
-    requiredAdmin: false,
-    component: () => import(/* webpackChunkName: "login" */'../views/UserProfile.vue')
-  },
-  {
-    name: 'NotFound',
-    path: '*',
-    requiredAdmin: false,
-    component: () => import('@/views/404'),
-  },
-]//which of these routes are for admin? only admin can see recipe? these
+const general = {
+  path: "/",
+  name: "Main",
+  redirect: { name: 'Home' },
+  component: () => import("../layouts/UserDashboardLayout.vue"),
+  children: [
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: () => import('../views/About.vue')
+    },
+    {
+      path: '/recipe',
+      name: 'Recipe',
+      component: Recipe
+    },
+    {
+      path: '/recipe/:id',
+      component: () => import('../views/Recipe.vue')
+    },
+    {
+      path: '/userprofile/:id',
+      name: 'UserProfile',
+      component: () => import('../views/UserProfile.vue')
+    },
+    {
+      path: '/recipedetail/:id',
+      name: 'RecipeDetail',
+      component: () => import('../views/RecipeDetail.vue')
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: () => import('../views/Signup.vue')
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: () => import('../views/Signin.vue')
+    },
+  ]
+}
 
-const router = new Router({
+export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: [
+    general,
+    {
+      name: 'NotFound',
+      path: '*',
+      component: () => import('../views/404'),
+    },
+  ],
 })
-
-export default router

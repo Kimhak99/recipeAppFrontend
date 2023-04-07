@@ -1,41 +1,79 @@
-
 <template>
-  <v-card flat>
-    <v-container fluid>
-      <v-row class="child-flex">
-        <div ml-50>
-          <v-toolbar color="#B71C1C" dark>
-            <!-- <v-btn
-              icon
-              class="ml-8"
-            >
-              <v-app-bar-nav-icon @click="$router.push({ name: 'Home'}).catch(() => {})"></v-app-bar-nav-icon>
-            </v-btn> -->
-            <v-toolbar-side-icon class="ml-12" @click="$router.push({ name: 'Home'}).catch(() => {})">
-            <v-img class="mr-3" src="@/assets/tongue-circle.png" height="50px" width="50px"> 
-            </v-img>
-          </v-toolbar-side-icon>
-            <v-toolbar-title>{{$t("welcome")}}</v-toolbar-title>
-          </v-toolbar>
-        </div>
+  <v-app-bar fixed color="black" elevate-on-scroll dark app>
+    <v-btn @click="handleDrawer" icon v-if="$vuetify.breakpoint.xs">
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
 
-        <div style="flex-basis: 20%">
-          <v-toolbar dark>
-            <v-spacer></v-spacer>
+    <v-toolbar-title class="titleStyle">{{ $t("app_name") }}</v-toolbar-title>
 
-            <v-btn @click="$router.push({ name: 'Signin' }).catch(() => {})">
-              {{$t('signin')}}
-            </v-btn>
+    <v-spacer></v-spacer>
 
-            <v-btn @click="$router.push({ name: 'Signup' }).catch(() => {})">
-               {{$t('signup')}}
-            </v-btn>
-            <!-- <v-btn class="mx-2" fab color="white" outlined> -->
-              <i class="fas fa-sign-out-alt mx-4" style='font-size:24px' @click="$router.push({ name: 'Signin' }).catch(() => {})"></i>
-            <!-- </v-btn> -->
-          </v-toolbar>
-        </div>
-      </v-row>
-    </v-container>
-  </v-card>
+    <v-btn
+      v-if="!this.userInfo._id"
+      @click="$router.push({ path: '/signin' })"
+      class="mr-5 test"
+    >
+      {{ $t("signin") }}
+    </v-btn>
+
+    <v-btn v-if="!this.userInfo._id" @click="$router.push({ path: '/signup' })">
+      {{ $t("signup") }}
+    </v-btn>
+    <span
+      v-if="this.userInfo._id"
+      class="px-3"
+      style="color: red; text-transform: uppercase; font-weight: bold"
+      >{{ this.userInfo.username }}</span
+    >
+    <v-badge
+      v-if="this.userInfo._id"
+      bordered
+      bottom
+      color="green"
+      dot
+      offset-x="10"
+      offset-y="10"
+    >
+      <v-avatar
+        size="40"
+        style="cursor: pointer"
+        @click="
+          $router.push({ path: '/userProfile/' + userInfo._id }).catch(() => {})
+        "
+      >
+        <!-- <v-img :src="require('../../assets/pumpkin.jpg')" ></v-img> -->
+        <!-- http://localhost:5000/file/askfjklasjfsdf.png -->
+        <v-img :src="checkAvatar(userInfo.profile_image)"></v-img>
+      </v-avatar>
+    </v-badge>
+  </v-app-bar>
 </template>
+
+<script>
+import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+
+export default {
+  name: "Appbar",
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(["drawer"]),
+    ...mapGetters(["userInfo"]),
+  },
+  methods: {
+    handleDrawer() {
+      this.$store.dispatch("SetDrawer", !this.drawer);
+    },
+  },
+};
+</script>
+
+<style>
+.test {
+  border-radius: 5px;
+  background-color: green;
+  color: pink;
+}
+</style>
