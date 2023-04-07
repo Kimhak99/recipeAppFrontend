@@ -3,7 +3,7 @@
 This is the frontend of recipeApp project
 Login Details:
 
-Admin: - username: samantha - password: 111
+Admin: - username: jessie - password: 1234
 User: - username: meng - password: 111
 
 Important Notes:
