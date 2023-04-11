@@ -1,6 +1,6 @@
 # recipeAppFrontend
 
-This is the frontend of recipeApp project
+This is the frontend of recipeApp project. Please running this file after running the backend file.
 
 Login Details:
 
